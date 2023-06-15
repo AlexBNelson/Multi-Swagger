@@ -413,9 +413,13 @@ if(this.state.clients.length==numberOfClients){
 
   }
   
-  //clients = taggedClients.map(this.renderOperationTag).toArray()
-  console.log(taggedClients)
-  console.log(multiClient)
+  console.log(JSON.parse(this.props.specSelectors.manifest()))
+
+  let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
+
+  // services.forEach((service)=>{
+  //   service["Clients"]
+  // })
 
       const taggedOps = this.props.specSelectors.taggedOperations()
 
@@ -423,11 +427,11 @@ if(this.state.clients.length==numberOfClients){
 
 
     //  console.log(this.state.json)
-    const Collapse = this.props.getComponent("Collapse")
+    //const Collapse = this.props.getComponent("Collapse")
 
     return (
       <div>
-        <h1>Clients</h1>
+        <h1 fontWeight='bold'> Clients</h1>
         {clients}
 
         {/* Use layout store to add collapsing functionality/*}
@@ -450,7 +454,14 @@ if(this.state.clients.length==numberOfClients){
   }
 
   
+  linkService = function(serviceUrl){
+    
+  }
 
+  onClick =(e) => {
+    e.stopPropagation()
+    this.props.specActions.download("http://localhost:8080/RoomBookingApi/roomBookingApi.json")
+  }
 
   renderOperationTag = (tagObj, tag) => {
     const {
@@ -461,6 +472,22 @@ if(this.state.clients.length==numberOfClients){
       layoutActions,
       getConfigs,
     } = this.props
+
+    let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
+
+    let service = services.find(item=>item.Name==tag)
+    
+    console.log(tag)
+    console.log( tag  + service["ExposedEndpoints"])
+
+    let serviceUrl = specSelectors.baseUrl() + '/' + tag + service["ExposedEndpoints"];
+
+    let serviceLink
+    
+    if(tag!=specSelectors.currentDoc()){
+      serviceLink = <a onClick={this.onClick}>{serviceUrl}</a>
+    }
+    
 
     const ClientContainer = getComponent("ClientContainer", true)
     const ClientTag = getComponent("ClientTag")
@@ -509,6 +536,7 @@ if(this.state.clients.length==numberOfClients){
             }).toArray()
           }
         </div>
+        {serviceLink}
       </ClientTag>
     )
   }
