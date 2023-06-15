@@ -2,11 +2,17 @@ import get from "lodash/get"
 
 export const updateSpec = (ori, {specActions}) => (...args) => {
   ori(...args)
+
+
   specActions.parseToJson(...args)
 }
 
 export const updateJsonSpec = (ori, {specActions}) => (...args) => {
   ori(...args)
+
+  // MOST LIKELY THIS IS WHERE THE SPEC OBJECT IS SET IN STATE
+
+  
 
   specActions.invalidateResolvedSubtreeCache()
 
@@ -14,6 +20,8 @@ export const updateJsonSpec = (ori, {specActions}) => (...args) => {
   const [json] = args
   const pathItems = get(json, ["paths"]) || {}
   const pathItemKeys = Object.keys(pathItems)
+
+
 
   pathItemKeys.forEach(k => {
     const val = get(pathItems, [k])
@@ -29,6 +37,7 @@ export const updateJsonSpec = (ori, {specActions}) => (...args) => {
 
 // Log the request ( just for debugging, shouldn't affect prod )
 export const executeRequest = (ori, { specActions }) => (req) => {
+  
   specActions.logRequest(req)
   return ori(req)
 }

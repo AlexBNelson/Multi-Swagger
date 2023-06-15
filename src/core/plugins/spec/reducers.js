@@ -25,11 +25,32 @@ import {
   CLEAR_RESPONSE,
   CLEAR_REQUEST,
   CLEAR_VALIDATE_PARAMS,
-  SET_SCHEME
+  SET_SCHEME,
+  SET_BASE_URL,
+  SET_CURRENT_DOC,
+  SET_CLIENT_JSON,
+  SET_MANIFEST
 } from "./actions"
 import { paramToIdentifier } from "../../utils"
 
 export default {
+  [SET_BASE_URL]: (state, action) => {
+    return (typeof action.payload === "string")
+      ? state.set("baseUrl", action.payload)
+      : state
+  },
+
+  [SET_CURRENT_DOC]: (state, action) => {
+    return state.set("currentDoc", action.payload)
+  },
+
+  [SET_MANIFEST]: (state, action) => {
+    return state.set("manifest", action.payload)
+  },
+
+  [SET_CLIENT_JSON]: (state, action) => {
+    return state.set("clientJson", action.payload)
+  },
 
   [UPDATE_SPEC]: (state, action) => {
     return (typeof action.payload === "string")

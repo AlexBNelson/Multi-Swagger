@@ -2,6 +2,10 @@ import React from "react"
 import PropTypes from "prop-types"
 
 export default class BaseLayout extends React.Component {
+  constructor(){
+    super()
+
+  }
 
   static propTypes = {
     errSelectors: PropTypes.object.isRequired,
@@ -12,6 +16,12 @@ export default class BaseLayout extends React.Component {
     getComponent: PropTypes.func.isRequired
   }
 
+  updateCurrentDoc(){
+    //system.specActions.updateCurrentDoc(elementNumber)
+  }
+
+
+
   render() {
     let {errSelectors, specSelectors, getComponent} = this.props
 
@@ -19,6 +29,7 @@ export default class BaseLayout extends React.Component {
     let InfoContainer = getComponent("InfoContainer", true)
     let VersionPragmaFilter = getComponent("VersionPragmaFilter")
     let Operations = getComponent("operations", true)
+    let Clients = getComponent("clients", true)
     let Models = getComponent("Models", true)
     let Row = getComponent("Row")
     let Col = getComponent("Col")
@@ -84,6 +95,15 @@ export default class BaseLayout extends React.Component {
     const hasSchemes = schemes && schemes.size
     const hasSecurityDefinitions = !!specSelectors.securityDefinitions()
 
+    let obj = JSON.parse(specSelectors.specStr())
+
+    // let arr = obj["Services"]
+
+    // let endpointUrl = obj["BaseUrl"] + arr[0]["ExposedEndpoints"]
+
+  //  var keys = Object.values(obj);
+
+   
     return (
       <div className='swagger-ui'>
         <SvgAssets />
@@ -107,6 +127,11 @@ export default class BaseLayout extends React.Component {
 
           <FilterContainer/>
 
+          <Row>
+            <Col mobile={12} desktop={12} >
+              <Clients/>
+            </Col>
+          </Row>
           <Row>
             <Col mobile={12} desktop={12} >
               <Operations/>

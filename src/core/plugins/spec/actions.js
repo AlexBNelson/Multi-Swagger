@@ -27,6 +27,10 @@ export const UPDATE_OPERATION_META_VALUE = "spec_update_operation_meta_value"
 export const UPDATE_RESOLVED = "spec_update_resolved"
 export const UPDATE_RESOLVED_SUBTREE = "spec_update_resolved_subtree"
 export const SET_SCHEME = "set_scheme"
+export const SET_BASE_URL = "set_base_url"
+export const SET_CURRENT_DOC = "set_current_doc"
+export const SET_CLIENT_JSON = "set_client_json"
+export const SET_MANIFEST = "set_manifest"
 
 const toStr = (str) => isString(str) ? str : ""
 
@@ -37,6 +41,34 @@ export function updateSpec(spec) {
       type: UPDATE_SPEC,
       payload: cleanSpec
     }
+  }
+}
+
+export function setManifest(manifest) {
+  return {
+    type: SET_MANIFEST,
+    payload: manifest
+  }
+}
+
+export function setBaseUrl(baseUrl) {
+  return {
+    type: SET_BASE_URL,
+    payload: baseUrl
+  }
+}
+
+export function setCurrentDoc(currentDoc) {
+  return {
+    type: SET_CURRENT_DOC,
+    payload: currentDoc
+  }
+}
+
+export function setClientJson(clientJson) {
+  return {
+    type: SET_CLIENT_JSON,
+    payload: clientJson
   }
 }
 
@@ -73,6 +105,9 @@ export const parseToJson = (str) => ({specActions, specSelectors, errActions}) =
       line: e.mark && e.mark.line ? e.mark.line + 1 : undefined
     })
   }
+
+  console.log(json)
+
   if(json && typeof json === "object") {
     return specActions.updateJsonSpec(json)
   }
@@ -131,6 +166,8 @@ export const resolveSpec = (json, url) => ({specActions, specSelectors, errActio
           })
         errActions.newThrownErrBatch(preparedErrors)
       }
+
+      console.log(spec)
 
       return specActions.updateResolved(spec)
     })
@@ -489,6 +526,7 @@ export const executeRequest = (req) =>
 
 // I'm using extras as a way to inject properties into the final, `execute` method - It's not great. Anyone have a better idea? @ponelat
 export const execute = ( { path, method, ...extras }={} ) => (system) => {
+
   let { fn:{fetch}, specSelectors, specActions } = system
   let spec = specSelectors.specJsonWithResolvedSubtrees().toJS()
   let scheme = specSelectors.operationScheme(path, method)

@@ -32,13 +32,20 @@ export default class Operations extends React.Component {
 
     const taggedOps = specSelectors.taggedOperations()
 
+    
+
+
     if(taggedOps.size === 0) {
       return <h3> No operations defined in spec!</h3>
     }
 
+    let ops = taggedOps.map(this.renderOperationTag).toArray()
+
+    console.log(ops)
     return (
       <div>
-        { taggedOps.map(this.renderOperationTag).toArray() }
+        <h1>Controllers</h1>
+        { ops }
         { taggedOps.size < 1 ? <h3> No operations defined in spec! </h3> : null }
       </div>
     )
@@ -56,6 +63,10 @@ export default class Operations extends React.Component {
     const OperationContainer = getComponent("OperationContainer", true)
     const OperationTag = getComponent("OperationTag")
     const operations = tagObj.get("operations")
+
+    console.log(tagObj)
+    console.log(tag)
+
     return (
       <OperationTag
         key={"operation-" + tag}

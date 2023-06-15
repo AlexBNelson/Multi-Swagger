@@ -6,7 +6,7 @@ import { createDeepLinkPath, escapeDeepLinkPath, sanitizeUrl } from "core/utils"
 import { safeBuildUrl } from "core/utils/url"
 import { isFunc } from "core/utils"
 
-export default class OperationTag extends React.Component {
+export default class ClientTag extends React.Component {
 
   static defaultProps = {
     tagObj: Im.fromJS({}),
@@ -64,7 +64,7 @@ export default class OperationTag extends React.Component {
       tagExternalDocsUrl = rawTagExternalDocsUrl
     }
 
-    let isShownKey = ["operations-tag", tag]
+    let isShownKey = ["clients-tag", tag]
     let showTag = layoutSelectors.isShown(isShownKey, docExpansion === "full" || docExpansion === "list")
 
     return (
@@ -74,8 +74,6 @@ export default class OperationTag extends React.Component {
           onClick={() => layoutActions.show(isShownKey, !showTag)}
           className={!tagDescription ? "opblock-tag no-desc" : "opblock-tag"}
           id={isShownKey.map(v => escapeDeepLinkPath(v)).join("-")}
-          data-tag={tag}
-          data-is-open={showTag}
         >
           <DeepLink
             enabled={isDeepLinkingEnabled}

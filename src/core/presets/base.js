@@ -11,11 +11,13 @@ import util from "core/plugins/util"
 import downloadUrlPlugin from "core/plugins/download-url"
 import configsPlugin from "core/plugins/configs"
 import deepLinkingPlugin from "core/plugins/deep-linking"
+import deepLinkingClientPlugin from "core/plugins/deep-linking-client"
 import filter from "core/plugins/filter"
 import onComplete from "core/plugins/on-complete"
 import safeRender from "core/plugins/safe-render"
 
 import OperationContainer from "core/containers/OperationContainer"
+import ClientContainer from "core/containers/ClientContainer"
 
 import App from "core/components/app"
 import AuthorizationPopup from "core/components/auth/authorization-popup"
@@ -32,6 +34,10 @@ import ExamplesSelect from "core/components/examples-select"
 import ExamplesSelectValueRetainer from "core/components/examples-select-value-retainer"
 import Oauth2 from "core/components/auth/oauth2"
 import Clear from "core/components/clear"
+import Clients from "core/components/clients"
+import Client from "core/components/client"
+import ClientTag from "core/components/client-tag"
+import ClientSummary from "core/components/client-summary"
 import LiveResponse from "core/components/live-response"
 import OnlineValidatorBadge from "core/components/online-validator-badge"
 import Operations from "core/components/operations"
@@ -109,6 +115,11 @@ export default function() {
       apiKeyAuth: ApiKeyAuth,
       basicAuth: BasicAuth,
       clear: Clear,
+      clients: Clients,
+      client: Client,
+      ClientTag,
+      ClientSummary,
+      ClientContainer,
       liveResponse: LiveResponse,
       InitializedInput,
       info: Info,
@@ -194,6 +205,7 @@ export default function() {
     auth,
     downloadUrlPlugin,
     deepLinkingPlugin,
+    deepLinkingClientPlugin,
     filter,
     onComplete,
     requestSnippets,

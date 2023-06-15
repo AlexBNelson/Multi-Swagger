@@ -1,6 +1,4 @@
 import layout from "./layout"
-import OperationWrapper from "./operation-wrapper"
-import OperationTagWrapper from "./operation-tag-wrapper"
 import ClientWrapper from "./client-wrapper"
 import ClientTagWrapper from "./client-tag-wrapper"
 
@@ -19,10 +17,8 @@ export default function() {
       }
     },
     wrapComponents: {
-      operation: OperationWrapper,
-      OperationTag: OperationTagWrapper,
       client: ClientWrapper,
-      ClientTag: ClientTagWrapper
+      ClientTag: ClientTagWrapper,
     },
   }]
 }

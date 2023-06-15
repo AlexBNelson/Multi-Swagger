@@ -4,7 +4,7 @@ import ImPropTypes from "react-immutable-proptypes"
 import { opId } from "swagger-client/es/helpers"
 import { Iterable, fromJS, Map } from "immutable"
 
-export default class OperationContainer extends PureComponent {
+export default class ClientContainer extends PureComponent {
   constructor(props, context) {
     super(props, context)
 
@@ -14,6 +14,8 @@ export default class OperationContainer extends PureComponent {
       tryItOutEnabled: tryItOutEnabled === true || tryItOutEnabled === "true",
       executeInProgress: false
     }
+
+    
   }
 
   static propTypes = {
@@ -111,7 +113,7 @@ export default class OperationContainer extends PureComponent {
       // transitioning from collapsed to expanded
       this.requestResolvedSubtree()
     }
-    layoutActions.show(["operations", tag, operationId], !isShown)
+    layoutActions.show(["clients", tag, operationId], !isShown)
   }
 
   onCancelClick=() => {
@@ -194,7 +196,7 @@ export default class OperationContainer extends PureComponent {
       fn
     } = this.props
 
-    const Operation = getComponent( "operation" )
+    const Client = getComponent( "client" )
 
     const resolvedSubtree = this.getResolvedSubtree() || Map()
 
@@ -226,7 +228,7 @@ export default class OperationContainer extends PureComponent {
     
 
     return (
-      <Operation
+      <Client
         operation={operationProps}
         response={response}
         request={request}

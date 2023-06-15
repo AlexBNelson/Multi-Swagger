@@ -18,11 +18,6 @@ export const baseUrl = createSelector(
   state => state.get( "baseUrl", Map() )
 )
 
-export const manifest = createSelector(
-  state,
-  state => state.get("manifest", Map() )
-)
-
 export const currentDoc = createSelector(
   state,
   state => state.get( "currentDoc", Map() )
@@ -50,17 +45,12 @@ export const specSource = createSelector(
 
 export const specJson = createSelector(
   state,
-  spec => spec.get("json", Map())
+  spec => spec.get("clientJson", Map())
 )
 
 export const specResolved = createSelector(
   state,
   spec => spec.get("resolved", Map())
-)
-
-export const specState = createSelector(
-  state,
-  spec => spec
 )
 
 export const specResolvedSubtree = (state, path) => {
@@ -84,6 +74,8 @@ const mergerFn = (oldVal, newVal) => {
 
   return newVal
 }
+
+let tagsSorter, operationsSorter 
 
 export const specJsonWithResolvedSubtrees = createSelector(
   state,
@@ -275,8 +267,14 @@ export const operationsWithTags = createSelector(
   }
 )
 
+export const initializeSorters = (state) => ({ getConfigs }) => {
+
+  tagsSorter, operationsSorter  = getConfigs()
+}
+
 export const taggedOperations = (state) => ({ getConfigs }) => {
-  let { tagsSorter, operationsSorter } = getConfigs()
+
+   tagsSorter, operationsSorter  = getConfigs()
   return operationsWithTags(state)
     .sortBy(
       (val, key) => key, // get the name of the tag to be passed to the sorter
@@ -294,7 +292,46 @@ export const taggedOperations = (state) => ({ getConfigs }) => {
     })
 }
 
+export const clientsWithTags = createSelector(
+  operationsWithRootInherited,
+  tags,
+  (operations, tags) => {
 
+
+    return operations.reduce( (taggedMap, op) => {
+      let tags = Set(op.getIn(["operation","tags"]))
+      if(tags.count() < 1)
+        return taggedMap.update(DEFAULT_TAG, List(), ar => ar.push(op))
+      return tags.reduce( (res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap )
+    }, tags.reduce( (taggedMap, tag) => {
+
+      
+      return taggedMap.set(tag.get("name"), List())
+    } , OrderedMap()))
+  }
+)
+
+
+export const taggedClients = (clients) => {
+
+  initializeSorters();
+  
+  return clientsWithTags(clients)
+    .sortBy(
+      (val, key) => key, // get the name of the tag to be passed to the sorter
+      (tagA, tagB) => {
+        let sortFn = (typeof tagsSorter === "function" ? tagsSorter : sorters.tagsSorter[ tagsSorter ])
+        return (!sortFn ? null : sortFn(tagA, tagB))
+      }
+    )
+    .map((ops, tag) => {
+      let sortFn = (typeof operationsSorter === "function" ? operationsSorter : sorters.operationsSorter[ operationsSorter ])
+      let operations = (!sortFn ? ops : ops.sort(sortFn))
+
+
+      return Map({ tagDetails: tagDetails(clients, tag), operations: operations })
+    })
+}
 
 export const responses = createSelector(
   state,
@@ -562,157 +599,4 @@ export const isMediaTypeSchemaPropertiesEqual = ( state, pathMethod, currentMedi
 function returnSelfOrNewMap(obj) {
   // returns obj if obj is an Immutable map, else returns a new Map
   return Map.isMap(obj) ? obj : new Map()
-}
-
-
-
-
-
-
-
-export const clientSpec = state => {
-  let res = clientJson(state)
-
-  console.log(res)
-  return res
-}
-
-export const clientJson = createSelector(
-  state,
-  spec => spec.get("clientJson", Map())
-)
-
-export const clientTags = createSelector(
-  clientSpec,
-  json => {
-    const tags = json.get("tags", List())
-    return List.isList(tags) ? tags.filter(tag => Map.isMap(tag)) : List()
-  }
-)
-
-export const clientConsumes = createSelector(
-  clientSpec,
-  spec => Set(spec.get("consumes"))
-)
-
-export const clientProduces = createSelector(
-  clientSpec,
-  spec => Set(spec.get("produces"))
-)
-
-export const clientJsonWithResolvedSubtrees = createSelector(
-  state,
-  spec => OrderedMap().mergeWith(
-    mergerFn,
-    spec.get("clientJson")
-    // Was causing the client summaries to duplicate for some reason
-    // spec.get("resolvedSubtrees")
-  )
-)
-
-export const clientPaths = createSelector(
-	clientJsonWithResolvedSubtrees,
-	clientSpec => clientSpec.get("paths")
-)
-
-export const clients = createSelector(
-  clientPaths,
-  clientPaths => {
-    if(!clientPaths || clientPaths.size < 1)
-      return List()
-
-    let list = List()
-
-    if(!clientPaths || !clientPaths.forEach) {
-      return List()
-    }
-
-    clientPaths.forEach((path, pathName) => {
-      if(!path || !path.forEach) {
-        return {}
-      }
-      path.forEach((operation, method) => {
-        if(OPERATION_METHODS.indexOf(method) < 0) {
-          return
-        }
-        list = list.push(fromJS({
-          path: pathName,
-          method,
-          operation,
-          id: `${method}-${pathName}`
-        }))
-      })
-    })
-
-    return list
-  }
-)
-
-export const clientsWithRootInherited = createSelector(
-  clients,
-  clientConsumes,
-  clientProduces,
-  (clients, clientConsumes, clientProduces) => {
-
-    return clients.map( ops => ops.update("operation", op => {
-      if(op) {
-        if(!Map.isMap(op)) { return }
-        return op.withMutations( op => {
-          if ( !op.get("consumes") ) {
-            op.update("consumes", a => Set(a).merge(clientConsumes))
-          }
-          if ( !op.get("produces") ) {
-            op.update("produces", a => Set(a).merge(clientProduces))
-          }
-          return op
-        })
-      } else {
-        // return something with Immutable methods
-        return Map()
-      }
-
-    }))
-  }
-)
-
-export const clientsWithTags = createSelector(
-  clientsWithRootInherited,
-  clientTags,
-  (clients, clientTags) => {
-
-
-    return clients.reduce( (taggedMap, op) => {
-      let tags = Set(op.getIn(["operation","tags"]))
-      if(tags.count() < 1)
-        return taggedMap.update(DEFAULT_TAG, List(), ar => ar.push(op))
-      return tags.reduce( (res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap )
-    }, clientTags.reduce( (taggedMap, tag) => {
-
-      
-      return taggedMap.set(tag.get("name"), List())
-    } , OrderedMap()))
-  }
-)
-
-
-export const taggedClients = (clients) => ({ getConfigs }) => {
-
-  let { tagsSorter, operationsSorter } = getConfigs()
-  
-  console.log(clients)
-  return clientsWithTags(clients)
-    .sortBy(
-      (val, key) => key, // get the name of the tag to be passed to the sorter
-      (tagA, tagB) => {
-        let sortFn = (typeof tagsSorter === "function" ? tagsSorter : sorters.tagsSorter[ tagsSorter ])
-        return (!sortFn ? null : sortFn(tagA, tagB))
-      }
-    )
-    .map((ops, tag) => {
-      let sortFn = (typeof operationsSorter === "function" ? operationsSorter : sorters.operationsSorter[ operationsSorter ])
-      let operations = (!sortFn ? ops : ops.sort(sortFn))
-
-
-      return Map({ tagDetails: tagDetails(clients, tag), operations: operations })
-    })
 }

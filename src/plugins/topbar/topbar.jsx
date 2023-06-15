@@ -1,5 +1,6 @@
 import React, { cloneElement } from "react"
 import PropTypes from "prop-types"
+import { fromJSOrdered  } from "core/utils"
 
 //import "./topbar.less"
 import {parseSearch, serializeSearch} from "../../core/utils"
@@ -13,8 +14,24 @@ export default class Topbar extends React.Component {
 
   constructor(props, context) {
     super(props, context)
-    this.state = { url: props.specSelectors.url(), selectedIndex: 0 }
+    this.state = { url: props.specSelectors.url(), selectedIndex: 0, json: null }
+
+    let url = 'http://localhost:8080' + '/' + 'RoomServiceApi' + '/' + 'Clients' + '/' + 'roomBookings.json'
+
+    console.log(this.props.specSelectors.specStr())
+
+    fetch(url)
+    .then( response => response.json()
+      .then(json => {
+        this.setState({json: json});
+        
+      }))
+
+    
+    this.props.specActions.setBaseUrl("http://localhost:8080")
   }
+
+
 
   UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({ url: nextProps.specSelectors.url() })
@@ -22,7 +39,9 @@ export default class Topbar extends React.Component {
 
   onUrlChange =(e)=> {
     let {target: {value}} = e
-    this.setState({url: value})
+    
+
+     this.setState({url: value})
   }
 
   flushAuthData() {
@@ -39,7 +58,30 @@ export default class Topbar extends React.Component {
   loadSpec = (url) => {
     this.flushAuthData()
     this.props.specActions.updateUrl(url)
-    this.props.specActions.download(url)
+
+    this.props.specActions.setManifest(this.props.specSelectors.specStr())
+
+    let obj = JSON.parse(this.props.specSelectors.specStr())
+
+    let arr = obj["Services"]
+
+    this.props.specActions.setCurrentDoc('RoomServiceApi')
+
+    let currentDoc = this.props.specSelectors.currentDoc()
+
+    let doc = arr.find(item=>item.Name=="RoomServiceApi");
+
+    let baseUrl = this.props.specSelectors.baseUrl()
+
+
+    let currentDocUrl = baseUrl + doc["ExposedEndpoints"]
+
+
+    this.props.specActions.download(currentDocUrl)
+
+     let manifest = JSON.parse("{\r\n  \"openapi\": \"3.0.1\",\r\n  \"info\": {\r\n    \"title\": \"RoomBookingApi\",\r\n    \"version\": \"1.0\"\r\n  },\r\n  \"paths\": {\r\n    \"\/roomBookings\": {\r\n      \"get\": {\r\n        \"tags\": [\r\n          \"RoomBookingApi\"\r\n        ],\r\n        \"operationId\": \"GetRoomBookings\",\r\n        \"responses\": {\r\n          \"200\": {\r\n            \"description\": \"OK\",\r\n            \"content\": {\r\n              \"application\/json\": {\r\n                \"schema\": {\r\n                  \"type\": \"array\",\r\n                  \"items\": {\r\n                    \"$ref\": \"#\/components\/schemas\/RoomBooking\"\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  \"components\": {\r\n    \"schemas\": {\r\n      \"DateOnly\": {\r\n        \"type\": \"object\",\r\n        \"properties\": {\r\n          \"year\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\"\r\n          },\r\n          \"month\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\"\r\n          },\r\n          \"day\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\"\r\n          },\r\n          \"dayOfWeek\": {\r\n            \"$ref\": \"#\/components\/schemas\/DayOfWeek\"\r\n          },\r\n          \"dayOfYear\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\",\r\n            \"readOnly\": true\r\n          },\r\n          \"dayNumber\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\",\r\n            \"readOnly\": true\r\n          }\r\n        },\r\n        \"additionalProperties\": false\r\n      },\r\n      \"DayOfWeek\": {\r\n        \"enum\": [\r\n          0,\r\n          1,\r\n          2,\r\n          3,\r\n          4,\r\n          5,\r\n          6\r\n        ],\r\n        \"type\": \"integer\",\r\n        \"format\": \"int32\"\r\n      },\r\n      \"RoomBooking\": {\r\n        \"type\": \"object\",\r\n        \"properties\": {\r\n          \"roomNumber\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\"\r\n          },\r\n          \"checkInDate\": {\r\n            \"$ref\": \"#\/components\/schemas\/DateOnly\"\r\n          },\r\n          \"checkOutDate\": {\r\n            \"$ref\": \"#\/components\/schemas\/DateOnly\"\r\n          }\r\n        },\r\n        \"additionalProperties\": false\r\n      }\r\n    }\r\n  }\r\n}")
+
+    this.props.specActions.setClientJson(fromJSOrdered(manifest))
   }
 
   onUrlSelect =(e)=> {

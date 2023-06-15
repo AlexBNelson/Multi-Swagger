@@ -163,6 +163,9 @@ export default function SwaggerUI(opts) {
   var system = store.getSystem()
 
   const downloadSpec = (fetchedConfig) => {
+
+    
+
     let localConfig = system.specSelectors.getLocalConfig ? system.specSelectors.getLocalConfig() : {}
     let mergedConfig = deepExtend({}, localConfig, constructorConfig, fetchedConfig || {}, queryConfig)
 
@@ -180,6 +183,9 @@ export default function SwaggerUI(opts) {
         system.specActions.updateLoadingStatus("success")
         system.specActions.updateSpec(JSON.stringify(mergedConfig.spec))
       } else if (system.specActions.download && mergedConfig.url && !mergedConfig.urls) {
+
+        console.log("downloading spec")
+
         system.specActions.updateUrl(mergedConfig.url)
         system.specActions.download(mergedConfig.url)
       }
