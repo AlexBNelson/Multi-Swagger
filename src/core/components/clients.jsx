@@ -39,10 +39,17 @@ constructor () {
 
   componentDidMount () {
 
+let clients =[]
+let toNullCheck = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())
 
 
+if(toNullCheck !=undefined){
+  if("Clients" in toNullCheck){
+    clients = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"]
+  }
+}
 
-    let clients = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"]
+
 
     let clientData =[]
 
@@ -352,9 +359,14 @@ clientPaths = function(){
 
     let numberOfClients =0
 
-    if(JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc()).hasOwnProperty("Clients")){
-      numberOfClients =JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"].length
+    let serviceList = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())
+
+    if(serviceList != undefined){
+      if("Clients" in serviceList){
+          numberOfClients =JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"].length
+      }
     }
+
 
     let multiClient =[]
 
@@ -383,9 +395,6 @@ if(this.state.clients.length==numberOfClients){
 
   let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
 
-  // services.forEach((service)=>{
-  //   service["Clients"]
-  // })
 
       const taggedOps = this.props.specSelectors.taggedOperations()
 
@@ -447,9 +456,16 @@ if(this.state.clients.length==numberOfClients){
 
   let clients
 
-if(JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag).hasOwnProperty("Clients")){
-  clients = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
-}
+  let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
+
+  if(clientList == undefined){
+    if("Clients" in clientList){
+        clients= JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
+    }
+
+  }
+
+
 
 
         if(clients!=undefined){
