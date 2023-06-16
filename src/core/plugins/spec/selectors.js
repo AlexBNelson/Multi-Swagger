@@ -25,7 +25,7 @@ export const manifest = createSelector(
 
 export const currentDoc = createSelector(
   state,
-  state => state.get( "currentDoc", Map() )
+  state => state.get( "currentDoc")
 )
 
 export const lastError = createSelector(
@@ -269,7 +269,7 @@ export const operationsWithTags = createSelector(
       return tags.reduce( (res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap )
     }, tags.reduce( (taggedMap, tag) => {
 
-      
+
       return taggedMap.set(tag.get("name"), List())
     } , OrderedMap()))
   }
@@ -688,7 +688,7 @@ export const clientsWithTags = createSelector(
       return tags.reduce( (res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap )
     }, clientTags.reduce( (taggedMap, tag) => {
 
-      
+
       return taggedMap.set(tag.get("name"), List())
     } , OrderedMap()))
   }
@@ -698,7 +698,7 @@ export const clientsWithTags = createSelector(
 export const taggedClients = (clients) => ({ getConfigs }) => {
 
   let { tagsSorter, operationsSorter } = getConfigs()
-  
+
   console.log(clients)
   return clientsWithTags(clients)
     .sortBy(

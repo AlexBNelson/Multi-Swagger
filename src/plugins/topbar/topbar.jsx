@@ -24,10 +24,10 @@ export default class Topbar extends React.Component {
     .then( response => response.json()
       .then(json => {
         this.setState({json: json});
-        
+
       }))
 
-    
+
     this.props.specActions.setBaseUrl("http://localhost:8080")
   }
 
@@ -39,7 +39,7 @@ export default class Topbar extends React.Component {
 
   onUrlChange =(e)=> {
     let {target: {value}} = e
-    
+
 
      this.setState({url: value})
   }
@@ -65,16 +65,23 @@ export default class Topbar extends React.Component {
 
     let arr = obj["Services"]
 
-    this.props.specActions.setCurrentDoc('RoomServiceApi')
+    let currDoc = this.props.specSelectors.currentDoc()
 
-    let currentDoc = this.props.specSelectors.currentDoc()
+    if(currDoc==undefined){
+      this.props.specActions.setCurrentDoc('RoomServiceApi')
+    }
+
+
+
+
+
 
     let doc = arr.find(item=>item.Name=="RoomServiceApi");
 
     let baseUrl = this.props.specSelectors.baseUrl()
 
 
-    let currentDocUrl = baseUrl + doc["ExposedEndpoints"]
+    let currentDocUrl = baseUrl + '/' + this.props.specSelectors.currentDoc() + doc["ExposedEndpoints"]
 
 
     this.props.specActions.download(currentDocUrl)

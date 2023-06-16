@@ -95,15 +95,7 @@ export default class BaseLayout extends React.Component {
     const hasSchemes = schemes && schemes.size
     const hasSecurityDefinitions = !!specSelectors.securityDefinitions()
 
-    let obj = JSON.parse(specSelectors.specStr())
 
-    // let arr = obj["Services"]
-
-    // let endpointUrl = obj["BaseUrl"] + arr[0]["ExposedEndpoints"]
-
-  //  var keys = Object.values(obj);
-
-   
     return (
       <div className='swagger-ui'>
         <SvgAssets />

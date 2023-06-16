@@ -9,7 +9,7 @@ import ImPropTypes from "react-immutable-proptypes"
 
 export default class Client extends PureComponent {
   constructor () {
-    super();  
+    super();
     this.state = {};
   }
 
@@ -54,15 +54,6 @@ export default class Client extends PureComponent {
 
   componentDidMount () {
 
-    let currentDoc = this.props.specSelectors.currentDoc()
-
-    let baseUrl = this.props.specSelectors.baseUrl()
-
-    let url = baseUrl + '/' + currentDoc + '/' + 'Clients' + '/' + 'roomBookings.json'
-
-    fetch(url)
-    .then( response => response.json()
-      .then(json => {this.setState({json})}))
   }
 
  render() {
@@ -142,7 +133,7 @@ export default class Client extends PureComponent {
 
 
 
-   
+
 
     return (
         <div className={deprecated ? "opblock opblock-deprecated" : isShown ? `opblock opblock-${method} is-open` : `opblock opblock-${method}`} id={escapeDeepLinkPath(isShownKey.join("-"))} >
@@ -168,7 +159,7 @@ export default class Client extends PureComponent {
                     {externalDocs.description &&
                       <span className="opblock-external-docs__description">
                         <Markdown source={ externalDocs.description } />
-                      </span> 
+                      </span>
                     }
                     <Link target="_blank" className="opblock-external-docs__link" href={sanitizeUrl(externalDocsUrl)}>{externalDocsUrl}</Link>
                   </div>
