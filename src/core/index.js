@@ -184,7 +184,6 @@ export default function SwaggerUI(opts) {
         system.specActions.updateSpec(JSON.stringify(mergedConfig.spec))
       } else if (system.specActions.download && mergedConfig.url && !mergedConfig.urls) {
 
-        console.log("downloading spec")
 
         system.specActions.updateUrl(mergedConfig.url)
         system.specActions.download(mergedConfig.url)

@@ -1,10 +1,17 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { fromJSOrdered  } from "core/utils"
 
 export default class BaseLayout extends React.Component {
   constructor(){
     super()
+    
+  }
 
+  componentDidMount(){
+    
+    let manifest = JSON.parse("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"ExposedEndpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"ExposedEndpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"ExposedEndpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"ExposedEndpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"ExposedEndpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"\/RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"\/RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ]\r\n    }\r\n  ]\r\n}")
+          this.props.specActions.setManifest("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"ExposedEndpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"ExposedEndpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"ExposedEndpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"ExposedEndpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"ExposedEndpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"\/RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"\/RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ]\r\n    }\r\n  ]\r\n}")
   }
 
   static propTypes = {
@@ -91,6 +98,39 @@ export default class BaseLayout extends React.Component {
     const servers = specSelectors.servers()
     const schemes = specSelectors.schemes()
 
+
+    let serviceLinks = []
+
+    if(specSelectors.specJson().getIn(["Services"]) != undefined){
+      
+
+      let services = specSelectors.specJson().getIn(["Services"])
+
+      services.forEach((service)=>{
+
+
+        serviceLinks.push(
+        <div><a onClick={(e)=>{
+          e.stopPropagation()
+
+          let serviceUrl = specSelectors.baseUrl() + '/' + service.getIn(["Name"]) + service.getIn(["ExposedEndpoints"])
+
+          this.props.specActions.updateUrl(this.props.specSelectors.url())
+
+    this.props.specActions.setManifest(this.props.specSelectors.specStr())
+
+          console.log(this.props.specSelectors.manifest())
+          this.props.specActions.download(serviceUrl)
+
+          this.props.specActions.setCurrentDoc(service.getIn(["Name"]))
+          }}>
+          {service.getIn(["Name"])}
+        </a></div>)
+      })
+
+
+    }
+
     const hasServers = servers && servers.size
     const hasSchemes = schemes && schemes.size
     const hasSecurityDefinitions = !!specSelectors.securityDefinitions()
@@ -98,6 +138,7 @@ export default class BaseLayout extends React.Component {
 
     return (
       <div className='swagger-ui'>
+        {serviceLinks}
         <SvgAssets />
         <VersionPragmaFilter isSwagger2={isSwagger2} isOAS3={isOAS3} alsoShow={<Errors/>}>
           <Errors/>

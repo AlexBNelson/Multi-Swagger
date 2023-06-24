@@ -6,6 +6,7 @@ import { fromJSOrdered  } from "core/utils"
 import { sorters } from "core/utils"
 import SwaggerLogo from "./swagger.svg"
 
+
 const SWAGGER2_OPERATION_METHODS = [
   "get", "put", "post", "delete", "options", "head", "patch"
 ]
@@ -40,6 +41,8 @@ constructor () {
   componentDidMount () {
 
 let clients =[]
+
+
 let toNullCheck = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())
 
 
@@ -48,6 +51,9 @@ if(toNullCheck !=undefined){
     clients = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"]
   }
 }
+
+
+
 
 
 
@@ -384,16 +390,13 @@ if(this.state.clients.length==numberOfClients){
   let clients =[]
   if(multiClient != undefined){
   if(multiClient.length>0){
-    console.log("using multi clients")
      multiClient.forEach((client)=>{
         clients.push(client.map(this.renderOperationTag).toArray())
     })
 
   }}
 
-  console.log(JSON.parse(this.props.specSelectors.manifest()))
 
-  let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
 
 
       const taggedOps = this.props.specSelectors.taggedOperations()
@@ -454,16 +457,18 @@ if(this.state.clients.length==numberOfClients){
         e.stopPropagation()
         this.props.specActions.download(serviceUrl)
 
-  let clients
+      let clients
 
-  let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
+      console.log(specSelectors.manifest())
 
-  if(clientList == undefined){
-    if("Clients" in clientList){
-        clients= JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
-    }
+      let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
 
-  }
+      if(clientList != undefined){
+        if("Clients" in clientList){
+            clients= JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
+        }
+
+      }
 
 
 

@@ -573,7 +573,6 @@ function returnSelfOrNewMap(obj) {
 export const clientSpec = state => {
   let res = clientJson(state)
 
-  console.log(res)
   return res
 }
 
@@ -699,7 +698,6 @@ export const taggedClients = (clients) => ({ getConfigs }) => {
 
   let { tagsSorter, operationsSorter } = getConfigs()
 
-  console.log(clients)
   return clientsWithTags(clients)
     .sortBy(
       (val, key) => key, // get the name of the tag to be passed to the sorter

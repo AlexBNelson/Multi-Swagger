@@ -8,7 +8,6 @@ export default function downloadUrlPlugin (toolbox) {
   const actions = {
     download: (url)=> ({ errActions, specSelectors, specActions, getConfigs }) => {
 
-      console.log("downloading spec")
 
       let { fetch } = fn
       const config = getConfigs()
@@ -62,7 +61,6 @@ export default function downloadUrlPlugin (toolbox) {
             return
           }
           if(specUrl.origin !== win.location.origin) {
-            console.log("origin" + win.location.origin)
             const error = Object.assign(
               new Error(`Possible cross-origin (CORS) issue? The URL origin (${specUrl.origin}) does not match the page (${win.location.origin}). Check the server returns the correct 'Access-Control-Allow-*' headers.`),
               {source: "fetch"}

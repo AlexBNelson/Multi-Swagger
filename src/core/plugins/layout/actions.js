@@ -8,7 +8,6 @@ export const SHOW = "layout_show"
 // export const ONLY_SHOW = "layout_only_show"
 
 export function updateLayout(layout) {
-  console.log(layout)
   return {
     type: UPDATE_LAYOUT,
     payload: layout
@@ -25,7 +24,6 @@ export function updateFilter(filter) {
 export function show(thing, shown=true) {
   thing = normalizeArray(thing)
 
-  console.log(thing)
   return {
     type: SHOW,
     payload: {thing, shown}

@@ -18,7 +18,6 @@ export default class Topbar extends React.Component {
 
     let url = 'http://localhost:8080' + '/' + 'RoomServiceApi' + '/' + 'Clients' + '/' + 'roomBookings.json'
 
-    console.log(this.props.specSelectors.specStr())
 
     fetch(url)
     .then( response => response.json()

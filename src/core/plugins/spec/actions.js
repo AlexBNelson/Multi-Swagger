@@ -106,7 +106,6 @@ export const parseToJson = (str) => ({specActions, specSelectors, errActions}) =
     })
   }
 
-  console.log(json)
 
   if(json && typeof json === "object") {
     return specActions.updateJsonSpec(json)
@@ -167,7 +166,6 @@ export const resolveSpec = (json, url) => ({specActions, specSelectors, errActio
         errActions.newThrownErrBatch(preparedErrors)
       }
 
-      console.log(spec)
 
       return specActions.updateResolved(spec)
     })
