@@ -1,6 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Im from "immutable"
+import { fromJSOrdered  } from "core/utils"
+import { fromJS, Map } from "immutable"
+import SwaggerLogo from "./swagger.svg"
 
 const SWAGGER2_OPERATION_METHODS = [
   "get", "put", "post", "delete", "options", "head", "patch"
@@ -10,6 +13,12 @@ const OAS3_OPERATION_METHODS = SWAGGER2_OPERATION_METHODS.concat(["trace"])
 
 
 export default class Operations extends React.Component {
+
+  constructor(){
+    super();
+    this.state = {consumers: Map() };
+  }
+
 
   static propTypes = {
     specSelectors: PropTypes.object.isRequired,
@@ -25,23 +34,81 @@ export default class Operations extends React.Component {
     fn: PropTypes.func.isRequired
   }
 
+  componentDidMount(){
+    let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
+
+    let consumerArr = new Map();
+
+
+    services.forEach((service)=>{
+      let clients = service["Clients"]
+
+
+      if(clients !=null){
+
+        clients.forEach((client)=>{
+          let clientUrl = this.props.specSelectors.baseUrl()+ "/" + client
+  
+          fetch(clientUrl)
+            .then( response => response.json()
+              .then(json => {
+
+
+                Object.values(json["paths"]).forEach((path)=>{
+                  Object.values(path).forEach((method)=>{
+
+                    let opConsumers = this.state.consumers.get(method["operationId"])
+                    
+                    if(opConsumers == undefined){
+                      this.setState({consumers: this.state.consumers.set(method["operationId"],[service])})
+                    }
+                    else{
+                      opConsumers.push(service)
+
+                      this.setState({consumers: this.state.consumers.set(method["operationId"], opConsumers)})
+                    }
+                  })
+                })
+            }))
+        })
+      }
+    })
+  }
+
   render() {
     let {
       specSelectors,
     } = this.props
 
+
     const taggedOps = specSelectors.taggedOperations()
 
+
+    // taggedOps.forEach((obj, tag)=>{
+    //   obj.get("operations").forEach((op)=>{
+
+    //     console.log(op.get("operation").get("operationId"))
+    //   })
+    // })
     
+    let consumerList = []
+
+//     taggedOps.forEach((service)=>{
+//  service["Clients"].forEach((client)=>{
+//   if(client.includes(this.props.specSelectors.currentDoc())){
+//     consumerList.push(service)
+//   }
+//  })
+// })
 
 
     if(taggedOps.size === 0) {
       return <h3> No operations defined in spec!</h3>
     }
 
+
     let ops = taggedOps.map(this.renderOperationTag).toArray()
 
-    console.log(ops)
     return (
       <div>
         <h1>Controllers</h1>
@@ -60,12 +127,19 @@ export default class Operations extends React.Component {
       layoutActions,
       getConfigs,
     } = this.props
+
+
+
+
+
     const OperationContainer = getComponent("OperationContainer", true)
     const OperationTag = getComponent("OperationTag")
     const operations = tagObj.get("operations")
 
-    console.log(tagObj)
-    console.log(tag)
+
+
+
+
 
     return (
       <OperationTag
@@ -85,6 +159,47 @@ export default class Operations extends React.Component {
               const method = op.get("method")
               const specPath = Im.List(["paths", path, method])
 
+              let opId = op.get("operation").get("operationId")
+
+           
+
+              let endpointLinks =[]
+
+              let consumerOpId = this.state.consumers.get(opId)
+
+
+              if(consumerOpId != undefined){
+
+
+                this.state.consumers.get(opId).forEach((endpoint)=>{
+
+                  let endpointUrl = specSelectors.baseUrl() + '/' + endpoint['Name'] + endpoint["ExposedEndpoints"]
+  
+
+                  let button = <a onClick={(e)=>{
+                      e.stopPropagation()
+  
+                      this.props.specActions.download(endpointUrl)
+                      console.log(endpoint['Name']); 
+                        this.props.specActions.setCurrentDoc(endpoint['Name'])
+                      }
+              
+              
+                    }><img src={SwaggerLogo} style={{
+                      width: 15,
+                      height: 15}} />&nbsp;&nbsp;{endpointUrl}</a>
+                  endpointLinks.push(button)
+                  
+                  }
+  
+                  )
+
+
+              }
+              
+              
+              
+              
 
               // FIXME: (someday) this logic should probably be in a selector,
               // but doing so would require further opening up
@@ -99,17 +214,25 @@ export default class Operations extends React.Component {
               }
 
               return (
+                <div>
                 <OperationContainer
                   key={`${path}-${method}`}
                   specPath={specPath}
                   op={op}
                   path={path}
                   method={method}
-                  tag={tag} />
+                  tag={tag}>
+
+                  
+
+                  </OperationContainer>
+                  {endpointLinks}
+                  </div>
               )
             }).toArray()
           }
         </div>
+        
       </OperationTag>
     )
   }
