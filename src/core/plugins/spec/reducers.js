@@ -29,7 +29,8 @@ import {
   SET_BASE_URL,
   SET_CURRENT_DOC,
   SET_CLIENT_JSON,
-  SET_MANIFEST
+  SET_MANIFEST,
+  SET_CLIENT_DETAILS
 } from "./actions"
 import { paramToIdentifier } from "../../utils"
 
@@ -46,6 +47,10 @@ export default {
 
   [SET_MANIFEST]: (state, action) => {
     return state.set("manifest", action.payload)
+  },
+
+  [SET_CLIENT_DETAILS]: (state, action) => {
+    return state.set("clientDetails", action.payload)
   },
 
   [SET_CLIENT_JSON]: (state, action) => {
@@ -72,6 +77,8 @@ export default {
 
   [UPDATE_RESOLVED_SUBTREE]: (state, action) => {
     const { value, path } = action.payload
+
+    console.log(...path)
     return state.setIn(["resolvedSubtrees", ...path], fromJSOrdered(value))
   },
 

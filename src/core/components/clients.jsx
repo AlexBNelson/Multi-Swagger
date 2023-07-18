@@ -2,10 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import Im from "immutable"
 import { fromJS, Set, Map, OrderedMap, List } from "immutable"
-import { fromJSOrdered  } from "core/utils"
+import { fromJSOrdered } from "core/utils"
 import { sorters } from "core/utils"
 import SwaggerLogo from "./swagger.svg"
+import debounce from "lodash/debounce"
+import resolveSubtree from "swagger-client/es/subtree-resolver"
+import set from "lodash/set"
 
+let index = 0
 
 const SWAGGER2_OPERATION_METHODS = [
   "get", "put", "post", "delete", "options", "head", "patch"
@@ -15,12 +19,108 @@ const OAS3_OPERATION_METHODS = SWAGGER2_OPERATION_METHODS.concat(["trace"])
 
 
 export default class Clients extends React.Component {
-constructor () {
+  constructor() {
     super();
-    this.state = {clients: [], json: [], collapsed: false };
+    this.state = { clients: [], json: [], collapsed: false };
 
 
   }
+
+
+
+
+
+
+
+
+
+
+  debResolveSubtrees = debounce(async () => {
+    // requestBatch.push(path)
+    // let requestBatch
+    // requestBatch.system = system
+    // const system = requestBatch.system // Just a reference to the "latest" system
+
+    // if(!system) {
+    //   console.error("debResolveSubtrees: don't have a system to operate on, aborting.")
+    //   return
+    // }
+    const {
+      errActions,
+      errSelectors,
+      fn: {
+        resolveSubtree,
+        fetch,
+        AST = {}
+      },
+      specSelectors,
+      specActions,
+    } = system
+
+    if (!resolveSubtree) {
+      console.error("Error: Swagger-Client did not provide a `resolveSubtree` method, doing nothing.")
+      return
+    }
+
+    let getLineNumberForPath = AST.getLineNumberForPath ? AST.getLineNumberForPath : () => undefined
+
+    const specStr = JSON.Stringify(this.state.clientJson[0])
+
+    const {
+      modelPropertyMacro,
+      parameterMacro,
+      requestInterceptor,
+      responseInterceptor
+    } = this.props.getConfigs()
+
+    try {
+      var batchResult = await requestBatch.reduce(async (prev, path) => {
+        const { resultMap, specWithCurrentSubtrees } = await prev
+        const { errors, spec } = await resolveSubtree(specWithCurrentSubtrees, path, {
+          baseDoc: specSelectors.url(),
+          modelPropertyMacro,
+          parameterMacro,
+          requestInterceptor,
+          responseInterceptor
+        })
+
+
+
+        set(resultMap, path, spec)
+        set(specWithCurrentSubtrees, path, spec)
+
+        return {
+          resultMap,
+          specWithCurrentSubtrees
+        }
+      }, Promise.resolve({
+        resultMap: (Map()).toJS(),
+        specWithCurrentSubtrees: this.state.clientJson[0].toJS()
+      }))
+
+      delete requestBatch.system
+      requestBatch = [] // Clear stack
+    } catch (e) {
+      console.error(e)
+    }
+
+
+    this.setState({ resolved: batchResult.resultMap })
+  }, 35)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -38,37 +138,40 @@ constructor () {
     fn: PropTypes.func.isRequired
   }
 
-  componentDidMount () {
+  componentDidMount() {
 
-let clients =[]
-
-
-let toNullCheck = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())
+    let clients = []
 
 
-if(toNullCheck !=undefined){
-  if("Clients" in toNullCheck){
-    clients = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"]
-  }
-}
+    let toNullCheck = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())
+
+
+    if (toNullCheck != undefined) {
+      if ("Clients" in toNullCheck) {
+        clients = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"]
+      }
+    }
+
+    
 
 
 
 
+    let clientData = []
+    let clientJsonList = []
 
+    clients.forEach((client) => {
 
-    let clientData =[]
+      let clientUrl = this.props.specSelectors.baseUrl() + "/" + client
 
-    clients.forEach((client) =>{
-
-        let clientUrl = this.props.specSelectors.baseUrl()+ "/" + client
-
-        fetch(clientUrl)
-          .then( response => response.json()
-            .then(json => {
-              clientData.push(fromJSOrdered(json))
-
-              this.setState({clients: clientData})
+      fetch(clientUrl)
+        .then(response => response.json()
+          .then(json => {
+            console.log(json)
+            clientData.push(fromJSOrdered(json))
+            clientJsonList.push((json))
+            this.setState({ clientJson: clientJsonList })
+            this.setState({ clients: clientData })
           }))
     })
 
@@ -86,31 +189,31 @@ if(toNullCheck !=undefined){
 
 
 
-  tags = function(){
+  tags = function () {
 
-      let clientArr = []
+    let clientArr = []
 
-      this.clientSpec().forEach((client)=>{
-        let tags  = (client.get("tags", List()))
-        let tagRes = List.isList(tags) ? tags.filter(tag => Map.isMap(tag)) : List()
-        clientArr.concat(tagRes)
-    } )
-      return clientArr
-    }
+    this.clientSpec().forEach((client) => {
+      let tags = (client.get("tags", List()))
+      let tagRes = List.isList(tags) ? tags.filter(tag => Map.isMap(tag)) : List()
+      clientArr.concat(tagRes)
+    })
+    return clientArr
+  }
 
 
-    tagDetails = (tag) => {
-      let currentTags = this.tags() || List()
-      return currentTags.filter(Map.isMap).find(t => t.get("name") === tag, Map())
-    }
+  tagDetails = (tag) => {
+    let currentTags = this.tags() || List()
+    return currentTags.filter(Map.isMap).find(t => t.get("name") === tag, Map())
+  }
 
   OPERATION_METHODS = [
     "get", "put", "post", "delete", "options", "head", "patch", "trace"
   ]
 
-   mergerFn = (oldVal, newVal) => {
-    if(Map.isMap(oldVal) && Map.isMap(newVal)) {
-      if(newVal.get("$$ref")) {
+  mergerFn = (oldVal, newVal) => {
+    if (Map.isMap(oldVal) && Map.isMap(newVal)) {
+      if (newVal.get("$$ref")) {
         // resolver artifacts indicated that this key was directly resolved
         // so we should drop the old value entirely
         return newVal
@@ -126,31 +229,31 @@ if(toNullCheck !=undefined){
     return newVal
   }
 
- clientSpec = function(){
-    let retValue =  this.state.clients
+  clientSpec = function () {
+    let retValue = this.state.clients
     return retValue
   }
 
-  clientJson = function(){
+  clientJson = function () {
     return this.state.clients
   }
 
-  clientTags = function(){
-      let clientArr = []
-
-      this.clientSpec().forEach((client)=>{
-        const tags = client.get("tags", List())
-        clientArr.push( List.isList(tags) ? tags.filter(tag => Map.isMap(tag)) : List())
-
-      })
-
-      return clientArr;
-    }
-
-  clientConsumes = function(){
+  clientTags = function () {
     let clientArr = []
 
-    this.clientSpec().forEach((client)=>{
+    this.clientSpec().forEach((client) => {
+      const tags = client.get("tags", List())
+      clientArr.push(List.isList(tags) ? tags.filter(tag => Map.isMap(tag)) : List())
+
+    })
+
+    return clientArr;
+  }
+
+  clientConsumes = function () {
+    let clientArr = []
+
+    this.clientSpec().forEach((client) => {
       clientArr.push(Set(client.get("consumes")))
     })
 
@@ -158,10 +261,10 @@ if(toNullCheck !=undefined){
 
   }
 
-  clientProduces = function(){
+  clientProduces = function () {
     let clientArr = []
 
-    this.clientSpec().forEach((client)=>{
+    this.clientSpec().forEach((client) => {
       clientArr.push(Set(client.get("produces")))
     })
 
@@ -169,7 +272,7 @@ if(toNullCheck !=undefined){
 
   }
 
-  clientJsonWithResolvedSubtrees = function(){
+  clientJsonWithResolvedSubtrees = function () {
     let clientArr = []
 
     this.clientSpec().forEach((client) => {
@@ -185,141 +288,142 @@ if(toNullCheck !=undefined){
   }
 
 
-clientPaths = function(){
-  let clientArr = []
+  clientPaths = function () {
+    let clientArr = []
 
-  this.clientJsonWithResolvedSubtrees().forEach((client)=>{
-    clientArr.push(client.get("paths"))
-  })
+    this.clientJsonWithResolvedSubtrees().forEach((client) => {
+      clientArr.push(client.get("paths"))
+    })
 
-  return clientArr;
+    return clientArr;
 
-}
+  }
 
-  clients = function() {
-      let clientArr = []
+  clients = function () {
+    let clientArr = []
 
 
-      this.clientPaths().forEach((clientOps) =>{
-        if(!clientOps || clientOps.size < 1)
+    this.clientPaths().forEach((clientOps) => {
+      if (!clientOps || clientOps.size < 1)
         clientArr.push(List())
 
-          let list = List()
+      let list = List()
 
-        if(!clientOps || !clientOps.forEach) {
+      if (!clientOps || !clientOps.forEach) {
         clientArr.push(List())
-         }
+      }
 
-         clientOps.forEach((path, pathName) => {
-              if(!path || !path.forEach) {
-                clientArr.push({})
-             }
-              path.forEach((operation, method) => {
-               if(this.OPERATION_METHODS.indexOf(method) < 0) {
+      clientOps.forEach((path, pathName) => {
+        if (!path || !path.forEach) {
+          clientArr.push({})
+        }
 
-                   }
-                list = list.push(fromJS({
-                  path: pathName,
-                 method,
-                   operation,
-                  id: `${method}-${pathName}`
-                 }))
+        path.forEach((operation, method) => {
+          if (this.OPERATION_METHODS.indexOf(method) < 0) {
+
+          }
+          list = list.push(fromJS({
+            path: pathName,
+            method,
+            operation,
+            id: `${method}-${pathName}`
+          }))
 
           clientArr.push(list)
         })
       })
-      })
+    })
 
 
-      return clientArr
-    }
+    return clientArr
+  }
 
 
-  clientsWithRootInherited = function(){
+  clientsWithRootInherited = function () {
 
-      let clientsArray = []
+    let clientsArray = []
 
-      // This function is where the second client object seems to disappear
+    // This function is where the second client object seems to disappear
 
-      for(let i=0; i<this.clients().length; i++){
-        clientsArray.push(this.clients()[i].map( ops => ops.update("operation", op => {
-          if(op) {
-            if(!Map.isMap(op)) { return }
-            return op.withMutations( op => {
-              if ( !op.get("consumes") ) {
-                op.update("consumes", a => Set(a).merge(this.clientConsumes()[i]))
-              }
-              if ( !op.get("produces") ) {
-                op.update("produces", a => Set(a).merge(this.clientProduces()[i]))
-              }
-              return op
-            })
-          } else {
-            // return something with Immutable methods
-            return Map()
-          }
+    for (let i = 0; i < this.clients().length; i++) {
+      clientsArray.push(this.clients()[i].map(ops => ops.update("operation", op => {
+        if (op) {
+          if (!Map.isMap(op)) { return }
+          return op.withMutations(op => {
+            if (!op.get("consumes")) {
+              op.update("consumes", a => Set(a).merge(this.clientConsumes()[i]))
+            }
+            if (!op.get("produces")) {
+              op.update("produces", a => Set(a).merge(this.clientProduces()[i]))
+            }
+            return op
+          })
+        } else {
+          // return something with Immutable methods
+          return Map()
+        }
 
-        })))
+      })))
     }
 
     return clientsArray;
   }
 
 
-  clientsWithTags = function(){
+  clientsWithTags = function () {
 
 
-      let clientArr = []
+    let clientArr = []
 
-      for(let i=0; i<this.clientsWithRootInherited().length; i++){
-        clientArr.push(this.clientsWithRootInherited()[i].reduce( (taggedMap, op) => {
-          let tags = Set(op.getIn(["operation","tags"]))
-          if(tags.count() < 1)
-            return taggedMap.update(DEFAULT_TAG, List(), ar => ar.push(op))
-          return tags.reduce( (res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap )
-        }, this.clientTags()[i].reduce( (taggedMap, tag) => {
+    for (let i = 0; i < this.clientsWithRootInherited().length; i++) {
+      clientArr.push(this.clientsWithRootInherited()[i].reduce((taggedMap, op) => {
+        let tags = Set(op.getIn(["operation", "tags"]))
+        if (tags.count() < 1)
+          return taggedMap.update(DEFAULT_TAG, List(), ar => ar.push(op))
+        return tags.reduce((res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap)
+      }, this.clientTags()[i].reduce((taggedMap, tag) => {
 
 
-          return taggedMap.set(tag.get("name"), List())
-        } , OrderedMap())))
+        return taggedMap.set(tag.get("name"), List())
+      }, OrderedMap())))
 
-      }
-
-      return clientArr
     }
 
+    return clientArr
+  }
 
 
-  taggedClients = function(){
+
+  taggedClients = function () {
 
     let { tagsSorter, operationsSorter } = this.props.getConfigs()
 
     let clientsArr = []
 
-    this.clientsWithTags().forEach((client)=>{
+    this.clientsWithTags().forEach((client) => {
 
       clientsArr.push(client
         .sortBy(
           (val, key) => key, // get the name of the tag to be passed to the sorter
           (tagA, tagB) => {
-            let sortFn = (typeof tagsSorter === "function" ? tagsSorter : sorters.tagsSorter[ tagsSorter ])
+            let sortFn = (typeof tagsSorter === "function" ? tagsSorter : sorters.tagsSorter[tagsSorter])
             return (!sortFn ? null : sortFn(tagA, tagB))
           }
         )
         .map((ops, tag) => {
-          let sortFn = (typeof operationsSorter === "function" ? operationsSorter : sorters.operationsSorter[ operationsSorter ])
+          let sortFn = (typeof operationsSorter === "function" ? operationsSorter : sorters.operationsSorter[operationsSorter])
           let operations = (!sortFn ? ops : ops.sort(sortFn))
 
 
           return Map({ tagDetails: this.tagDetails(tag), operations: operations })
         }))
 
-      })
+    })
 
-    return  clientsArr
+    return clientsArr
   }
 
-  getMultiClients = function(){
+  getMultiClients = function () {
     let retValue = this.state.clients
     return retValue
   }
@@ -338,11 +442,11 @@ clientPaths = function(){
 
   transformOperations = (operations) => {
 
-      return operations.reduce( (taggedMap, op) => {
-        let tags = Set(op.getIn(["operation","tags"]))
-        return tags.reduce( (res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap )
-      },null)
-    }
+    return operations.reduce((taggedMap, op) => {
+      let tags = Set(op.getIn(["operation", "tags"]))
+      return tags.reduce((res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap)
+    }, null)
+  }
 
 
   taggedOperationsParent = (operations) => {
@@ -353,8 +457,8 @@ clientPaths = function(){
 
   }
 
-  showTag = function(){
-    this.setState({collapsed: !this.state.collapsed});
+  showTag = function () {
+    this.setState({ collapsed: !this.state.collapsed });
   }
 
   render() {
@@ -363,69 +467,62 @@ clientPaths = function(){
     } = this.props
 
 
-    let numberOfClients =0
+    let numberOfClients = 0
 
     let serviceList = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())
 
-    if(serviceList != undefined){
-      if("Clients" in serviceList){
-          numberOfClients =JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"].length
+    if (serviceList != undefined) {
+      if ("Clients" in serviceList) {
+        numberOfClients = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"].length
       }
     }
 
 
-    let multiClient =[]
+    let multiClient = []
 
-if(this.state.clients.length==numberOfClients){
-
-   multiClient = this.taggedClients()
-}
-
-
+    if (this.state.clients.length == numberOfClients) {
+      multiClient = this.taggedClients()
+      
+    }
 
 
+    let i = 0
 
-  let taggedClients = this.props.specSelectors.taggedClients();
+    let clients = []
 
-  let clients =[]
-  if(multiClient != undefined){
-  if(multiClient.length>0){
-     multiClient.forEach((client)=>{
-        clients.push(client.map(this.renderOperationTag).toArray())
-    })
 
-  }}
+    if (multiClient != undefined) {
+      if (multiClient.length > 0) {
+
+
+        multiClient.forEach((client) => {
 
 
 
+          index++
 
-      const taggedOps = this.props.specSelectors.taggedOperations()
+          
+          clients.push(client.map(this.renderOperationTag).toArray())
 
-     let ops = taggedOps.map(this.renderOperationTag).toArray()
+
+        })
 
 
-    //  console.log(this.state.json)
-    //const Collapse = this.props.getComponent("Collapse")
+
+      }
+    }
+
+    // if(system){
+    //   this.debResolveSubtrees();
+    // console.log(this.state.resolved)
+    // console.log(resolveSubtree())
+    // }
+
 
     return (
       <div>
         <h1 fontWeight='bold'> Clients</h1>
         {clients}
-
-        {/* Use layout store to add collapsing functionality/*}
-        {/* <button
-            aria-expanded={showTag}
-            className="expand-operation"
-            title={showTag ? "Collapse operation" : "Expand operation"}
-            onClick={() => layoutActions.show(isShownKey, !showTag)}>
-
-            <svg className="arrow" width="20" height="20" aria-hidden="true" focusable="false">
-              <use href={showTag ? "#large-arrow-up" : "#large-arrow-down"} xlinkHref={showTag ? "#large-arrow-up" : "#large-arrow-down"} />
-            </svg>
-          </button>
-        <Collapse isOpened={this.showTag}>
-        {clients}
-        </Collapse> */}
 
       </div>
     )
@@ -433,7 +530,21 @@ if(this.state.clients.length==numberOfClients){
 
 
 
+
+
+
+
   renderOperationTag = (tagObj, tag) => {
+
+
+
+    // let clientJson = OrderedMap().mergeWith(
+    //   this.mergerFn,
+    //   this.state.clientJson[index]
+    //   // Was causing the client summaries to duplicate for some reason
+    //   // spec.get("resolvedSubtrees")
+    // )
+
     const {
       specSelectors,
       getComponent,
@@ -445,50 +556,56 @@ if(this.state.clients.length==numberOfClients){
 
     let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
 
-    let service = services.find(item=>item.Name==tag)
+    let service = services.find(item => item.Name == tag)
 
 
-    let serviceUrl = specSelectors.baseUrl() + '/' + tag + service["ExposedEndpoints"];
+    let serviceUrl
+
+    if (service != undefined)
+      serviceUrl = specSelectors.baseUrl() + '/' + tag + service["ExposedEndpoints"];
 
     let serviceLink
 
-    if(tag!=specSelectors.currentDoc()){
-      serviceLink = <a onClick={(e)=>{
+    if (tag != specSelectors.currentDoc()) {
+      serviceLink = <a onClick={(e) => {
         e.stopPropagation()
         this.props.specActions.download(serviceUrl)
 
-      let clients
+        let clients
 
-      console.log(specSelectors.manifest())
+        let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
 
-      let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
+        if (clientList != undefined) {
+          if ("Clients" in clientList) {
+            clients = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
+          }
 
-      if(clientList != undefined){
-        if("Clients" in clientList){
-            clients= JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
         }
 
-      }
 
 
 
-
-        if(clients!=undefined){
+        if (clients != undefined) {
           this.props.specActions.setCurrentDoc(tag)
-        }else{
+        } else {
           this.props.specActions.setCurrentDoc()
         }
 
 
       }}><img src={SwaggerLogo} style={{
         width: 15,
-        height: 15}} />&nbsp;&nbsp;{serviceUrl}</a>
+        height: 15
+      }} />&nbsp;&nbsp;{serviceUrl}</a>
     }
+
 
 
     const ClientContainer = getComponent("ClientContainer", true)
     const ClientTag = getComponent("ClientTag")
     const clients = tagObj.get("operations")
+
+    let index = 0
+
     return (
       <ClientTag
         key={"operation-" + tag}
@@ -499,15 +616,26 @@ if(this.state.clients.length==numberOfClients){
         layoutActions={layoutActions}
         getConfigs={getConfigs}
         getComponent={getComponent}
-        specUrl={specSelectors.url()}>
+        specUrl={specSelectors.url()}
+      >
 
         <div className="operation-tag-content">
           {
+
+
             clients.map(op => {
+
+
+              let clientDetails = specSelectors.clientDetails().get(specSelectors.currentDoc())
+
+
+              let clientDetail = clientDetails.get(op.get("path").slice(1))
+
+              //.get(op.get("path").slice(1))
+
               const path = op.get("path")
               const method = op.get("method")
               const specPath = Im.List(["paths", path, method])
-
 
               // FIXME: (someday) this logic should probably be in a selector,
               // but doing so would require further opening up
@@ -521,11 +649,14 @@ if(this.state.clients.length==numberOfClients){
                 return null
               }
 
+
+
               return (
                 <ClientContainer
                   key={`${path}-${method}`}
                   specPath={specPath}
                   op={op}
+                  clientDetail={clientDetail}
                   path={path}
                   method={method}
                   tag={tag} />

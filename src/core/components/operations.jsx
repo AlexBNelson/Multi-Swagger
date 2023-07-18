@@ -84,24 +84,6 @@ export default class Operations extends React.Component {
     const taggedOps = specSelectors.taggedOperations()
 
 
-    // taggedOps.forEach((obj, tag)=>{
-    //   obj.get("operations").forEach((op)=>{
-
-    //     console.log(op.get("operation").get("operationId"))
-    //   })
-    // })
-    
-    let consumerList = []
-
-//     taggedOps.forEach((service)=>{
-//  service["Clients"].forEach((client)=>{
-//   if(client.includes(this.props.specSelectors.currentDoc())){
-//     consumerList.push(service)
-//   }
-//  })
-// })
-
-
     if(taggedOps.size === 0) {
       return <h3> No operations defined in spec!</h3>
     }
@@ -180,7 +162,6 @@ export default class Operations extends React.Component {
                       e.stopPropagation()
   
                       this.props.specActions.download(endpointUrl)
-                      console.log(endpoint['Name']); 
                         this.props.specActions.setCurrentDoc(endpoint['Name'])
                       }
               
@@ -212,6 +193,7 @@ export default class Operations extends React.Component {
               if (validMethods.indexOf(method) === -1) {
                 return null
               }
+
 
               return (
                 <div>

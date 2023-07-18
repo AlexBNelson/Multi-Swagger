@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import PropTypes from "prop-types"
 import ImPropTypes from "react-immutable-proptypes"
 import { opId } from "swagger-client/es/helpers"
-import { Iterable, fromJS, Map } from "immutable"
+import { Iterable, fromJS, Map, OrderedMap } from "immutable"
 
 export default class OperationContainer extends PureComponent {
   constructor(props, context) {
@@ -109,7 +109,6 @@ export default class OperationContainer extends PureComponent {
     const resolvedSubtree = this.getResolvedSubtree()
     if(!isShown && resolvedSubtree === undefined) {
       // transitioning from collapsed to expanded
-      this.requestResolvedSubtree()
     }
     layoutActions.show(["operations", tag, operationId], !isShown)
   }
@@ -162,6 +161,24 @@ export default class OperationContainer extends PureComponent {
     return specActions.requestResolvedSubtree(["paths", path, method])
   }
 
+  mergerFn = (oldVal, newVal) => {
+    if(Map.isMap(oldVal) && Map.isMap(newVal)) {
+      if(newVal.get("$$ref")) {
+        // resolver artifacts indicated that this key was directly resolved
+        // so we should drop the old value entirely
+        return newVal
+      }
+  
+      return OrderedMap().mergeWith(
+        mergerFn,
+        oldVal,
+        newVal
+      )
+    }
+  
+    return newVal
+  }
+
   render() {
     let {
       op: unresolvedOp,
@@ -198,7 +215,7 @@ export default class OperationContainer extends PureComponent {
 
     const resolvedSubtree = this.getResolvedSubtree() || Map()
 
-    
+    console.log(resolvedSubtree)
 
     const operationProps = fromJS({
       op: resolvedSubtree,

@@ -23,9 +23,14 @@ export const manifest = createSelector(
   state => state.get("manifest", Map() )
 )
 
+export const clientDetails = createSelector(
+  state,
+  state => state.get("clientDetails", Map() )
+)
+
 export const currentDoc = createSelector(
   state,
-  state => state.get( "currentDoc")
+  state => state.get("currentDoc")
 )
 
 export const lastError = createSelector(

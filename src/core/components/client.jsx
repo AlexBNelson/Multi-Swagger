@@ -93,6 +93,8 @@ export default class Client extends PureComponent {
       executeInProgress
     } = operationProps.toJS()
 
+
+
     let {
       description,
       externalDocs,
@@ -100,7 +102,11 @@ export default class Client extends PureComponent {
     } = op
 
     const externalDocsUrl = externalDocs ? safeBuildUrl(externalDocs.url, specSelectors.url(), { selectedServer: oas3Selectors.selectedServer() }) : ""
-    let operation = operationProps.getIn(["op"])
+    let operation = this.props.clientDetail
+
+    if(this.props.clientDetail==undefined){
+      operation = operationProps.getIn(["op"])
+    }
     let responses = operation.get("responses")
     let parameters = getList(operation, ["parameters"])
     let operationScheme = specSelectors.operationScheme(path, method)
@@ -130,9 +136,6 @@ export default class Client extends PureComponent {
     let onChangeKey = [ path, method ] // Used to add values to _this_ operation ( indexed by path and method )
 
     const validationErrors = specSelectors.validationErrors([path, method])
-
-
-
 
 
     return (

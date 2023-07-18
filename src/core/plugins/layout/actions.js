@@ -23,6 +23,7 @@ export function updateFilter(filter) {
 
 export function show(thing, shown=true) {
   thing = normalizeArray(thing)
+  
 
   return {
     type: SHOW,

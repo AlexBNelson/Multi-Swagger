@@ -31,6 +31,7 @@ export const SET_BASE_URL = "set_base_url"
 export const SET_CURRENT_DOC = "set_current_doc"
 export const SET_CLIENT_JSON = "set_client_json"
 export const SET_MANIFEST = "set_manifest"
+export const SET_CLIENT_DETAILS = "set_client_details"
 
 const toStr = (str) => isString(str) ? str : ""
 
@@ -43,6 +44,16 @@ export function updateSpec(spec) {
     }
   }
 }
+
+
+export function setClientDetails(clientDetails) {
+  return {
+    type: SET_CLIENT_DETAILS,
+    payload: clientDetails
+  }
+}
+
+
 
 export function setManifest(manifest) {
   return {
@@ -219,6 +230,8 @@ const debResolveSubtrees = debounce(async () => {
         responseInterceptor
       })
 
+      
+
       if(errSelectors.allErrors().size) {
         errActions.clearBy(err => {
           // keep if...
@@ -267,6 +280,8 @@ const debResolveSubtrees = debounce(async () => {
       set(resultMap, path, spec)
       set(specWithCurrentSubtrees, path, spec)
 
+      
+
       return {
         resultMap,
         specWithCurrentSubtrees
@@ -281,6 +296,8 @@ const debResolveSubtrees = debounce(async () => {
   } catch(e) {
     console.error(e)
   }
+
+  console.log(batchResult.resultMap)
 
   specActions.updateResolvedSubtree([], batchResult.resultMap)
 }, 35)
