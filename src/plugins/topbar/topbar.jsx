@@ -28,6 +28,9 @@ export default class Topbar extends React.Component {
 
 
     this.props.specActions.setBaseUrl("http://localhost:8080")
+
+
+    
   }
 
 
@@ -88,6 +91,8 @@ export default class Topbar extends React.Component {
      let manifest = JSON.parse("{\r\n  \"openapi\": \"3.0.1\",\r\n  \"info\": {\r\n    \"title\": \"RoomBookingApi\",\r\n    \"version\": \"1.0\"\r\n  },\r\n  \"paths\": {\r\n    \"\/roomBookings\": {\r\n      \"get\": {\r\n        \"tags\": [\r\n          \"RoomBookingApi\"\r\n        ],\r\n        \"operationId\": \"GetRoomBookings\",\r\n        \"responses\": {\r\n          \"200\": {\r\n            \"description\": \"OK\",\r\n            \"content\": {\r\n              \"application\/json\": {\r\n                \"schema\": {\r\n                  \"type\": \"array\",\r\n                  \"items\": {\r\n                    \"$ref\": \"#\/components\/schemas\/RoomBooking\"\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          }\r\n        }\r\n      }\r\n    }\r\n  },\r\n  \"components\": {\r\n    \"schemas\": {\r\n      \"DateOnly\": {\r\n        \"type\": \"object\",\r\n        \"properties\": {\r\n          \"year\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\"\r\n          },\r\n          \"month\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\"\r\n          },\r\n          \"day\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\"\r\n          },\r\n          \"dayOfWeek\": {\r\n            \"$ref\": \"#\/components\/schemas\/DayOfWeek\"\r\n          },\r\n          \"dayOfYear\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\",\r\n            \"readOnly\": true\r\n          },\r\n          \"dayNumber\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\",\r\n            \"readOnly\": true\r\n          }\r\n        },\r\n        \"additionalProperties\": false\r\n      },\r\n      \"DayOfWeek\": {\r\n        \"enum\": [\r\n          0,\r\n          1,\r\n          2,\r\n          3,\r\n          4,\r\n          5,\r\n          6\r\n        ],\r\n        \"type\": \"integer\",\r\n        \"format\": \"int32\"\r\n      },\r\n      \"RoomBooking\": {\r\n        \"type\": \"object\",\r\n        \"properties\": {\r\n          \"roomNumber\": {\r\n            \"type\": \"integer\",\r\n            \"format\": \"int32\"\r\n          },\r\n          \"checkInDate\": {\r\n            \"$ref\": \"#\/components\/schemas\/DateOnly\"\r\n          },\r\n          \"checkOutDate\": {\r\n            \"$ref\": \"#\/components\/schemas\/DateOnly\"\r\n          }\r\n        },\r\n        \"additionalProperties\": false\r\n      }\r\n    }\r\n  }\r\n}")
 
     this.props.specActions.setClientJson(fromJSOrdered(manifest))
+
+    
   }
 
   onUrlSelect =(e)=> {
@@ -150,6 +155,11 @@ export default class Topbar extends React.Component {
 
       this.loadSpec(urls[targetIndex].url)
     }
+
+
+
+
+
   }
 
   onFilterChange =(e) => {
