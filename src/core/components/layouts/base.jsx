@@ -46,8 +46,6 @@ export default class BaseLayout extends React.Component {
                 let localClients = []
                 localClients.push(fromJSOrdered(json))
 
-                console.log(localClients)
-
                 let multiClients = this.taggedClients(localClients)
                 let tO
 
@@ -177,12 +175,9 @@ export default class BaseLayout extends React.Component {
 
           
 
-         console.log(outerMap)
         });
 
   })
-
-  console.log(clientDetailsToReturn)
 
 if(clientDetailsToReturn!=null){
 
@@ -261,6 +256,7 @@ clientConsumes = function(clients){
   let clientArr = []
 
   clients.forEach((client)=>{
+    //seems to be the source of the multi-client issues
     clientArr.push(Set(client.get("consumes")))
   })
 
@@ -309,7 +305,7 @@ return clientArr;
 clients = function(clients) {
     let clientArr = []
 
-
+  // clientPaths unwraps according to paths
     this.clientPaths(clients).forEach((clientOps) =>{
       if(!clientOps || clientOps.size < 1)
       clientArr.push(List())
@@ -320,11 +316,16 @@ clients = function(clients) {
       clientArr.push(List())
        }
 
+       console.log(clientOps)
+
+       
+      // this is what's causing the duplication in the clientArr
        clientOps.forEach((path, pathName) => {
             if(!path || !path.forEach) {
               clientArr.push({})
            }
 
+           // will need to fix for multiple operation scenario
             path.forEach((operation, method) => {
              if(this.OPERATION_METHODS.indexOf(method) < 0) {
 
@@ -336,12 +337,17 @@ clients = function(clients) {
                 id: `${method}-${pathName}`
                }))
 
-        clientArr.push(list)
+        // clientArr.push(list) where it was pushing to client array before
       })
-    })
-    })
 
 
+    })
+    
+
+    clientArr.push(list)
+    })
+    console.log(clientArr)
+  //if two paths, then incorrectly return a list of one path and a list of two paths
     return clientArr
   }
 
@@ -350,9 +356,11 @@ clientsWithRootInherited = function(clients){
 
     let clientsArray = []
 
+
     // This function is where the second client object seems to disappear
 
     for(let i=0; i<this.clients(clients).length; i++){
+      console.log(this.clients(clients))
       clientsArray.push(this.clients(clients)[i].map( ops => ops.update("operation", op => {
         if(op) {
           if(!Map.isMap(op)) { return }
@@ -379,7 +387,7 @@ clientsWithRootInherited = function(clients){
 
 clientsWithTags = function(clients){
 
-
+  console.log(this.clientsWithRootInherited(clients))
     let clientArr = []
 
     for(let i=0; i<this.clientsWithRootInherited(clients).length; i++){
@@ -404,6 +412,7 @@ clientsWithTags = function(clients){
 taggedClients = function(clients){
 
   let { tagsSorter, operationsSorter } = this.props.getConfigs()
+
 
   let clientsArr = []
 

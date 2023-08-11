@@ -227,6 +227,8 @@ export const operationsWithRootInherited = createSelector(
   consumes,
   produces,
   (operations, consumes, produces) => {
+
+    console.log(operations)
     return operations.map( ops => ops.update("operation", op => {
       if(op) {
         if(!Map.isMap(op)) { return }
@@ -266,7 +268,7 @@ export const operationsWithTags = createSelector(
   tags,
   (operations, tags) => {
 
-
+    console.log(operations)
     return operations.reduce( (taggedMap, op) => {
       let tags = Set(op.getIn(["operation","tags"]))
       if(tags.count() < 1)
@@ -281,6 +283,7 @@ export const operationsWithTags = createSelector(
 )
 
 export const taggedOperations = (state) => ({ getConfigs }) => {
+ 
   let { tagsSorter, operationsSorter } = getConfigs()
   return operationsWithTags(state)
     .sortBy(

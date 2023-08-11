@@ -167,7 +167,7 @@ export default class Clients extends React.Component {
       fetch(clientUrl)
         .then(response => response.json()
           .then(json => {
-            console.log(json)
+            //console.log(json)
             clientData.push(fromJSOrdered(json))
             clientJsonList.push((json))
             this.setState({ clientJson: clientJsonList })
@@ -329,9 +329,10 @@ export default class Clients extends React.Component {
             id: `${method}-${pathName}`
           }))
 
-          clientArr.push(list)
+          
         })
       })
+      clientArr.push(list)
     })
 
 
@@ -346,6 +347,7 @@ export default class Clients extends React.Component {
     // This function is where the second client object seems to disappear
 
     for (let i = 0; i < this.clients().length; i++) {
+
       clientsArray.push(this.clients()[i].map(ops => ops.update("operation", op => {
         if (op) {
           if (!Map.isMap(op)) { return }
@@ -485,10 +487,15 @@ export default class Clients extends React.Component {
       
     }
 
+    // console.log(this.state.clients)
 
-    let i = 0
 
     let clients = []
+
+    for(let i=0; i<multiClient.length; i++){
+      //console.log(multiClient[i])
+
+    }
 
 
     if (multiClient != undefined) {
@@ -497,7 +504,8 @@ export default class Clients extends React.Component {
 
         multiClient.forEach((client) => {
 
-
+          console.log(client.map(this.renderOperationTag).toArray())
+          
 
           index++
 
@@ -511,12 +519,6 @@ export default class Clients extends React.Component {
 
       }
     }
-
-    // if(system){
-    //   this.debResolveSubtrees();
-    // console.log(this.state.resolved)
-    // console.log(resolveSubtree())
-    // }
 
 
     return (
@@ -536,7 +538,7 @@ export default class Clients extends React.Component {
 
   renderOperationTag = (tagObj, tag) => {
 
-
+    //console.log(tagObj)
 
     // let clientJson = OrderedMap().mergeWith(
     //   this.mergerFn,
@@ -605,6 +607,8 @@ export default class Clients extends React.Component {
     const clients = tagObj.get("operations")
 
     let index = 0
+
+    //console.log(clients)
 
     return (
       <ClientTag

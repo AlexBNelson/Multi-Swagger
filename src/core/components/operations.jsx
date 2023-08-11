@@ -110,18 +110,56 @@ export default class Operations extends React.Component {
       getConfigs,
     } = this.props
 
+    let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
+
+    let service = services.find(item => item.Name == tag)
 
 
+    let serviceUrl
 
+    if (service != undefined)
+      serviceUrl = specSelectors.baseUrl() + '/' + tag + service["ExposedEndpoints"];
+
+    let serviceLink
 
     const OperationContainer = getComponent("OperationContainer", true)
     const OperationTag = getComponent("OperationTag")
     const operations = tagObj.get("operations")
 
 
+    
+      serviceLink = <a onClick={(e) => {
+        e.stopPropagation()
+        this.props.specActions.download(serviceUrl)
+
+        let clients
+
+        let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
+
+        if (clientList != undefined) {
+          if ("Clients" in clientList) {
+            clients = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
+          }
+
+        }
 
 
 
+
+        if (clients != undefined) {
+          this.props.specActions.setCurrentDoc(tag)
+        } else {
+          this.props.specActions.setCurrentDoc()
+        }
+
+
+      }}><img src={SwaggerLogo} style={{
+        width: 15,
+        height: 15
+      }} />&nbsp;&nbsp;{serviceUrl}</a>
+    
+
+      let endpointLinks =<button></button>
 
     return (
       <OperationTag
@@ -145,7 +183,7 @@ export default class Operations extends React.Component {
 
            
 
-              let endpointLinks =[]
+              
 
               let consumerOpId = this.state.consumers.get(opId)
 
@@ -169,7 +207,7 @@ export default class Operations extends React.Component {
                     }><img src={SwaggerLogo} style={{
                       width: 15,
                       height: 15}} />&nbsp;&nbsp;{endpointUrl}</a>
-                  endpointLinks.push(button)
+                  endpointLinks = button
                   
                   }
   
@@ -208,13 +246,13 @@ export default class Operations extends React.Component {
                   
 
                   </OperationContainer>
-                  {endpointLinks}
+                  
                   </div>
               )
             }).toArray()
           }
         </div>
-        
+        {endpointLinks}
       </OperationTag>
     )
   }
