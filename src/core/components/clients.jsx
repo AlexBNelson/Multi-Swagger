@@ -61,11 +61,6 @@ export default class Clients extends React.Component {
       console.error("Error: Swagger-Client did not provide a `resolveSubtree` method, doing nothing.")
       return
     }
-
-    let getLineNumberForPath = AST.getLineNumberForPath ? AST.getLineNumberForPath : () => undefined
-
-    const specStr = JSON.Stringify(this.state.clientJson[0])
-
     const {
       modelPropertyMacro,
       parameterMacro,
@@ -153,7 +148,7 @@ export default class Clients extends React.Component {
     }
 
     
-
+   
 
 
 
@@ -175,6 +170,7 @@ export default class Clients extends React.Component {
           }))
     })
 
+    
 
   }
 
@@ -464,10 +460,7 @@ export default class Clients extends React.Component {
   }
 
   render() {
-    let {
-      specSelectors,
-    } = this.props
-
+   
 
     let numberOfClients = 0
 
@@ -487,30 +480,29 @@ export default class Clients extends React.Component {
       
     }
 
+    console.log(this.props.specSelectors.clientData().get(this.props.specSelectors.currentDoc()))
     // console.log(this.state.clients)
 
 
+    multiClient = this.props.specSelectors.clientData().get(this.props.specSelectors.currentDoc())
+
     let clients = []
 
-    for(let i=0; i<multiClient.length; i++){
-      //console.log(multiClient[i])
-
-    }
 
 
     if (multiClient != undefined) {
       if (multiClient.length > 0) {
 
+        console.log(multiClient)
 
         multiClient.forEach((client) => {
 
-          console.log(client.map(this.renderOperationTag).toArray())
           
 
           index++
 
-          
-          clients.push(client.map(this.renderOperationTag).toArray())
+          // for now 'client' is assumed to always be 1 element
+          clients.push(client[0].map(this.renderOperationTag).toArray())
 
 
         })
@@ -538,15 +530,7 @@ export default class Clients extends React.Component {
 
   renderOperationTag = (tagObj, tag) => {
 
-    //console.log(tagObj)
-
-    // let clientJson = OrderedMap().mergeWith(
-    //   this.mergerFn,
-    //   this.state.clientJson[index]
-    //   // Was causing the client summaries to duplicate for some reason
-    //   // spec.get("resolvedSubtrees")
-    // )
-
+  
     const {
       specSelectors,
       getComponent,
@@ -607,8 +591,6 @@ export default class Clients extends React.Component {
     const clients = tagObj.get("operations")
 
     let index = 0
-
-    //console.log(clients)
 
     return (
       <ClientTag

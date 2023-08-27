@@ -207,7 +207,7 @@ export default class Operations extends React.Component {
                     }><img src={SwaggerLogo} style={{
                       width: 15,
                       height: 15}} />&nbsp;&nbsp;{endpointUrl}</a>
-                  endpointLinks = button
+                  endpointLinks=button
                   
                   }
   

@@ -32,6 +32,7 @@ export const SET_CURRENT_DOC = "set_current_doc"
 export const SET_CLIENT_JSON = "set_client_json"
 export const SET_MANIFEST = "set_manifest"
 export const SET_CLIENT_DETAILS = "set_client_details"
+export const SET_CLIENTS = "set_clients"
 
 const toStr = (str) => isString(str) ? str : ""
 
@@ -52,6 +53,14 @@ export function setClientDetails(clientDetails) {
     payload: clientDetails
   }
 }
+
+export function setClients(clients) {
+  return {
+    type: SET_CLIENTS,
+    payload: clients
+  }
+}
+
 
 
 

@@ -28,6 +28,12 @@ export const clientDetails = createSelector(
   state => state.get("clientDetails", Map() )
 )
 
+
+export const clientData = createSelector(
+  state,
+  state => state.get("clients", Map() )
+)
+
 export const currentDoc = createSelector(
   state,
   state => state.get("currentDoc")
@@ -268,7 +274,6 @@ export const operationsWithTags = createSelector(
   tags,
   (operations, tags) => {
 
-    console.log(operations)
     return operations.reduce( (taggedMap, op) => {
       let tags = Set(op.getIn(["operation","tags"]))
       if(tags.count() < 1)

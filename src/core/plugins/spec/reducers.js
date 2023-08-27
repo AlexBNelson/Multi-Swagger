@@ -30,7 +30,8 @@ import {
   SET_CURRENT_DOC,
   SET_CLIENT_JSON,
   SET_MANIFEST,
-  SET_CLIENT_DETAILS
+  SET_CLIENT_DETAILS,
+  SET_CLIENTS
 } from "./actions"
 import { paramToIdentifier } from "../../utils"
 
@@ -51,6 +52,10 @@ export default {
 
   [SET_CLIENT_DETAILS]: (state, action) => {
     return state.set("clientDetails", action.payload)
+  },
+
+  [SET_CLIENTS]: (state, action) => {
+    return state.set("clients", action.payload)
   },
 
   [SET_CLIENT_JSON]: (state, action) => {
