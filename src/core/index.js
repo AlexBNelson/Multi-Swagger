@@ -11,6 +11,7 @@ const { GIT_DIRTY, GIT_COMMIT, PACKAGE_VERSION, BUILD_TIME } = buildInfo
 
 export default function SwaggerUI(opts) {
 
+  console.log(opts)
   win.versions = win.versions || {}
   win.versions.swaggerUi = {
     version: PACKAGE_VERSION,

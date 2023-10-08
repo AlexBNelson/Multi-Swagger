@@ -135,329 +135,11 @@ export default class Clients extends React.Component {
 
   componentDidMount() {
 
-    let clients = []
-
-
-    let toNullCheck = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())
-
-
-    if (toNullCheck != undefined) {
-      if ("Clients" in toNullCheck) {
-        clients = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"]
-      }
-    }
-
-    
-   
-
-
-
-    let clientData = []
-    let clientJsonList = []
-
-    clients.forEach((client) => {
-
-      let clientUrl = this.props.specSelectors.baseUrl() + "/" + client
-
-      fetch(clientUrl)
-        .then(response => response.json()
-          .then(json => {
-            //console.log(json)
-            clientData.push(fromJSOrdered(json))
-            clientJsonList.push((json))
-            this.setState({ clientJson: clientJsonList })
-            this.setState({ clients: clientData })
-          }))
-    })
-
-    
 
   }
 
 
 
-
-
-
-
-
-
-
-
-
-  tags = function () {
-
-    let clientArr = []
-
-    this.clientSpec().forEach((client) => {
-      let tags = (client.get("tags", List()))
-      let tagRes = List.isList(tags) ? tags.filter(tag => Map.isMap(tag)) : List()
-      clientArr.concat(tagRes)
-    })
-    return clientArr
-  }
-
-
-  tagDetails = (tag) => {
-    let currentTags = this.tags() || List()
-    return currentTags.filter(Map.isMap).find(t => t.get("name") === tag, Map())
-  }
-
-  OPERATION_METHODS = [
-    "get", "put", "post", "delete", "options", "head", "patch", "trace"
-  ]
-
-  mergerFn = (oldVal, newVal) => {
-    if (Map.isMap(oldVal) && Map.isMap(newVal)) {
-      if (newVal.get("$$ref")) {
-        // resolver artifacts indicated that this key was directly resolved
-        // so we should drop the old value entirely
-        return newVal
-      }
-
-      return OrderedMap().mergeWith(
-        mergerFn,
-        oldVal,
-        newVal
-      )
-    }
-
-    return newVal
-  }
-
-  clientSpec = function () {
-    let retValue = this.state.clients
-    return retValue
-  }
-
-  clientJson = function () {
-    return this.state.clients
-  }
-
-  clientTags = function () {
-    let clientArr = []
-
-    this.clientSpec().forEach((client) => {
-      const tags = client.get("tags", List())
-      clientArr.push(List.isList(tags) ? tags.filter(tag => Map.isMap(tag)) : List())
-
-    })
-
-    return clientArr;
-  }
-
-  clientConsumes = function () {
-    let clientArr = []
-
-    this.clientSpec().forEach((client) => {
-      clientArr.push(Set(client.get("consumes")))
-    })
-
-    return clientArr
-
-  }
-
-  clientProduces = function () {
-    let clientArr = []
-
-    this.clientSpec().forEach((client) => {
-      clientArr.push(Set(client.get("produces")))
-    })
-
-    return clientArr
-
-  }
-
-  clientJsonWithResolvedSubtrees = function () {
-    let clientArr = []
-
-    this.clientSpec().forEach((client) => {
-      clientArr.push(OrderedMap().mergeWith(
-        this.mergerFn,
-        client
-        // Was causing the client summaries to duplicate for some reason
-        // spec.get("resolvedSubtrees")
-      ))
-    })
-
-    return clientArr;
-  }
-
-
-  clientPaths = function () {
-    let clientArr = []
-
-    this.clientJsonWithResolvedSubtrees().forEach((client) => {
-      clientArr.push(client.get("paths"))
-    })
-
-    return clientArr;
-
-  }
-
-  clients = function () {
-    let clientArr = []
-
-
-    this.clientPaths().forEach((clientOps) => {
-      if (!clientOps || clientOps.size < 1)
-        clientArr.push(List())
-
-      let list = List()
-
-      if (!clientOps || !clientOps.forEach) {
-        clientArr.push(List())
-      }
-
-      clientOps.forEach((path, pathName) => {
-        if (!path || !path.forEach) {
-          clientArr.push({})
-        }
-
-        path.forEach((operation, method) => {
-          if (this.OPERATION_METHODS.indexOf(method) < 0) {
-
-          }
-          list = list.push(fromJS({
-            path: pathName,
-            method,
-            operation,
-            id: `${method}-${pathName}`
-          }))
-
-          
-        })
-      })
-      clientArr.push(list)
-    })
-
-
-    return clientArr
-  }
-
-
-  clientsWithRootInherited = function () {
-
-    let clientsArray = []
-
-    // This function is where the second client object seems to disappear
-
-    for (let i = 0; i < this.clients().length; i++) {
-
-      clientsArray.push(this.clients()[i].map(ops => ops.update("operation", op => {
-        if (op) {
-          if (!Map.isMap(op)) { return }
-          return op.withMutations(op => {
-            if (!op.get("consumes")) {
-              op.update("consumes", a => Set(a).merge(this.clientConsumes()[i]))
-            }
-            if (!op.get("produces")) {
-              op.update("produces", a => Set(a).merge(this.clientProduces()[i]))
-            }
-            return op
-          })
-        } else {
-          // return something with Immutable methods
-          return Map()
-        }
-
-      })))
-    }
-
-    return clientsArray;
-  }
-
-
-  clientsWithTags = function () {
-
-
-    let clientArr = []
-
-    for (let i = 0; i < this.clientsWithRootInherited().length; i++) {
-      clientArr.push(this.clientsWithRootInherited()[i].reduce((taggedMap, op) => {
-        let tags = Set(op.getIn(["operation", "tags"]))
-        if (tags.count() < 1)
-          return taggedMap.update(DEFAULT_TAG, List(), ar => ar.push(op))
-        return tags.reduce((res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap)
-      }, this.clientTags()[i].reduce((taggedMap, tag) => {
-
-
-        return taggedMap.set(tag.get("name"), List())
-      }, OrderedMap())))
-
-    }
-
-    return clientArr
-  }
-
-
-
-  taggedClients = function () {
-
-    let { tagsSorter, operationsSorter } = this.props.getConfigs()
-
-    let clientsArr = []
-
-    this.clientsWithTags().forEach((client) => {
-
-      clientsArr.push(client
-        .sortBy(
-          (val, key) => key, // get the name of the tag to be passed to the sorter
-          (tagA, tagB) => {
-            let sortFn = (typeof tagsSorter === "function" ? tagsSorter : sorters.tagsSorter[tagsSorter])
-            return (!sortFn ? null : sortFn(tagA, tagB))
-          }
-        )
-        .map((ops, tag) => {
-          let sortFn = (typeof operationsSorter === "function" ? operationsSorter : sorters.operationsSorter[operationsSorter])
-          let operations = (!sortFn ? ops : ops.sort(sortFn))
-
-
-          return Map({ tagDetails: this.tagDetails(tag), operations: operations })
-        }))
-
-    })
-
-    return clientsArr
-  }
-
-  getMultiClients = function () {
-    let retValue = this.state.clients
-    return retValue
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  transformOperations = (operations) => {
-
-    return operations.reduce((taggedMap, op) => {
-      let tags = Set(op.getIn(["operation", "tags"]))
-      return tags.reduce((res, tag) => res.update(tag, List(), (ar) => ar.push(op)), taggedMap)
-    }, null)
-  }
-
-
-  taggedOperationsParent = (operations) => {
-
-
-    let finalMap = Map(['tagDetails', undefined])
-
-
-  }
-
-  showTag = function () {
-    this.setState({ collapsed: !this.state.collapsed });
-  }
 
   render() {
    
@@ -475,14 +157,10 @@ export default class Clients extends React.Component {
 
     let multiClient = []
 
-    if (this.state.clients.length == numberOfClients) {
-      multiClient = this.taggedClients()
+    // if (this.state.clients.length == numberOfClients) {
+    //   multiClient = this.taggedClients()
       
-    }
-
-    console.log(this.props.specSelectors.clientData().get(this.props.specSelectors.currentDoc()))
-    // console.log(this.state.clients)
-
+    // }
 
     multiClient = this.props.specSelectors.clientData().get(this.props.specSelectors.currentDoc())
 
@@ -492,8 +170,6 @@ export default class Clients extends React.Component {
 
     if (multiClient != undefined) {
       if (multiClient.length > 0) {
-
-        console.log(multiClient)
 
         multiClient.forEach((client) => {
 
@@ -547,8 +223,10 @@ export default class Clients extends React.Component {
 
     let serviceUrl
 
+    console.log(service)
+
     if (service != undefined)
-      serviceUrl = specSelectors.baseUrl() + '/' + tag + service["ExposedEndpoints"];
+      serviceUrl = specSelectors.baseUrl() + '/' + tag + ".json"
 
     let serviceLink
 
@@ -581,7 +259,7 @@ export default class Clients extends React.Component {
       }}><img src={SwaggerLogo} style={{
         width: 15,
         height: 15
-      }} />&nbsp;&nbsp;{serviceUrl}</a>
+      }} />&nbsp;&nbsp;{tag}</a>
     }
 
 
@@ -611,17 +289,25 @@ export default class Clients extends React.Component {
 
             clients.map(op => {
 
-
-              let clientDetails = specSelectors.clientDetails().get(specSelectors.currentDoc())
-
-
-              let clientDetail = clientDetails.get(op.get("path").slice(1))
-
-              //.get(op.get("path").slice(1))
+              console.log(tag)
+              console.log(specSelectors.clientDetails())
 
               const path = op.get("path")
               const method = op.get("method")
               const specPath = Im.List(["paths", path, method])
+
+              let specClientDetails = specSelectors.clientDetails().get(tag)
+              let clientDetails = specSelectors.clientDetails().get(specSelectors.currentDoc())
+              //we want to get details from official source
+              //let clientDetails = specSelectors.clientDetails().get(tag)
+
+              let detailParam = op.get("path").slice(1)
+
+              let clientDetail = specClientDetails.get(method + path)
+
+              //.get(op.get("path").slice(1))
+
+              
 
               // FIXME: (someday) this logic should probably be in a selector,
               // but doing so would require further opening up

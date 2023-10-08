@@ -32,6 +32,8 @@ export default class ConnectedServices extends React.Component {
     
             let connectedServicesUrl = this.props.specSelectors.baseUrl()+ "/" + this.props.specSelectors.currentDoc() + "/" + connectedServices
     
+
+            console.log(connectedServicesUrl)
             fetch(connectedServicesUrl)
               .then( response => response.json())
               .then(json => {

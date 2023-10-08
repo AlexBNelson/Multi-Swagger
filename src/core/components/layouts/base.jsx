@@ -4,9 +4,8 @@ import Im from "immutable"
 import { fromJS, Set, Map, OrderedMap, List } from "immutable"
 import { fromJSOrdered } from "core/utils"
 import { sorters } from "core/utils"
-import debounce from "lodash/debounce"
 import resolveSubtree from "swagger-client/es/subtree-resolver"
-import set from "lodash/set"
+import SwaggerLogo from "../swagger.svg"
 
 export default class BaseLayout extends React.Component {
   constructor() {
@@ -14,102 +13,52 @@ export default class BaseLayout extends React.Component {
 
   }
 
-  setSwaggerState() {
-
-
-
-    let manifest = JSON.parse("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"ExposedEndpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"ExposedEndpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"ExposedEndpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"ExposedEndpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"ExposedEndpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"\/RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"\/RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ]\r\n    }\r\n  ]\r\n}")
-
-
-
-
-    //generate clients (with details), operations and connected services for each service
-
-
-    // let clients = []
-
-
-    // let toNullCheck = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())
-
-
-    // if (toNullCheck != undefined) {
-    //   if ("Clients" in toNullCheck) {
-    //     clients = JSON.parse(this.props.specSelectors.manifest())["Services"].find(service => service.Name === this.props.specSelectors.currentDoc())["Clients"]
-    //   }
-    // }
-
-
-
-
-
-
-    // let clientData = []
-    // let clientJsonList = []
-
-    // clients.forEach((client) => {
-
-    //   let clientUrl = this.props.specSelectors.baseUrl() + "/" + client
-
-    //   fetch(clientUrl)
-    //     .then(response => response.json()
-    //       .then(json => {
-    //         //console.log(json)
-    //         clientData.push(fromJSOrdered(json))
-    //         clientJsonList.push((json))
-    //         this.setState({ clientJson: clientJsonList })
-    //         this.setState({ clients: clientData })
-    //         this.props.specActions.setClients(clientData)
-    //       }))
-    // })
-  }
 
   TransformClients(serviceName, clients) {
-
-    let transformedClients = []
 
     let serviceClientMap = this.props.specSelectors.clientData()
 
 
     let clientMap = []
 
-    clients.forEach((client) => {
-      let clientUrl = this.props.specSelectors.baseUrl() + "/" + client
 
-      
+
+    clients.forEach((client) => {
+      let clientUrl = this.props.specSelectors.baseUrl() + "/" + client + ".json"
+
+      console.log(clientUrl)
 
       fetch(clientUrl)
         .then(response => response.json()
-          .then( json => {
+          .then(json => {
             let localClients = []
             localClients.push(fromJSOrdered(json))
 
-
             let multiClients = this.taggedClients(localClients)
 
-            this.TransformClientDetails(multiClients, json, clientUrl)
+
+            this.TransformClientDetails(multiClients, json)
 
             clientMap.push(multiClients)
-
-            transformedClients.push(multiClients)
+            // jsonMap.push(json)
           }))
 
     })
-
     serviceClientMap = serviceClientMap.set(serviceName, clientMap)
+
 
     this.props.specActions.setClients(serviceClientMap)
 
-    return transformedClients
+    return null
   }
 
 
 
-  TransformClientDetails(multiClients, json, clientUrl) {
+  TransformClientDetails(multiClients, json) {
 
     // Can this list ever be longer than 1?
     let multiClientList = List(multiClients)
 
-    let returnMap = Map()
 
     multiClientList.forEach(multiClient => {
 
@@ -130,7 +79,7 @@ export default class BaseLayout extends React.Component {
         } = this.props.getConfigs()
 
 
-        const prom = await resolveSubtree(json, specPath.toArray(), {
+        const prom = resolveSubtree(json, specPath.toArray(), {
           baseDoc: this.props.specSelectors.baseUrl(),
           modelPropertyMacro,
           parameterMacro,
@@ -138,140 +87,114 @@ export default class BaseLayout extends React.Component {
           responseInterceptor
         })
 
-        let ClientDetails = fromJSOrdered(prom.spec)
-        
+        prom.then(({ errors, spec }) => {
 
-        innerMap = innerMap.set(method + path, ClientDetails)
+          let ClientDetails = fromJSOrdered(spec)
 
-        let outerMap = this.props.specSelectors.clientDetails();
+          innerMap = innerMap.set(method + path, ClientDetails)
 
-        outerMap = outerMap.set(mcl.get(0)[0], innerMap)
+          let outerMap = this.props.specSelectors.clientDetails();
 
-        this.props.specActions.setClientDetails(outerMap)
-       
+          outerMap = outerMap.set(mcl.get(0)[0], innerMap)
+
+          this.props.specActions.setClientDetails(outerMap)
+        })
+
       })
-    })
-    
-  }
 
-  GenerateDetailsFromOperations() {
+    })
+
+
 
   }
 
 
   componentDidMount() {
+    let clientUrl = "http://localhost:8521/manifest.json"
+    fetch(clientUrl)
+      .then(response => response.json()
+        .then(json => {
+          this.props.specActions.setManifest(json)
 
-    let manifest = JSON.parse("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"ExposedEndpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"ExposedEndpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"ExposedEndpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"ExposedEndpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"ExposedEndpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"\/RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"\/RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ]\r\n    }\r\n  ]\r\n}")
-    this.props.specActions.setManifest("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"ExposedEndpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"ExposedEndpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"ExposedEndpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"ExposedEndpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"ExposedEndpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"\/RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"\/RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ]\r\n    }\r\n  ]\r\n}")
-
-
-    let clientDetailsMap = Map()
-
-    let serviceDetailsMap = Map()
-
-    let serviceDataMap = Map()
+          let services = json["Services"];
 
 
+          services.forEach(service => {
+            if (service["Clients"] != undefined) {
+              console.log(service)
+              this.TransformClients(service["Name"], service["Clients"]);
+            }
+          })
+        }))
+
+    // let manifest = JSON.parse("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"ExposedEndpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"ExposedEndpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"ExposedEndpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"ExposedEndpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\",\r\n        \"CleaningScheduleService\/cleaningScheduleService.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"ExposedEndpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ],\r\n      \"ConnectedServices\": \"connectedServices.json\"\r\n    }\r\n  ]\r\n}")
+    // this.props.specActions.setManifest("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"ExposedEndpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"ExposedEndpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"ExposedEndpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"ExposedEndpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"ExposedEndpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"\/RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"\/RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ]\r\n    }\r\n  ]\r\n}")
 
 
-    let parsedData = Map()
-
-    let services = manifest["Services"];
+    // let services = manifest["Services"];
 
 
-    services.forEach(service => {
-      let parsedService = Map()
+    // services.forEach(service => {
+    //   // let parsedService = Map()
 
-      if (service["Clients"] != undefined) {
-        let transformedClients = this.TransformClients(service["Name"],service["Clients"]);
-        parsedService = parsedService.set("Clients", transformedClients)
-      }
+    //   if (service["Clients"] != undefined) {
+    //     this.TransformClients(service["Name"], service["Clients"]);
+    //     // parsedService = parsedService.set("Clients", transformedClients)
+    //   }
 
-      if (service["ConnectedServices"] != undefined) {
-        parsedService = parsedService.set("ConnectedServices", service["ConnectedServices"])
-      }
+    //   // if (service["ConnectedServices"] != undefined) {
+    //   //   parsedService = parsedService.set("ConnectedServices", service["ConnectedServices"])
+    //   // }
 
-      parsedData = parsedData.set(service["Name"], parsedService)
-    })
-
-
-
-
-
-
-
-
-    manifest["Services"].forEach((service) => {
-
-      if ("Clients" in service) {
-
-
-        let clients = []
-
-        let clientDetailsMap = Map()
-
-        let clientData = Map()
-
-        service["Clients"].forEach((client) => {
-          let clientUrl = this.props.specSelectors.baseUrl() + "/" + client
-
-
-          let generatedClientDetails = null
-
-
-
-          fetch(clientUrl)
-            .then(response => response.json()
-              .then(json => {
-                let localClients = []
-                localClients.push(fromJSOrdered(json))
-
-
-                let multiClients = this.taggedClients(localClients)
-
-                clientData.set(client, multiClients)
-                let tO
-
-
-                //Need to loop to handle multiple paths
-                let mapped = multiClients[0]
-
-
-
-                mapped.map((x) => {
-                  tO = this.getMappedClient(x)
-                })
-
-                let clientArr = client.split("/");
-
-
-                //get client key from client service file when all client data added to state
-                let clientKey = clientArr[clientArr.length - 1].slice(0, -5)
-
-
-
-                let thing = this.generateClientDetails(tO, json, service["Name"], clientKey)
-
-                generatedClientDetails = thing
-
-
-              }))
-
-          clientDetailsMap.set(clientUrl, generatedClientDetails)
-
-        })
-
-        serviceDataMap.set(service["Name"], clientData)
-        //this.props.specActions.setClients(serviceDataMap)
-        serviceDetailsMap.set(service["Name"], serviceDetailsMap)
-      }
-
-    })
+    //   // parsedData = parsedData.set(service["Name"], parsedService)
+    // })
 
 
 
 
 
+
+
+
+    // manifest["Services"].forEach((service) => {
+
+    //   if ("Clients" in service) {
+
+    //     let clientData = Map()
+
+    //     service["Clients"].forEach((client) => {
+    //       let clientUrl = this.props.specSelectors.baseUrl() + "/" + client
+
+
+    //       fetch(clientUrl)
+    //         .then(response => response.json()
+    //           .then(json => {
+    //             let localClients = []
+    //             localClients.push(fromJSOrdered(json))
+
+
+    //             let multiClients = this.taggedClients(localClients)
+
+    //             clientData.set(client, multiClients)
+    //             let tO
+
+
+    //             //Need to loop to handle multiple paths
+    //             let mapped = multiClients[0]
+
+
+
+    //             mapped.map((x) => {
+    //               tO = this.getMappedClient(x)
+    //             })
+
+    //           }))
+
+    //     })
+
+    //   }
+
+    // })
   }
 
 
@@ -314,13 +237,8 @@ export default class BaseLayout extends React.Component {
 
 
       prom.then(({ errors, spec }) => {
-        let orderedResolved = Map()
-        let path = []
-        // orderedResolved.setIn(["resolvedSubtrees", ...path], fromJSOrdered(spec))
 
         let ClientDetails = fromJSOrdered(spec)
-
-
 
         clientDetailsToReturn = ClientDetails
 
@@ -333,8 +251,6 @@ export default class BaseLayout extends React.Component {
         if (stateMap.has(serviceKey)) {
           serviceStateMap = stateMap.get(serviceKey)
         }
-
-
 
         let innerMap = serviceStateMap ?? Map()
 
@@ -611,13 +527,6 @@ export default class BaseLayout extends React.Component {
 
 
 
-
-
-
-
-
-
-
   static propTypes = {
     errSelectors: PropTypes.object.isRequired,
     errActions: PropTypes.object.isRequired,
@@ -626,11 +535,6 @@ export default class BaseLayout extends React.Component {
     oas3Actions: PropTypes.object.isRequired,
     getComponent: PropTypes.func.isRequired
   }
-
-  updateCurrentDoc() {
-    //system.specActions.updateCurrentDoc(elementNumber)
-  }
-
 
 
   render() {
@@ -715,10 +619,10 @@ export default class BaseLayout extends React.Component {
 
 
         serviceLinks.push(
-          <div><a onClick={(e) => {
+          <div><p><a onClick={(e) => {
             e.stopPropagation()
 
-            let serviceUrl = specSelectors.baseUrl() + '/' + service.getIn(["Name"]) + service.getIn(["ExposedEndpoints"])
+            let serviceUrl = specSelectors.baseUrl() + '/' + service.getIn(["Name"]) + ".json"
 
             this.props.specActions.updateUrl(this.props.specSelectors.url())
 
@@ -728,8 +632,15 @@ export default class BaseLayout extends React.Component {
 
             this.props.specActions.setCurrentDoc(service.getIn(["Name"]))
           }}>
-            {service.getIn(["Name"])}
-          </a></div>)
+
+            <h4>
+              &nbsp;&nbsp;&nbsp;&nbsp;<img src={SwaggerLogo} style={{
+                width: 15,
+                height: 15
+              }} />&nbsp;&nbsp;
+              {service.getIn(["Name"])}
+            </h4>
+          </a></p></div>)
       })
 
 
@@ -763,12 +674,11 @@ export default class BaseLayout extends React.Component {
           ) : null}
 
           <FilterContainer />
-
-          <Row>
+          {/* <Row>
             <Col mobile={12} desktop={12} >
               <ConnectedServices />
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col mobile={12} desktop={12} >
               <Clients />

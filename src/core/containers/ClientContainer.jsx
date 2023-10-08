@@ -114,6 +114,8 @@ export default class ClientContainer extends PureComponent {
     if(!isShown && resolvedSubtree === undefined) {
       // transitioning from collapsed to expanded
     }
+
+    console.log({ layoutActions, tag, operationId, isShown })
     layoutActions.show(["operations", tag, operationId], !isShown)
   }
 

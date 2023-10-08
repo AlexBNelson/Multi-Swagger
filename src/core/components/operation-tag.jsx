@@ -42,11 +42,17 @@ export default class OperationTag extends React.Component {
       specUrl,
     } = this.props
 
+    //Obviously temp fix
+
+    if(tag == "default"){
+      return (<div></div>)
+    }
+
     let {
       docExpansion,
       deepLinking,
     } = getConfigs()
-
+    
     const isDeepLinkingEnabled = deepLinking && deepLinking !== "false"
 
     const Collapse = getComponent("Collapse")

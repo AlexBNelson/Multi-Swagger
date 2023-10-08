@@ -4,7 +4,7 @@ window.onload = function() {
   window["SwaggerUIStandalonePreset"] = window["swagger-ui-standalone-preset"]
   // Build a system
   const ui = SwaggerUIBundle({
-    url: "http://localhost:8080/manifest.json",
+    url: "http://localhost:8521/manifest.json",
     dom_id: "#swagger-ui",
     presets: [
       SwaggerUIBundle.presets.apis,

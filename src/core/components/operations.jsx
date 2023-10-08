@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Im from "immutable"
-import { fromJSOrdered  } from "core/utils"
 import { fromJS, Map } from "immutable"
 import SwaggerLogo from "./swagger.svg"
 
@@ -47,7 +46,9 @@ export default class Operations extends React.Component {
       if(clients !=null){
 
         clients.forEach((client)=>{
-          let clientUrl = this.props.specSelectors.baseUrl()+ "/" + client
+          let clientUrl = this.props.specSelectors.baseUrl()+ "/" + client + ".json"
+
+          console.log(clientUrl)
   
           fetch(clientUrl)
             .then( response => response.json()
@@ -118,7 +119,7 @@ export default class Operations extends React.Component {
     let serviceUrl
 
     if (service != undefined)
-      serviceUrl = specSelectors.baseUrl() + '/' + tag + service["ExposedEndpoints"];
+      serviceUrl = specSelectors.baseUrl() + '/' + tag + ".json"
 
     let serviceLink
 
@@ -156,10 +157,10 @@ export default class Operations extends React.Component {
       }}><img src={SwaggerLogo} style={{
         width: 15,
         height: 15
-      }} />&nbsp;&nbsp;{serviceUrl}</a>
+      }} />&nbsp;&nbsp;{tag}</a>
     
 
-      let endpointLinks =<button></button>
+      let endpointLinks
 
     return (
       <OperationTag
@@ -193,8 +194,7 @@ export default class Operations extends React.Component {
 
                 this.state.consumers.get(opId).forEach((endpoint)=>{
 
-                  let endpointUrl = specSelectors.baseUrl() + '/' + endpoint['Name'] + endpoint["ExposedEndpoints"]
-  
+                  let endpointUrl = specSelectors.baseUrl() + '/' + endpoint['Name'] + ".json"
 
                   let button = <a onClick={(e)=>{
                       e.stopPropagation()
@@ -206,7 +206,7 @@ export default class Operations extends React.Component {
               
                     }><img src={SwaggerLogo} style={{
                       width: 15,
-                      height: 15}} />&nbsp;&nbsp;{endpointUrl}</a>
+                      height: 15}} />&nbsp;&nbsp;{endpoint['Name']}</a>
                   endpointLinks=button
                   
                   }
