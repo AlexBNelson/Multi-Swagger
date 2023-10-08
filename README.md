@@ -58,3 +58,11 @@ names that call into that service. E.g. In the file below, RoomBookingApi and De
 ## How it works
 
 Multi-Swagger will recreate the files used in a temporary directory in the temp folder. It will then run a http-server on port 8521, and the swagger-ui React app on port 3200.
+
+The homepage with links to the different services:
+
+![homepage](homeScreenshot.png)
+
+The service swagger page with links to clients and services of which this is a client
+
+![Alt text](serviceScreenshot.png)

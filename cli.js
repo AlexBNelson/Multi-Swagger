@@ -44,27 +44,40 @@ tmp.dir(function _tempDirCreated(err, path, cleanupCallback) {
 
         });
 
-       
+
     });
 
-    let commandZero = "cd " + __dirname
-    let commandTwo = "cd " + path
-    let commandThree = "http-server -p 8521 --cors"
-    var prefix = (process.platform === 'win32' ? ' start /B ' : ' && ');
+    let modulepath = exec("npm root",
+        function (error, stdout, stderr) {
+            console.log('stdout: ' + stdout);
+            console.log('stderr: ' + stderr);
+            if (error !== null) {
+                console.log('exec error: ' + error);
+            }
 
-    let commandOne = "npm run dev"
+
+            let commandZero = "cd " + stdout + "\multi-swagger"
+            let commandTwo = "cd " + path
+            let commandThree = "http-server -p 8521 --cors"
+            var prefix = (process.platform === 'win32' ? ' start /B ' : ' && ');
+
+            let commandOne = "webpack serve --config webpack/dev.babel.js"
 
 
-    exec(prefix + commandZero)
-    exec(prefix + commandOne)
- 
-    console.log(path)
+            exec(prefix + commandZero)
+            exec(prefix + commandOne)
 
-    // exec(prefix + commandTwo);
-    // exec(prefix + commandThree);
+            console.log(path)
 
-   let combinedCommand = "http-server " + path + " -p 8521 --cors" 
-   exec(prefix + combinedCommand);
+            // exec(prefix + commandTwo);
+            // exec(prefix + commandThree);
+
+            let combinedCommand = "http-server " + path + " -p 8521 --cors"
+            exec(prefix + combinedCommand);
+
+        });
+
+
 
     // cleanupCallback();
 });
