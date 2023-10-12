@@ -1,6 +1,6 @@
 {
   "name": "multi-swagger",
-  "version": "0.0.26",
+  "version": "0.0.39",
   "main": "./dist/swagger-ui.js",
   "module": "./dist/swagger-ui-es-bundle-core.js",
   "exports": {

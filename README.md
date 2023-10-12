@@ -19,36 +19,36 @@ names that call into that service. E.g. In the file below, RoomBookingApi and De
   "Services": [
     {
       "Name": "RoomBookingApi",
-      "ExposedEndpoints": "/roomBookingApi.json"
+      "ExposedEndpoints": "C:\\roomBookingApi.json"
 
     },
     {
       "Name": "StaffAvailabilityApi",
-      "ExposedEndpoints": "/staffAvailabilityApi.json"
+      "ExposedEndpoints": "C:\\staffAvailabilityApi.json"
 
     },
     {
       "Name": "DeliveryApi",
-      "ExposedEndpoints": "/deliveryApi.json"
+      "ExposedEndpoints": "C:\\deliveryApi.json"
     },
     {
       "Name": "DeliveryApi",
-      "ExposedEndpoints": "/cleaningScheduleService.json"
+      "ExposedEndpoints": "C:\\cleaningScheduleService.json"
     },
     {
       "Name": "StockKeepingApi",
-      "ExposedEndpoints": "/stockKeepingApi.json",
+      "ExposedEndpoints": "C:\\stockKeepingApi.json",
       "Clients": [
-        "StockKeepingApi/Clients/deliveryApi.json",
-        "CleaningScheduleService/cleaningScheduleService.json"
+        "C:\\deliveryApi.json",
+        "C:\\cleaningScheduleService.json"
       ]
     },
     {
       "Name": "RoomServiceApi",
-      "ExposedEndpoints": "/roomServiceApi.json",
+      "ExposedEndpoints": "C:\\roomServiceApi.json",
       "Clients": [
-        "RoomServiceApi/Clients/roomBookings.json",
-        "RoomServiceApi/Clients/stockKeeping.json"
+        "C:\\roomBookings.json",
+        "C:\\stockKeeping.json"
       ]
     }
   ]
