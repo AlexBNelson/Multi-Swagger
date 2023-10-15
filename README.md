@@ -19,25 +19,25 @@ names that call into that service. E.g. In the file below, RoomBookingApi and De
   "Services": [
     {
       "Name": "RoomBookingApi",
-      "ExposedEndpoints": "C:\\roomBookingApi.json"
+      "Endpoints": "C:\\roomBookingApi.json"
 
     },
     {
       "Name": "StaffAvailabilityApi",
-      "ExposedEndpoints": "C:\\staffAvailabilityApi.json"
+      "Endpoints": "C:\\staffAvailabilityApi.json"
 
     },
     {
       "Name": "DeliveryApi",
-      "ExposedEndpoints": "C:\\deliveryApi.json"
+      "Endpoints": "C:\\deliveryApi.json"
     },
     {
       "Name": "DeliveryApi",
-      "ExposedEndpoints": "C:\\cleaningScheduleService.json"
+      "Endpoints": "C:\\cleaningScheduleService.json"
     },
     {
       "Name": "StockKeepingApi",
-      "ExposedEndpoints": "C:\\stockKeepingApi.json",
+      "Endpoints": "C:\\stockKeepingApi.json",
       "Clients": [
         "C:\\deliveryApi.json",
         "C:\\cleaningScheduleService.json"
@@ -45,7 +45,7 @@ names that call into that service. E.g. In the file below, RoomBookingApi and De
     },
     {
       "Name": "RoomServiceApi",
-      "ExposedEndpoints": "C:\\roomServiceApi.json",
+      "Endpoints": "C:\\roomServiceApi.json",
       "Clients": [
         "C:\\roomBookings.json",
         "C:\\stockKeeping.json"

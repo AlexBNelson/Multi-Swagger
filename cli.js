@@ -2,10 +2,14 @@
 // //Passing in manifest url in command line https://stackoverflow.com/questions/42840422/webpack-dev-server-custom-parameters-from-command-line
 
 
-const { exec } = require('child_process')
+//const { exec } = require('child_process')
 const process = require('process');
 var fs = require("fs-extra");
 const tmp = require('tmp');
+
+const cp = require('child_process');
+
+
 
 const tmpobj = tmp.dirSync({ unsafeCleanup : true });
 
@@ -14,14 +18,12 @@ fs.readJson(process.cwd() + '\\manifest.json', 'utf8', (err, manifest) => {
         console.error(err);
         return;
     }
-
-
+    
     let services = manifest["Services"];
-
     fs.writeJson(tmpobj.name + "/manifest.json", manifest);
 
     services.forEach(service => {
-        fs.readJSON(service["ExposedEndpoints"], 'utf8', (err, data) => {
+        fs.readJSON(service["Endpoints"], 'utf8', (err, data) => {
             let midPath = tmpobj.name + "\\" + service["Name"] + ".json"
             fs.writeJson(midPath, data);
         })
@@ -31,29 +33,57 @@ fs.readJson(process.cwd() + '\\manifest.json', 'utf8', (err, manifest) => {
 
 });
 
-let root
-
-exec("npm root",
-    function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-            console.log('exec error: ' + error);
-        }
-        root = stdout
-    })
-
-
-let commandZero = "cd " + root + "\multi-swagger"
 var prefix = (process.platform === 'win32' ? ' start /B ' : ' && ');
 
-let commandOne = "webpack serve --config webpack/dev.babel.js"
+let commandOne = prefix + "http-server " + tmpobj.name + " -p 8521 --cors"
+let commandTwo = prefix + "http-server " + __dirname + "\\dist -p 8532 --cors"
+
+console.log(commandTwo)
+console.log(__dirname + '\\server.js')
+	
+    cp.fork(__dirname + '\\server.js', [commandTwo]);
+    cp.fork(__dirname + '\\server.js', [commandOne]);
 
 
-exec(prefix + commandZero)
-exec(prefix + commandOne)
-let combinedCommand = "http-server " + tmpobj.name + " -p 8521 --cors"
-exec(prefix + combinedCommand);
+
+
+
+
+
+
+
+
+
+// let root
+
+// exec("npm root",
+//     function (error, stdout, stderr) {
+//         console.log('stdout: ' + stdout);
+//         console.log('stderr: ' + stderr);
+//         if (error !== null) {
+//             console.log('exec error: ' + error);
+//         }
+//         root = stdout
+//     })
+
+
+// // let commandZero = "cd " + __dirname
+// var prefix = (process.platform === 'win32' ? ' start /B ' : ' && ');
+// let combinedCommand = "http-server " + tmpobj.name + " -p 8521 --cors"
+// exec(prefix + combinedCommand);
+// // let commandOne = "webpack serve --config webpack/dev.babel.js"
+// let commandTwo = "http-server ./dist -p 8532 --cors"
+
+// exec(prefix + commandTwo)
+// // exec(prefix + commandZero)
+// // exec(prefix + commandOne)
+
+// cpuCount.forEach((cpu, index) => {
+// 	const PORT = `${4000 + index * 10}`
+// 	console.log(`Starting server on port ${PORT} with cpu ${cpu.model}, speed ${cpu.speed}`);
+// 	cp.fork('./server.js', [PORT]);
+// });
+
 
 function exitHandler(options, exitCode) {
     console.log("exiting")
@@ -87,7 +117,7 @@ process.on('SIGINT', function() {
 //         fs.writeJson(path + "/manifest.json", manifest);
 
 //         services.forEach(service => {
-//             fs.readJSON(service["ExposedEndpoints"], 'utf8', (err, data) => {
+//             fs.readJSON(service["Endpoints"], 'utf8', (err, data) => {
 //                 let midPath = path + "\\" + service["Name"] + ".json"
 //                 fs.writeJson(midPath, data);
 //             })
@@ -128,5 +158,3 @@ process.on('SIGINT', function() {
 
 //     cleanupCallback();
 // });
-
-

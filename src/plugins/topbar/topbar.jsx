@@ -87,7 +87,7 @@ export default class Topbar extends React.Component {
   //   let baseUrl = this.props.specSelectors.baseUrl()
 
 
-  //   let currentDocUrl = baseUrl + '/' + this.props.specSelectors.currentDoc() + doc["ExposedEndpoints"]
+  //   let currentDocUrl = baseUrl + '/' + this.props.specSelectors.currentDoc() + doc["Endpoints"]
 
 
   //   this.props.specActions.download(currentDocUrl)

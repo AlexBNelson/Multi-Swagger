@@ -2,26 +2,26 @@
   "Services": [
     {
       "Name": "RoomBookingApi",
-      "ExposedEndpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\RoomBookingApi\\roomBookingApi.json"
+      "Endpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\RoomBookingApi\\roomBookingApi.json"
 
     },
     {
       "Name": "CleaningScheduleService",
-      "ExposedEndpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\CleaningScheduleService\\cleaningScheduleService.json"
+      "Endpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\CleaningScheduleService\\cleaningScheduleService.json"
 
     },
     {
       "Name": "StaffAvailabilityApi",
-      "ExposedEndpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\StaffAvailabilityApi\\staffAvailabilityApi.json"
+      "Endpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\StaffAvailabilityApi\\staffAvailabilityApi.json"
 
     },
     {
       "Name": "DeliveryApi",
-      "ExposedEndpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\StockKeepingApi\\Clients\\deliveryApi.json"
+      "Endpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\StockKeepingApi\\Clients\\deliveryApi.json"
     },
     {
       "Name": "StockKeepingApi",
-      "ExposedEndpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\StockKeepingApi\\stockKeepingApi.json",
+      "Endpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\StockKeepingApi\\stockKeepingApi.json",
       "Clients": [
         "DeliveryApi",
         "CleaningScheduleService"
@@ -29,7 +29,7 @@
     },
     {
       "Name": "RoomServiceApi",
-      "ExposedEndpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\RoomServiceApi\\roomServiceApi.json",
+      "Endpoints": "C:\\Users\\User\\source\\repos\\SwaggerCombinator\\SwaggerFiles\\RoomServiceApi\\roomServiceApi.json",
       "Clients": [
         "RoomBookingApi",
         "StockKeepingApi"
