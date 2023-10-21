@@ -71,7 +71,7 @@
     "js-file-download": "^0.4.12",
     "js-yaml": "=4.1.0",
     "lodash": "^4.17.21",
-    "multi-swagger": "^1.0.0",
+    "multi-swagger": "=1.0.32",
     "patch-package": "^6.5.0",
     "prop-types": "^15.8.1",
     "randexp": "^0.5.3",

@@ -116,6 +116,7 @@ export default class Operations extends React.Component {
     let service = services.find(item => item.Name == tag)
 
 
+
     let serviceUrl
 
     if (service != undefined)
@@ -144,9 +145,6 @@ export default class Operations extends React.Component {
 
         }
 
-
-
-
         if (clients != undefined) {
           this.props.specActions.setCurrentDoc(tag)
         } else {
@@ -160,7 +158,8 @@ export default class Operations extends React.Component {
       }} />&nbsp;&nbsp;{tag}</a>
     
 
-      let endpointLinks
+      let endpointLinks = []
+      let alreadyAddedLinks = []
 
     return (
       <OperationTag
@@ -191,12 +190,14 @@ export default class Operations extends React.Component {
 
               if(consumerOpId != undefined){
 
+              console.log(this.state.consumers)
+
 
                 this.state.consumers.get(opId).forEach((endpoint)=>{
 
                   let endpointUrl = specSelectors.baseUrl() + '/' + endpoint['Name'] + ".json"
 
-                  let button = <a onClick={(e)=>{
+                  let button = <p><a onClick={(e)=>{
                       e.stopPropagation()
   
                       this.props.specActions.download(endpointUrl)
@@ -206,8 +207,15 @@ export default class Operations extends React.Component {
               
                     }><img src={SwaggerLogo} style={{
                       width: 15,
-                      height: 15}} />&nbsp;&nbsp;{endpoint['Name']}</a>
-                  endpointLinks=button
+                      height: 15}} />&nbsp;&nbsp;{endpoint['Name']}</a></p>
+                      
+                      if(!alreadyAddedLinks.includes(endpoint['Name'])){
+                          
+                         endpointLinks.push(button)
+
+                      }
+                      alreadyAddedLinks.push(endpoint['Name'])
+
                   
                   }
   

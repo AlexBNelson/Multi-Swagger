@@ -33,7 +33,11 @@ fs.readJson(process.cwd() + '\\manifest.json', 'utf8', (err, manifest) => {
         }else{
             let midPath = tmpobj.name + "\\" + service["Name"] + ".json"
             let data = "{\r\n  \"openapi\": \"3.0.1\",\r\n  \"info\": {\r\n    \"title\": \"RoomServiceApi\",\r\n    \"version\": \"1.0\"\r\n  },\r\n  \"paths\": {\r\n              \r\n  }\r\n}"
-                fs.writeJson(midPath, JSON.parse(data));
+                let jsonData = JSON.parse(data)
+
+                jsonData["info"]["title"]= service["Name"]
+                console.log(jsonData["info"]["title"])
+            fs.writeJson(midPath, jsonData);
         }
         
 
