@@ -8,6 +8,8 @@ var fs = require("fs-extra");
 const tmp = require('tmp');
 
 const cp = require('child_process');
+const opener = require('opener')
+
 
 
 
@@ -23,14 +25,19 @@ fs.readJson(process.cwd() + '\\manifest.json', 'utf8', (err, manifest) => {
     fs.writeJson(tmpobj.name + "/manifest.json", manifest);
 
     services.forEach(service => {
-        fs.readJSON(service["Endpoints"], 'utf8', (err, data) => {
+        if(service["Endpoints"]){
+            fs.readJSON(service["Endpoints"], 'utf8', (err, data) => {
+                let midPath = tmpobj.name + "\\" + service["Name"] + ".json"
+                fs.writeJson(midPath, data);
+            })
+        }else{
             let midPath = tmpobj.name + "\\" + service["Name"] + ".json"
-            fs.writeJson(midPath, data);
-        })
+            let data = "{\r\n  \"openapi\": \"3.0.1\",\r\n  \"info\": {\r\n    \"title\": \"RoomServiceApi\",\r\n    \"version\": \"1.0\"\r\n  },\r\n  \"paths\": {\r\n              \r\n  }\r\n}"
+                fs.writeJson(midPath, JSON.parse(data));
+        }
+        
 
     });
-
-
 });
 
 var prefix = (process.platform === 'win32' ? ' start /B ' : ' && ');
@@ -43,6 +50,8 @@ console.log(__dirname + '\\server.js')
 	
     cp.fork(__dirname + '\\server.js', [commandTwo]);
     cp.fork(__dirname + '\\server.js', [commandOne]);
+
+   opener("http://localhost:8532")
 
 
 
