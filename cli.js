@@ -10,12 +10,15 @@ const tmp = require('tmp');
 const cp = require('child_process');
 const opener = require('opener')
 
+var manifestPath = process.argv[2];
+
+
 
 
 
 const tmpobj = tmp.dirSync({ unsafeCleanup : true });
 
-fs.readJson(process.cwd() + '\\manifest.json', 'utf8', (err, manifest) => {
+fs.readJson(manifestPath, 'utf8', (err, manifest) => {
     if (err) {
         console.error(err);
         return;

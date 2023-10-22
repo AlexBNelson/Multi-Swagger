@@ -3,9 +3,12 @@
 ***PLEASE NOTE, THIS PACKAGE IS STILL IN DEVELOPMENT***
 
 ## Introduction
+
 Multi-Swagger is a script that allows you to link swagger specifications for services that call each other and navigate between them. 
 
 It's a fork of the [swagger-ui](https://github.com/swagger-api/swagger-ui) repository. Please see the swagger-ui package for more extensive documentation.
+
+![demo](multi-swagger-demo.gif)
 
 ## Getting Started
 
@@ -39,30 +42,43 @@ names that call into that service. E.g. In the file below, RoomBookingApi and De
       "Name": "StockKeepingApi",
       "Endpoints": "C:\\stockKeepingApi.json",
       "Clients": [
-        "C:\\deliveryApi.json",
-        "C:\\cleaningScheduleService.json"
+        "DeliveryApi",
+        "CleaningScheduleService"
       ]
     },
     {
       "Name": "RoomServiceApi",
       "Endpoints": "C:\\roomServiceApi.json",
       "Clients": [
-        "C:\\roomBookings.json",
-        "C:\\stockKeeping.json"
+        "RoomBookingApi",
+        "StockKeepingApi"
       ]
     }
   ]
 }
 ```
 
+Please note, relative paths are not supported at the moment.
+
 ## How it works
 
-Multi-Swagger will recreate the files used in a temporary directory in the temp folder. It will then run a http-server on port 8521, and the swagger-ui React app on port 3200.
+Multi-Swagger will recreate the files used in a temporary directory in the temp folder. It will then run a http-server on port 8521, and open the swagger-ui React app in the default browser on port 8532.
 
 The homepage with links to the different services:
 
-![homepage](homeScreenshot.png)
 
-The service swagger page with links to clients and services of which this is a client
 
-![Alt text](serviceScreenshot.png)
+## Advanced Usage
+
+You can also add services that only consume other services, and don't expose any endpoints of their own, simply remove the 'Endpoints' property
+
+```
+...
+{
+  "Name": "KeyReader",
+      "Clients": [
+        "RoomBookingApi",
+        "CleaningScheduleService"
+      ]    
+}
+```
