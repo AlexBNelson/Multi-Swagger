@@ -38,8 +38,6 @@ import Clients from "core/components/clients"
 import Client from "core/components/client"
 import ClientTag from "core/components/client-tag"
 import ClientSummary from "core/components/client-summary"
-import ConnectedServices from "core/components/connected-services"
-import ConnectedService from "core/components/connected-service"
 import LiveResponse from "core/components/live-response"
 import OnlineValidatorBadge from "core/components/online-validator-badge"
 import Operations from "core/components/operations"
@@ -122,8 +120,6 @@ export default function() {
       ClientTag,
       ClientSummary,
       ClientContainer,
-      connectedServices: ConnectedServices,
-      connectedService: ConnectedService,
       liveResponse: LiveResponse,
       InitializedInput,
       info: Info,

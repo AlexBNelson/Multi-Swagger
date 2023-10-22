@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Im from "immutable"
-import { fromJS, Map } from "immutable"
+import { Map } from "immutable"
 import SwaggerLogo from "./swagger.svg"
 
 const SWAGGER2_OPERATION_METHODS = [
@@ -190,38 +190,31 @@ export default class Operations extends React.Component {
 
               if(consumerOpId != undefined){
 
-              console.log(this.state.consumers)
-
-
                 this.state.consumers.get(opId).forEach((endpoint)=>{
 
-                  let endpointUrl = specSelectors.baseUrl() + '/' + endpoint['Name'] + ".json"
+                  let endpointUrl = specSelectors.baseUrl() + "/" + endpoint['Name'] + ".json"
 
                   let button = <p><a onClick={(e)=>{
                       e.stopPropagation()
   
                       this.props.specActions.download(endpointUrl)
-                        this.props.specActions.setCurrentDoc(endpoint['Name'])
+                        this.props.specActions.setCurrentDoc(endpoint["Name"])
                       }
               
               
                     }><img src={SwaggerLogo} style={{
                       width: 15,
-                      height: 15}} />&nbsp;&nbsp;{endpoint['Name']}</a></p>
+                      height: 15}} />&nbsp;&nbsp;{endpoint["Name"]}</a></p>
                       
-                      if(!alreadyAddedLinks.includes(endpoint['Name'])){
+                      if(!alreadyAddedLinks.includes(endpoint["Name"])){
                           
                          endpointLinks.push(button)
 
                       }
-                      alreadyAddedLinks.push(endpoint['Name'])
-
-                  
+                      alreadyAddedLinks.push(endpoint["Name"])
                   }
   
                   )
-
-
               }
               
               

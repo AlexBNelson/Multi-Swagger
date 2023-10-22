@@ -26,8 +26,6 @@ export default class BaseLayout extends React.Component {
     clients.forEach((client) => {
       let clientUrl = this.props.specSelectors.baseUrl() + "/" + client + ".json"
 
-      console.log(clientUrl)
-
       fetch(clientUrl)
         .then(response => response.json()
           .then(json => {
@@ -93,7 +91,7 @@ export default class BaseLayout extends React.Component {
 
           innerMap = innerMap.set(method + path, ClientDetails)
 
-          let outerMap = this.props.specSelectors.clientDetails();
+          let outerMap = this.props.specSelectors.clientDetails()
 
           outerMap = outerMap.set(mcl.get(0)[0], innerMap)
 
@@ -121,88 +119,16 @@ export default class BaseLayout extends React.Component {
 
           services.forEach(service => {
             if (service["Clients"] != undefined) {
-              console.log(service)
               this.TransformClients(service["Name"], service["Clients"]);
             }
           })
         }))
-
-    // let manifest = JSON.parse("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"Endpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"Endpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"Endpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"Endpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\",\r\n        \"CleaningScheduleService\/cleaningScheduleService.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"Endpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ],\r\n      \"ConnectedServices\": \"connectedServices.json\"\r\n    }\r\n  ]\r\n}")
-    // this.props.specActions.setManifest("{\r\n  \"BaseUrl\": \"http:\/\/localhost:8080\",\r\n  \"Services\": [\r\n    {\r\n      \"Name\": \"RoomBookingApi\",\r\n      \"Endpoints\": \"\/roomBookingApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"StaffAvailabilityApi\",\r\n      \"Endpoints\": \"\/staffAvailabilityApi.json\"\r\n\r\n    },\r\n    {\r\n      \"Name\": \"DeliveryApi\",\r\n      \"Endpoints\": \"\/deliveryApi.json\"\r\n    },\r\n    {\r\n      \"Name\": \"StockKeepingApi\",\r\n      \"Endpoints\": \"\/stockKeepingApi.json\",\r\n      \"Clients\": [\r\n        \"StockKeepingApi\/Clients\/deliveryApi.json\"\r\n      ]\r\n    },\r\n    {\r\n      \"Name\": \"RoomServiceApi\",\r\n      \"Endpoints\": \"\/roomServiceApi.json\",\r\n      \"Clients\": [\r\n        \"\/RoomServiceApi\/Clients\/roomBookings.json\",\r\n        \"\/RoomServiceApi\/Clients\/stockKeeping.json\"\r\n      ]\r\n    }\r\n  ]\r\n}")
-
-
-    // let services = manifest["Services"];
-
-
-    // services.forEach(service => {
-    //   // let parsedService = Map()
-
-    //   if (service["Clients"] != undefined) {
-    //     this.TransformClients(service["Name"], service["Clients"]);
-    //     // parsedService = parsedService.set("Clients", transformedClients)
-    //   }
-
-    //   // if (service["ConnectedServices"] != undefined) {
-    //   //   parsedService = parsedService.set("ConnectedServices", service["ConnectedServices"])
-    //   // }
-
-    //   // parsedData = parsedData.set(service["Name"], parsedService)
-    // })
-
-
-
-
-
-
-
-
-    // manifest["Services"].forEach((service) => {
-
-    //   if ("Clients" in service) {
-
-    //     let clientData = Map()
-
-    //     service["Clients"].forEach((client) => {
-    //       let clientUrl = this.props.specSelectors.baseUrl() + "/" + client
-
-
-    //       fetch(clientUrl)
-    //         .then(response => response.json()
-    //           .then(json => {
-    //             let localClients = []
-    //             localClients.push(fromJSOrdered(json))
-
-
-    //             let multiClients = this.taggedClients(localClients)
-
-    //             clientData.set(client, multiClients)
-    //             let tO
-
-
-    //             //Need to loop to handle multiple paths
-    //             let mapped = multiClients[0]
-
-
-
-    //             mapped.map((x) => {
-    //               tO = this.getMappedClient(x)
-    //             })
-
-    //           }))
-
-    //     })
-
-    //   }
-
-    // })
   }
 
 
 
-  getMappedClient = (tagObj, tag) => {
-
+  getMappedClient = (tagObj, _) => {
     return tagObj
-
   }
 
 
@@ -262,8 +188,6 @@ export default class BaseLayout extends React.Component {
         outerMap = outerMap.set(serviceKey, innerMap)
 
         this.props.specActions.setClientDetails(outerMap)
-
-
 
       });
 
@@ -339,7 +263,7 @@ export default class BaseLayout extends React.Component {
 
     })
 
-    return clientArr;
+    return clientArr
   }
 
   clientConsumes = function (clients) {
@@ -377,7 +301,7 @@ export default class BaseLayout extends React.Component {
       ))
     })
 
-    return clientArr;
+    return clientArr
   }
 
 
@@ -531,6 +455,7 @@ export default class BaseLayout extends React.Component {
     errSelectors: PropTypes.object.isRequired,
     errActions: PropTypes.object.isRequired,
     specSelectors: PropTypes.object.isRequired,
+    specActions: PropTypes.object.isRequired,
     oas3Selectors: PropTypes.object.isRequired,
     oas3Actions: PropTypes.object.isRequired,
     getComponent: PropTypes.func.isRequired
@@ -549,7 +474,6 @@ export default class BaseLayout extends React.Component {
     let Row = getComponent("Row")
     let Col = getComponent("Col")
     let Errors = getComponent("errors", true)
-    let ConnectedServices = getComponent("connectedServices", true)
 
     const ServersContainer = getComponent("ServersContainer", true)
     const SchemesContainer = getComponent("SchemesContainer", true)
@@ -622,7 +546,7 @@ export default class BaseLayout extends React.Component {
           <div><p><a onClick={(e) => {
             e.stopPropagation()
 
-            let serviceUrl = specSelectors.baseUrl() + '/' + service.getIn(["Name"]) + ".json"
+            let serviceUrl = specSelectors.baseUrl() + "/" + service.getIn(["Name"]) + ".json"
 
             this.props.specActions.updateUrl(this.props.specSelectors.url())
 

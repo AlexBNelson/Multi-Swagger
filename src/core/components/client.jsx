@@ -9,14 +9,15 @@ import ImPropTypes from "react-immutable-proptypes"
 
 export default class Client extends PureComponent {
   constructor () {
-    super();
-    this.state = {};
+    super()
+    this.state = {}
   }
 
   static propTypes = {
     specPath: ImPropTypes.list.isRequired,
     operation: PropTypes.instanceOf(Iterable).isRequired,
     summary: PropTypes.string,
+    clientDetail:PropTypes.object,
     response: PropTypes.instanceOf(Iterable),
     request: PropTypes.instanceOf(Iterable),
 
@@ -138,7 +139,6 @@ export default class Client extends PureComponent {
     const validationErrors = specSelectors.validationErrors([path, method])
 
     // Getting empty map for StockKeepingApi
-    console.log(operation)
     return (
         <div className={deprecated ? "opblock opblock-deprecated" : isShown ? `opblock opblock-${method} is-open` : `opblock opblock-${method}`} id={escapeDeepLinkPath(isShownKey.join("-"))} >
           <ClientSummary operationProps={operationProps} isShown={isShown} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} />
