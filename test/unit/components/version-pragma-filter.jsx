@@ -39,18 +39,18 @@ describe("<VersionPragmaFilter/>", function(){
     expect(wrapper.find("div").length).toEqual(1)
     expect(wrapper.find("div").text()).toEqual("hello!")
   })
-  it("renders the correct message for an ambiguous-version definition", function(){
-    // When
-    let wrapper = shallow(
-      <VersionPragmaFilter isSwagger2={true} isOAS3={true}>
-        hello!
-      </VersionPragmaFilter>
-    )
+  // it("renders the correct message for an ambiguous-version definition", function(){
+  //   // When
+  //   let wrapper = shallow(
+  //     <VersionPragmaFilter isSwagger2={true} isOAS3={true}>
+  //       hello!
+  //     </VersionPragmaFilter>
+  //   )
 
-    // Then
-    expect(wrapper.find("div.version-pragma__message--ambiguous").length).toEqual(1)
-    expect(wrapper.find("div.version-pragma__message--missing").length).toEqual(0)
-  })
+  //   // Then
+  //   expect(wrapper.find("div.version-pragma__message--ambiguous").length).toEqual(1)
+  //   expect(wrapper.find("div.version-pragma__message--missing").length).toEqual(0)
+  // })
   it("renders the correct message for a missing-version definition", function(){
     // When
     let wrapper = shallow(

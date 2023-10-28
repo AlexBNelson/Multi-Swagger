@@ -14,8 +14,8 @@ const OAS3_OPERATION_METHODS = SWAGGER2_OPERATION_METHODS.concat(["trace"])
 export default class Operations extends React.Component {
 
   constructor(){
-    super();
-    this.state = {consumers: Map() };
+    super()
+    this.state = {consumers: Map() }
   }
 
 
@@ -36,8 +36,6 @@ export default class Operations extends React.Component {
   componentDidMount(){
     let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
 
-    let consumerArr = new Map();
-
 
     services.forEach((service)=>{
       let clients = service["Clients"]
@@ -48,8 +46,6 @@ export default class Operations extends React.Component {
         clients.forEach((client)=>{
           let clientUrl = this.props.specSelectors.baseUrl()+ "/" + client + ".json"
 
-          console.log(clientUrl)
-  
           fetch(clientUrl)
             .then( response => response.json()
               .then(json => {
@@ -111,18 +107,18 @@ export default class Operations extends React.Component {
       getConfigs,
     } = this.props
 
-    let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
+    // let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
 
-    let service = services.find(item => item.Name == tag)
+    // let service = services.find(item => item.Name == tag)
 
 
 
-    let serviceUrl
+    // let serviceUrl
 
-    if (service != undefined)
-      serviceUrl = specSelectors.baseUrl() + '/' + tag + ".json"
+    // if (service != undefined)
+      // serviceUrl = specSelectors.baseUrl() + "/" + tag + ".json"
 
-    let serviceLink
+    // let serviceLink
 
     const OperationContainer = getComponent("OperationContainer", true)
     const OperationTag = getComponent("OperationTag")
@@ -130,32 +126,32 @@ export default class Operations extends React.Component {
 
 
     
-      serviceLink = <a onClick={(e) => {
-        e.stopPropagation()
-        this.props.specActions.download(serviceUrl)
+      // serviceLink = <a onClick={(e) => {
+      //   e.stopPropagation()
+      //   this.props.specActions.download(serviceUrl)
 
-        let clients
+      //   let clients
 
-        let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
+      //   let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
 
-        if (clientList != undefined) {
-          if ("Clients" in clientList) {
-            clients = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
-          }
+      //   if (clientList != undefined) {
+      //     if ("Clients" in clientList) {
+      //       clients = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
+      //     }
 
-        }
+      //   }
 
-        if (clients != undefined) {
-          this.props.specActions.setCurrentDoc(tag)
-        } else {
-          this.props.specActions.setCurrentDoc()
-        }
+      //   if (clients != undefined) {
+      //     this.props.specActions.setCurrentDoc(tag)
+      //   } else {
+      //     this.props.specActions.setCurrentDoc()
+      //   }
 
 
-      }}><img src={SwaggerLogo} style={{
-        width: 15,
-        height: 15
-      }} />&nbsp;&nbsp;{tag}</a>
+      // }}><img src={SwaggerLogo} style={{
+      //   width: 15,
+      //   height: 15
+      // }} />&nbsp;&nbsp;{tag}</a>
     
 
       let endpointLinks = []
@@ -163,7 +159,6 @@ export default class Operations extends React.Component {
 
     return (
       <OperationTag
-        key={"operation-" + tag}
         tagObj={tagObj}
         tag={tag}
         oas3Selectors={oas3Selectors}
@@ -192,7 +187,7 @@ export default class Operations extends React.Component {
 
                 this.state.consumers.get(opId).forEach((endpoint)=>{
 
-                  let endpointUrl = specSelectors.baseUrl() + "/" + endpoint['Name'] + ".json"
+                  let endpointUrl = specSelectors.baseUrl() + "/" + endpoint["Name"] + ".json"
 
                   let button = <p><a onClick={(e)=>{
                       e.stopPropagation()
@@ -235,7 +230,6 @@ export default class Operations extends React.Component {
 
 
               return (
-                <div>
                 <OperationContainer
                   key={`${path}-${method}`}
                   specPath={specPath}
@@ -243,12 +237,8 @@ export default class Operations extends React.Component {
                   path={path}
                   method={method}
                   tag={tag}>
-
-                  
-
                   </OperationContainer>
                   
-                  </div>
               )
             }).toArray()
           }

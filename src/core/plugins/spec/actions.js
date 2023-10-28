@@ -306,7 +306,7 @@ const debResolveSubtrees = debounce(async () => {
     console.error(e)
   }
 
-  console.log(batchResult.resultMap)
+  // console.log(batchResult.resultMap)
 
   specActions.updateResolvedSubtree([], batchResult.resultMap)
 }, 35)

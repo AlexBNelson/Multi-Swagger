@@ -267,7 +267,7 @@ export const operationsWithTags = createSelector(
   }
 )
 
-export const initializeSorters = (state) => ({ getConfigs }) => {
+export const initializeSorters = () => ({ getConfigs }) => {
 
   tagsSorter, operationsSorter  = getConfigs()
 }
@@ -314,7 +314,7 @@ export const clientsWithTags = createSelector(
 
 export const taggedClients = (clients) => {
 
-  initializeSorters();
+  initializeSorters()
   
   return clientsWithTags(clients)
     .sortBy(

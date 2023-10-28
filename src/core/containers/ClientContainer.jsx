@@ -48,7 +48,8 @@ export default class ClientContainer extends PureComponent {
     layoutActions: PropTypes.object.isRequired,
     layoutSelectors: PropTypes.object.isRequired,
     fn: PropTypes.object.isRequired,
-    getConfigs: PropTypes.func.isRequired
+    getConfigs: PropTypes.func.isRequired,
+    clientDetail: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -115,7 +116,6 @@ export default class ClientContainer extends PureComponent {
       // transitioning from collapsed to expanded
     }
 
-    console.log({ layoutActions, tag, operationId, isShown })
     layoutActions.show(["operations", tag, operationId], !isShown)
   }
 

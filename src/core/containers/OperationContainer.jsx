@@ -170,7 +170,6 @@ export default class OperationContainer extends PureComponent {
       }
   
       return OrderedMap().mergeWith(
-        mergerFn,
         oldVal,
         newVal
       )
@@ -214,9 +213,7 @@ export default class OperationContainer extends PureComponent {
     const Operation = getComponent( "operation" )
 
     const resolvedSubtree = this.getResolvedSubtree() || Map()
-
-    console.log(resolvedSubtree)
-
+    
     const operationProps = fromJS({
       op: resolvedSubtree,
       tag,

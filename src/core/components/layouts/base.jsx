@@ -64,7 +64,7 @@ export default class BaseLayout extends React.Component {
 
       let innerMap = Map()
 
-      mcl.get(0)[1].get('operations').forEach(async op => {
+      mcl.get(0)[1].get("operations").forEach(async op => {
         const path = op.get("path")
         const method = op.get("method")
         const specPath = Im.List(["paths", path, method])
@@ -85,7 +85,7 @@ export default class BaseLayout extends React.Component {
           responseInterceptor
         })
 
-        prom.then(({ errors, spec }) => {
+        prom.then(({ spec }) => {
 
           let ClientDetails = fromJSOrdered(spec)
 
@@ -114,12 +114,12 @@ export default class BaseLayout extends React.Component {
         .then(json => {
           this.props.specActions.setManifest(json)
 
-          let services = json["Services"];
+          let services = json["Services"]
 
 
           services.forEach(service => {
             if (service["Clients"] != undefined) {
-              this.TransformClients(service["Name"], service["Clients"]);
+              this.TransformClients(service["Name"], service["Clients"])
             }
           })
         }))
@@ -127,7 +127,7 @@ export default class BaseLayout extends React.Component {
 
 
 
-  getMappedClient = (tagObj, _) => {
+  getMappedClient = (tagObj) => {
     return tagObj
   }
 
@@ -162,7 +162,7 @@ export default class BaseLayout extends React.Component {
       })
 
 
-      prom.then(({ errors, spec }) => {
+      prom.then(({ spec }) => {
 
         let ClientDetails = fromJSOrdered(spec)
 
@@ -189,7 +189,7 @@ export default class BaseLayout extends React.Component {
 
         this.props.specActions.setClientDetails(outerMap)
 
-      });
+      })
 
     })
 
@@ -236,7 +236,6 @@ export default class BaseLayout extends React.Component {
       }
 
       return OrderedMap().mergeWith(
-        mergerFn,
         oldVal,
         newVal
       )
@@ -312,7 +311,7 @@ export default class BaseLayout extends React.Component {
       clientArr.push(client.get("paths"))
     })
 
-    return clientArr;
+    return clientArr
 
   }
 
@@ -339,9 +338,9 @@ export default class BaseLayout extends React.Component {
 
         // will need to fix for multiple operation scenario
         path.forEach((operation, method) => {
-          if (this.OPERATION_METHODS.indexOf(method) < 0) {
+          // if (this.OPERATION_METHODS.indexOf(method) < 0) {
 
-          }
+          // }
           list = list.push(fromJS({
             path: pathName,
             method,
@@ -391,7 +390,7 @@ export default class BaseLayout extends React.Component {
       })))
     }
 
-    return clientsArray;
+    return clientsArray
   }
 
 
@@ -400,6 +399,7 @@ export default class BaseLayout extends React.Component {
     let clientArr = []
 
     for (let i = 0; i < this.clientsWithRootInherited(clients).length; i++) {
+      const DEFAULT_TAG = "default"
       clientArr.push(this.clientsWithRootInherited(clients)[i].reduce((taggedMap, op) => {
         let tags = Set(op.getIn(["operation", "tags"]))
         if (tags.count() < 1)
@@ -458,7 +458,8 @@ export default class BaseLayout extends React.Component {
     specActions: PropTypes.object.isRequired,
     oas3Selectors: PropTypes.object.isRequired,
     oas3Actions: PropTypes.object.isRequired,
-    getComponent: PropTypes.func.isRequired
+    getComponent: PropTypes.func.isRequired,
+    getConfigs: PropTypes.func.isRequired
   }
 
 

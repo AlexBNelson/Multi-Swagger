@@ -94,7 +94,7 @@ export default class Clients extends React.Component {
     let serviceUrl
 
     if (service != undefined)
-      serviceUrl = specSelectors.baseUrl() + '/' + tag + ".json"
+      serviceUrl = specSelectors.baseUrl() + "/" + tag + ".json"
 
     let serviceLink
 

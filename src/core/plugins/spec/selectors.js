@@ -234,7 +234,6 @@ export const operationsWithRootInherited = createSelector(
   produces,
   (operations, consumes, produces) => {
 
-    console.log(operations)
     return operations.map( ops => ops.update("operation", op => {
       if(op) {
         if(!Map.isMap(op)) { return }
@@ -577,10 +576,10 @@ function returnSelfOrNewMap(obj) {
   return Map.isMap(obj) ? obj : new Map()
 }
 
-
-
-
-
+export const clientJson = createSelector(
+  state,
+  spec => spec.get("clientJson", Map())
+)
 
 
 export const clientSpec = state => {
@@ -589,10 +588,6 @@ export const clientSpec = state => {
   return res
 }
 
-export const clientJson = createSelector(
-  state,
-  spec => spec.get("clientJson", Map())
-)
 
 export const clientTags = createSelector(
   clientSpec,

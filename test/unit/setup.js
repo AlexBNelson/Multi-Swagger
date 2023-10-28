@@ -22,9 +22,9 @@ function setUpDomEnvironment() {
   })
   const { window } = jsdom
 
-  global.window = window
-  global.document = window.document
-  global.navigator = {
+  global.window ??= window
+  global.document ??= window.document
+  global.navigator ??= {
     userAgent: "node.js",
   }
   copyProps(win, window) // use UI's built-in window wrapper
