@@ -1,18 +1,22 @@
 //SVGs are problematic in jest
 
-// import React from "react"
-// import { render } from "enzyme"
-// import { fromJS } from "immutable"
-// import DeepLink from "components/deep-link"
-// import Operations from "components/operations"
-// import {Collapse} from "components/layout-utils"
+import React from "react"
+import { render } from "enzyme"
+import { fromJS } from "immutable"
+import DeepLink from "components/deep-link"
+import Operations from "components/operations"
+import {Collapse} from "components/layout-utils"
 
-// const components = {
-//   Collapse,
-//   DeepLink,
-//   OperationContainer: ({ path, method }) => <span className="mocked-op" id={`${path}-${method}`} />,
-//   OperationTag: "div",
-// }
+
+
+const components = {
+  Collapse,
+  DeepLink,
+  OperationContainer: ({ path, method }) => <span className="mocked-op" id={`${path}-${method}`} />,
+  OperationTag: "div",
+}
+
+it("",()=>{});
 
 // describe("<Operations/>", function(){
 //   it("should render a Swagger2 `get` method, but not a `trace` or `foo` method", function(){

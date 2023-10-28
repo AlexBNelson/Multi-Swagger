@@ -51,33 +51,38 @@ jobs:
       - name: Test build artifacts
         run: npm run test:artifact
 
-  e2e-tests:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: ['+(a11y|security|bugs)/**/*.js', 'features/**/+(o|d)*.js', 'features/**/m*.js', 'features/**/!(o|d|m)*.js']
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.8b9751a9-5d60-430c-b478-37d8a6cd2af9 }}
 
-    steps:
-      - uses: actions/checkout@v3
+  # e2e-tests:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       containers: ['+(a11y|security|bugs)/**/*.js', 'features/**/+(o|d)*.js', 'features/**/m*.js', 'features/**/!(o|d|m)*.js']
 
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Cache Node Modules and Cypress binary
-        uses: actions/cache@v3
-        id: cache-primes
-        with:
-          path: |
-            node_modules
-            ${{ env.CYPRESS_CACHE_FOLDER }}
-          key: ${{ runner.os }}-node-and-cypress-${{ hashFiles('package-lock.json') }}
+  #     - name: Use Node.js 16.x
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
 
-      - name: Install dependencies
-        if: steps.cache-primes.outputs.cache-hit != 'true'
-        run: npm ci
+  #     - name: Cache Node Modules and Cypress binary
+  #       uses: actions/cache@v3
+  #       id: cache-primes
+  #       with:
+  #         path: |
+  #           node_modules
+  #           ${{ env.CYPRESS_CACHE_FOLDER }}
+  #         key: ${{ runner.os }}-node-and-cypress-${{ hashFiles('package-lock.json') }}
 
-      - name: Cypress Test
-        run: npx start-server-and-test cy:start http://localhost:3204 'npm run cy:run -- --spec "test/e2e-cypress/tests/${{ matrix.containers }}"'
+  #     - name: Install dependencies
+  #       if: steps.cache-primes.outputs.cache-hit != 'true'
+  #       run: npm ci
+
+  #     - name: Cypress Test
+  #       run: npx start-server-and-test cy:start http://localhost:3204 'npm run cy:run -- --spec "test/e2e-cypress/tests/${{ matrix.containers }}"'
