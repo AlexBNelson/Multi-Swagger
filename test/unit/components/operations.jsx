@@ -16,7 +16,7 @@ const components = {
   OperationTag: "div",
 }
 
-it("",()=>{});
+it("",()=>{})
 
 // describe("<Operations/>", function(){
 //   it("should render a Swagger2 `get` method, but not a `trace` or `foo` method", function(){

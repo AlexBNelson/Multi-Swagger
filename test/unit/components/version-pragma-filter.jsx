@@ -3,7 +3,7 @@ import { shallow } from "enzyme"
 import VersionPragmaFilter from "components/version-pragma-filter"
 
 
-it("",()=>{});
+it("",()=>{})
 // describe("<VersionPragmaFilter/>", function(){
 //   it("renders children for a Swagger 2 definition", function(){
 //     // When
