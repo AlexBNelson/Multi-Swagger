@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master, next ]
+    branches: [master, next]
   pull_request:
-    branches: [ master, next ]
+    branches: [master, next]
 
 env:
   CYPRESS_CACHE_FOLDER: cypress/cache
@@ -50,11 +50,6 @@ jobs:
 
       - name: Test build artifacts
         run: npm run test:artifact
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.8b9751a9-5d60-430c-b478-37d8a6cd2af9 }}
 
   # e2e-tests:
   #   runs-on: ubuntu-latest
