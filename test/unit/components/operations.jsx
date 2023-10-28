@@ -3,8 +3,8 @@
 import React from "react"
 import { render } from "enzyme"
 import { fromJS } from "immutable"
-import DeepLink from "components/deep-link"
-import Operations from "components/operations"
+// import DeepLink from "components/deep-link"
+// import Operations from "components/operations"
 import {Collapse} from "components/layout-utils"
 
 
@@ -12,7 +12,7 @@ import {Collapse} from "components/layout-utils"
 const components = {
   Collapse,
   DeepLink,
-  OperationContainer: ({ path, method }) => <span className="mocked-op" id={`${path}-${method}`} />,
+  // OperationContainer: ({ path, method }) => <span className="mocked-op" id={`${path}-${method}`} />,
   OperationTag: "div",
 }
 
