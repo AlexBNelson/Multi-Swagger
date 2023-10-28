@@ -3,7 +3,7 @@
 import React from "react"
 import { render } from "enzyme"
 import { fromJS } from "immutable"
-// import DeepLink from "components/deep-link"
+import DeepLink from "components/deep-link"
 // import Operations from "components/operations"
 import {Collapse} from "components/layout-utils"
 
