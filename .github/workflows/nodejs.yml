@@ -44,17 +44,17 @@ jobs:
         run: npm run just-test-in-node && npm run test:unit-jest
         env:
           CI: true
-          
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
+    
       - name: Build SwaggerUI
         run: npm run build
 
       - name: Test build artifacts
         run: npm run test:artifact
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       
 
