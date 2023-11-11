@@ -14,7 +14,9 @@ export const shownDefinitions = createSelector(
 export const definitionsToAuthorize = createSelector(
     state,
     () => ( { specSelectors } ) => {
+        console.log(specSelectors) 
       let definitions = specSelectors.securityDefinitions() || Map({})
+   
       let list = List()
 
       //todo refactor
@@ -62,9 +64,22 @@ export const getDefinitionsByNames = ( state, securities ) => ( { specSelectors 
   return result
 }
 
-export const definitionsForRequirements = (state, securities = List()) => ({ authSelectors }) => {
-  const allDefinitions = authSelectors.definitionsToAuthorize() || List()
-  let result = List()
+export const definitionsForRequirements = (state, securities = List()) => ({ specSelectors }) => {
+    let definitions = specSelectors.spec().get("securityDefinitions") || Map({})
+    let list = List()
+
+    //todo refactor
+    definitions.entrySeq().forEach( ([ key, val ]) => {
+      let map = Map()
+
+      map = map.set(key, val)
+      list = list.push(map)
+    })
+let allDefinitions = list
+
+console.log(specSelectors.spec().get("securityDefinitions"))
+
+    let result = List()
   allDefinitions.forEach( (definition) => {
     let security = securities.find(sec => sec.get(definition.keySeq().first()))
     if ( security ) {
@@ -86,7 +101,7 @@ export const definitionsForRequirements = (state, securities = List()) => ({ aut
     }
   })
 
-  console.log(result)
+  
   return result
 }
 
