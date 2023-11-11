@@ -1,9 +1,3 @@
-import opsFilter from "./opsFilter"
-
-export default function() {
-  return {
-    fn: {
-      opsFilter
-    }
-  }
-}
+function cov_14s6ip58xk(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\filter\\index.js";var hash="73d55c10d0aa71d6f7371cfafc44c1b90353d527";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\filter\\index.js",statementMap:{"0":{start:{line:4,column:2},end:{line:8,column:3}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:3,column:15},end:{line:3,column:16}},loc:{start:{line:3,column:26},end:{line:9,column:1}},line:3}},branchMap:{},s:{"0":0},f:{"0":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"73d55c10d0aa71d6f7371cfafc44c1b90353d527"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_14s6ip58xk=function(){return actualCoverage;};}return actualCoverage;}cov_14s6ip58xk();import opsFilter from"./opsFilter";export default function(){cov_14s6ip58xk().f[0]++;cov_14s6ip58xk().s[0]++;return{fn:{opsFilter}};}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMTRzNmlwNTh4ayIsImFjdHVhbENvdmVyYWdlIiwib3BzRmlsdGVyIiwiZiIsInMiLCJmbiJdLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBvcHNGaWx0ZXIgZnJvbSBcIi4vb3BzRmlsdGVyXCJcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uKCkge1xyXG4gIHJldHVybiB7XHJcbiAgICBmbjoge1xyXG4gICAgICBvcHNGaWx0ZXJcclxuICAgIH1cclxuICB9XHJcbn1cclxuIl0sIm1hcHBpbmdzIjoiODNCQWVZO0FBQUFBLGNBQUEsU0FBQUEsQ0FBQSxTQUFBQyxjQUFBLFdBQUFBLGNBQUEsRUFBQUQsY0FBQSxHQWZaLE1BQU8sQ0FBQUUsU0FBUyxLQUFNLGFBQWEsQ0FFbkMsY0FBZSxXQUFXLENBQUFGLGNBQUEsR0FBQUcsQ0FBQSxNQUFBSCxjQUFBLEdBQUFJLENBQUEsTUFDeEIsTUFBTyxDQUNMQyxFQUFFLENBQUUsQ0FDRkgsU0FDRixDQUNGLENBQUMsQ0FDSCJ9

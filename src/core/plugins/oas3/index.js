@@ -1,31 +1,5 @@
-// import reducers from "./reducers"
+function cov_1soak7to3z(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\oas3\\index.js";var hash="dbac4e87ba8ecb260c273afcde3950259ef3ae07";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\oas3\\index.js",statementMap:{"0":{start:{line:13,column:2},end:{line:30,column:3}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:12,column:15},end:{line:12,column:16}},loc:{start:{line:12,column:26},end:{line:31,column:1}},line:12}},branchMap:{},s:{"0":0},f:{"0":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"dbac4e87ba8ecb260c273afcde3950259ef3ae07"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_1soak7to3z=function(){return actualCoverage;};}return actualCoverage;}cov_1soak7to3z();// import reducers from "./reducers"
 // import * as actions from "./actions"
-import * as specWrapSelectors from "./spec-extensions/wrap-selectors"
-import * as authWrapSelectors from "./auth-extensions/wrap-selectors"
-import * as specSelectors from "./spec-extensions/selectors"
-import components from "./components"
-import wrapComponents from "./wrap-components"
-import * as oas3Actions from "./actions"
-import * as oas3Selectors from "./selectors"
-import oas3Reducers from "./reducers"
-
-export default function() {
-  return {
-    components,
-    wrapComponents,
-    statePlugins: {
-      spec: {
-        wrapSelectors: specWrapSelectors,
-        selectors: specSelectors
-      },
-      auth: {
-        wrapSelectors: authWrapSelectors
-      },
-      oas3: {
-        actions: oas3Actions,
-        reducers: oas3Reducers,
-        selectors: oas3Selectors,
-      }
-    }
-  }
-}
+import*as specWrapSelectors from"./spec-extensions/wrap-selectors";import*as authWrapSelectors from"./auth-extensions/wrap-selectors";import*as specSelectors from"./spec-extensions/selectors";import components from"./components";import wrapComponents from"./wrap-components";import*as oas3Actions from"./actions";import*as oas3Selectors from"./selectors";import oas3Reducers from"./reducers";export default function(){cov_1soak7to3z().f[0]++;cov_1soak7to3z().s[0]++;return{components,wrapComponents,statePlugins:{spec:{wrapSelectors:specWrapSelectors,selectors:specSelectors},auth:{wrapSelectors:authWrapSelectors},oas3:{actions:oas3Actions,reducers:oas3Reducers,selectors:oas3Selectors}}};}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMXNvYWs3dG8zeiIsImFjdHVhbENvdmVyYWdlIiwic3BlY1dyYXBTZWxlY3RvcnMiLCJhdXRoV3JhcFNlbGVjdG9ycyIsInNwZWNTZWxlY3RvcnMiLCJjb21wb25lbnRzIiwid3JhcENvbXBvbmVudHMiLCJvYXMzQWN0aW9ucyIsIm9hczNTZWxlY3RvcnMiLCJvYXMzUmVkdWNlcnMiLCJmIiwicyIsInN0YXRlUGx1Z2lucyIsInNwZWMiLCJ3cmFwU2VsZWN0b3JzIiwic2VsZWN0b3JzIiwiYXV0aCIsIm9hczMiLCJhY3Rpb25zIiwicmVkdWNlcnMiXSwic291cmNlcyI6WyJpbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyBpbXBvcnQgcmVkdWNlcnMgZnJvbSBcIi4vcmVkdWNlcnNcIlxyXG4vLyBpbXBvcnQgKiBhcyBhY3Rpb25zIGZyb20gXCIuL2FjdGlvbnNcIlxyXG5pbXBvcnQgKiBhcyBzcGVjV3JhcFNlbGVjdG9ycyBmcm9tIFwiLi9zcGVjLWV4dGVuc2lvbnMvd3JhcC1zZWxlY3RvcnNcIlxyXG5pbXBvcnQgKiBhcyBhdXRoV3JhcFNlbGVjdG9ycyBmcm9tIFwiLi9hdXRoLWV4dGVuc2lvbnMvd3JhcC1zZWxlY3RvcnNcIlxyXG5pbXBvcnQgKiBhcyBzcGVjU2VsZWN0b3JzIGZyb20gXCIuL3NwZWMtZXh0ZW5zaW9ucy9zZWxlY3RvcnNcIlxyXG5pbXBvcnQgY29tcG9uZW50cyBmcm9tIFwiLi9jb21wb25lbnRzXCJcclxuaW1wb3J0IHdyYXBDb21wb25lbnRzIGZyb20gXCIuL3dyYXAtY29tcG9uZW50c1wiXHJcbmltcG9ydCAqIGFzIG9hczNBY3Rpb25zIGZyb20gXCIuL2FjdGlvbnNcIlxyXG5pbXBvcnQgKiBhcyBvYXMzU2VsZWN0b3JzIGZyb20gXCIuL3NlbGVjdG9yc1wiXHJcbmltcG9ydCBvYXMzUmVkdWNlcnMgZnJvbSBcIi4vcmVkdWNlcnNcIlxyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oKSB7XHJcbiAgcmV0dXJuIHtcclxuICAgIGNvbXBvbmVudHMsXHJcbiAgICB3cmFwQ29tcG9uZW50cyxcclxuICAgIHN0YXRlUGx1Z2luczoge1xyXG4gICAgICBzcGVjOiB7XHJcbiAgICAgICAgd3JhcFNlbGVjdG9yczogc3BlY1dyYXBTZWxlY3RvcnMsXHJcbiAgICAgICAgc2VsZWN0b3JzOiBzcGVjU2VsZWN0b3JzXHJcbiAgICAgIH0sXHJcbiAgICAgIGF1dGg6IHtcclxuICAgICAgICB3cmFwU2VsZWN0b3JzOiBhdXRoV3JhcFNlbGVjdG9yc1xyXG4gICAgICB9LFxyXG4gICAgICBvYXMzOiB7XHJcbiAgICAgICAgYWN0aW9uczogb2FzM0FjdGlvbnMsXHJcbiAgICAgICAgcmVkdWNlcnM6IG9hczNSZWR1Y2VycyxcclxuICAgICAgICBzZWxlY3RvcnM6IG9hczNTZWxlY3RvcnMsXHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcbn1cclxuIl0sIm1hcHBpbmdzIjoiaTRCQWVZO0FBQUFBLGNBQUEsU0FBQUEsQ0FBQSxTQUFBQyxjQUFBLFdBQUFBLGNBQUEsRUFBQUQsY0FBQSxHQWZaO0FBQ0E7QUFDQSxNQUFPLEdBQUssQ0FBQUUsaUJBQWlCLEtBQU0sa0NBQWtDLENBQ3JFLE1BQU8sR0FBSyxDQUFBQyxpQkFBaUIsS0FBTSxrQ0FBa0MsQ0FDckUsTUFBTyxHQUFLLENBQUFDLGFBQWEsS0FBTSw2QkFBNkIsQ0FDNUQsTUFBTyxDQUFBQyxVQUFVLEtBQU0sY0FBYyxDQUNyQyxNQUFPLENBQUFDLGNBQWMsS0FBTSxtQkFBbUIsQ0FDOUMsTUFBTyxHQUFLLENBQUFDLFdBQVcsS0FBTSxXQUFXLENBQ3hDLE1BQU8sR0FBSyxDQUFBQyxhQUFhLEtBQU0sYUFBYSxDQUM1QyxNQUFPLENBQUFDLFlBQVksS0FBTSxZQUFZLENBRXJDLGNBQWUsV0FBVyxDQUFBVCxjQUFBLEdBQUFVLENBQUEsTUFBQVYsY0FBQSxHQUFBVyxDQUFBLE1BQ3hCLE1BQU8sQ0FDTE4sVUFBVSxDQUNWQyxjQUFjLENBQ2RNLFlBQVksQ0FBRSxDQUNaQyxJQUFJLENBQUUsQ0FDSkMsYUFBYSxDQUFFWixpQkFBaUIsQ0FDaENhLFNBQVMsQ0FBRVgsYUFDYixDQUFDLENBQ0RZLElBQUksQ0FBRSxDQUNKRixhQUFhLENBQUVYLGlCQUNqQixDQUFDLENBQ0RjLElBQUksQ0FBRSxDQUNKQyxPQUFPLENBQUVYLFdBQVcsQ0FDcEJZLFFBQVEsQ0FBRVYsWUFBWSxDQUN0Qk0sU0FBUyxDQUFFUCxhQUNiLENBQ0YsQ0FDRixDQUFDLENBQ0gifQ==

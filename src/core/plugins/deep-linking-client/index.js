@@ -1,24 +1,4 @@
-import layout from "./layout"
-import ClientWrapper from "./client-wrapper"
-import ClientTagWrapper from "./client-tag-wrapper"
-
-export default function() {
-  return [layout, {
-    statePlugins: {
-      configs: {
-        wrapActions: {
-          loaded: (ori, system) => (...args) => {
-            ori(...args)
-            // location.hash was an UTF-16 String, here is required UTF-8
-            const hash = decodeURIComponent(window.location.hash)
-            system.layoutActions.parseDeepLinkHash(hash)
-          }
-        }
-      }
-    },
-    wrapComponents: {
-      client: ClientWrapper,
-      ClientTag: ClientTagWrapper,
-    },
-  }]
-}
+function cov_2205ylx2w0(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\deep-linking-client\\index.js";var hash="43ef3bd20ebdb3c9d931eb9976cb4e57166c4864";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\deep-linking-client\\index.js",statementMap:{"0":{start:{line:6,column:2},end:{line:23,column:4}},"1":{start:{line:10,column:35},end:{line:15,column:11}},"2":{start:{line:11,column:12},end:{line:11,column:24}},"3":{start:{line:13,column:25},end:{line:13,column:65}},"4":{start:{line:14,column:12},end:{line:14,column:56}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:5,column:15},end:{line:5,column:16}},loc:{start:{line:5,column:26},end:{line:24,column:1}},line:5},"1":{name:"(anonymous_1)",decl:{start:{line:10,column:18},end:{line:10,column:19}},loc:{start:{line:10,column:35},end:{line:15,column:11}},line:10},"2":{name:"(anonymous_2)",decl:{start:{line:10,column:35},end:{line:10,column:36}},loc:{start:{line:10,column:48},end:{line:15,column:11}},line:10}},branchMap:{},s:{"0":0,"1":0,"2":0,"3":0,"4":0},f:{"0":0,"1":0,"2":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"43ef3bd20ebdb3c9d931eb9976cb4e57166c4864"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_2205ylx2w0=function(){return actualCoverage;};}return actualCoverage;}cov_2205ylx2w0();import layout from"./layout";import ClientWrapper from"./client-wrapper";import ClientTagWrapper from"./client-tag-wrapper";export default function(){cov_2205ylx2w0().f[0]++;cov_2205ylx2w0().s[0]++;return[layout,{statePlugins:{configs:{wrapActions:{loaded:(ori,system)=>{cov_2205ylx2w0().f[1]++;cov_2205ylx2w0().s[1]++;return(...args)=>{cov_2205ylx2w0().f[2]++;cov_2205ylx2w0().s[2]++;ori(...args);// location.hash was an UTF-16 String, here is required UTF-8
+const hash=(cov_2205ylx2w0().s[3]++,decodeURIComponent(window.location.hash));cov_2205ylx2w0().s[4]++;system.layoutActions.parseDeepLinkHash(hash);};}}}},wrapComponents:{client:ClientWrapper,ClientTag:ClientTagWrapper}}];}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMjIwNXlseDJ3MCIsImFjdHVhbENvdmVyYWdlIiwibGF5b3V0IiwiQ2xpZW50V3JhcHBlciIsIkNsaWVudFRhZ1dyYXBwZXIiLCJmIiwicyIsInN0YXRlUGx1Z2lucyIsImNvbmZpZ3MiLCJ3cmFwQWN0aW9ucyIsImxvYWRlZCIsIm9yaSIsInN5c3RlbSIsImFyZ3MiLCJoYXNoIiwiZGVjb2RlVVJJQ29tcG9uZW50Iiwid2luZG93IiwibG9jYXRpb24iLCJsYXlvdXRBY3Rpb25zIiwicGFyc2VEZWVwTGlua0hhc2giLCJ3cmFwQ29tcG9uZW50cyIsImNsaWVudCIsIkNsaWVudFRhZyJdLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBsYXlvdXQgZnJvbSBcIi4vbGF5b3V0XCJcclxuaW1wb3J0IENsaWVudFdyYXBwZXIgZnJvbSBcIi4vY2xpZW50LXdyYXBwZXJcIlxyXG5pbXBvcnQgQ2xpZW50VGFnV3JhcHBlciBmcm9tIFwiLi9jbGllbnQtdGFnLXdyYXBwZXJcIlxyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oKSB7XHJcbiAgcmV0dXJuIFtsYXlvdXQsIHtcclxuICAgIHN0YXRlUGx1Z2luczoge1xyXG4gICAgICBjb25maWdzOiB7XHJcbiAgICAgICAgd3JhcEFjdGlvbnM6IHtcclxuICAgICAgICAgIGxvYWRlZDogKG9yaSwgc3lzdGVtKSA9PiAoLi4uYXJncykgPT4ge1xyXG4gICAgICAgICAgICBvcmkoLi4uYXJncylcclxuICAgICAgICAgICAgLy8gbG9jYXRpb24uaGFzaCB3YXMgYW4gVVRGLTE2IFN0cmluZywgaGVyZSBpcyByZXF1aXJlZCBVVEYtOFxyXG4gICAgICAgICAgICBjb25zdCBoYXNoID0gZGVjb2RlVVJJQ29tcG9uZW50KHdpbmRvdy5sb2NhdGlvbi5oYXNoKVxyXG4gICAgICAgICAgICBzeXN0ZW0ubGF5b3V0QWN0aW9ucy5wYXJzZURlZXBMaW5rSGFzaChoYXNoKVxyXG4gICAgICAgICAgfVxyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG4gICAgfSxcclxuICAgIHdyYXBDb21wb25lbnRzOiB7XHJcbiAgICAgIGNsaWVudDogQ2xpZW50V3JhcHBlcixcclxuICAgICAgQ2xpZW50VGFnOiBDbGllbnRUYWdXcmFwcGVyLFxyXG4gICAgfSxcclxuICB9XVxyXG59XHJcbiJdLCJtYXBwaW5ncyI6InM4Q0FlWTtBQUFBQSxjQUFBLFNBQUFBLENBQUEsU0FBQUMsY0FBQSxXQUFBQSxjQUFBLEVBQUFELGNBQUEsR0FmWixNQUFPLENBQUFFLE1BQU0sS0FBTSxVQUFVLENBQzdCLE1BQU8sQ0FBQUMsYUFBYSxLQUFNLGtCQUFrQixDQUM1QyxNQUFPLENBQUFDLGdCQUFnQixLQUFNLHNCQUFzQixDQUVuRCxjQUFlLFdBQVcsQ0FBQUosY0FBQSxHQUFBSyxDQUFBLE1BQUFMLGNBQUEsR0FBQU0sQ0FBQSxNQUN4QixNQUFPLENBQUNKLE1BQU0sQ0FBRSxDQUNkSyxZQUFZLENBQUUsQ0FDWkMsT0FBTyxDQUFFLENBQ1BDLFdBQVcsQ0FBRSxDQUNYQyxNQUFNLENBQUVBLENBQUNDLEdBQUcsQ0FBRUMsTUFBTSxHQUFLLENBQUFaLGNBQUEsR0FBQUssQ0FBQSxNQUFBTCxjQUFBLEdBQUFNLENBQUEsYUFBQyxHQUFHTyxJQUFJLEdBQUssQ0FBQWIsY0FBQSxHQUFBSyxDQUFBLE1BQUFMLGNBQUEsR0FBQU0sQ0FBQSxNQUNwQ0ssR0FBRyxDQUFDLEdBQUdFLElBQUksQ0FBQyxDQUNaO0FBQ0EsS0FBTSxDQUFBQyxJQUFJLEVBQUFkLGNBQUEsR0FBQU0sQ0FBQSxNQUFHUyxrQkFBa0IsQ0FBQ0MsTUFBTSxDQUFDQyxRQUFRLENBQUNILElBQUksQ0FBQyxFQUFBZCxjQUFBLEdBQUFNLENBQUEsTUFDckRNLE1BQU0sQ0FBQ00sYUFBYSxDQUFDQyxpQkFBaUIsQ0FBQ0wsSUFBSSxDQUFDLENBQzlDLENBQUMsQ0FBRCxDQUNGLENBQ0YsQ0FDRixDQUFDLENBQ0RNLGNBQWMsQ0FBRSxDQUNkQyxNQUFNLENBQUVsQixhQUFhLENBQ3JCbUIsU0FBUyxDQUFFbEIsZ0JBQ2IsQ0FDRixDQUFDLENBQUMsQ0FDSiJ9

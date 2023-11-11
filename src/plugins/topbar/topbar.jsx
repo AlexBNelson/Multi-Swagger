@@ -98,7 +98,7 @@ export default class Topbar extends React.Component {
               {control.map((el, i) => cloneElement(el, { key: i }))}
             </form>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <img height={"32px"} width={"32px"} src={require("../../img/house-solid.svg")} onClick={this.refresh}/>
+            <img  id = "homeButton" height={"32px"} width={"32px"} src={require("../../img/house-solid.svg")} onClick={this.refresh}/>
           </div>
         </div>
       </div>

@@ -5,7 +5,10 @@ const state = state => state
 
 export const shownDefinitions = createSelector(
     state,
-    auth => auth.get( "showDefinitions" )
+    auth => {
+      console.log(auth)
+      return auth.get( "showDefinitions" )
+    }
 )
 
 export const definitionsToAuthorize = createSelector(
@@ -82,6 +85,8 @@ export const definitionsForRequirements = (state, securities = List()) => ({ aut
       result = result.push(definition)
     }
   })
+
+  console.log(result)
   return result
 }
 

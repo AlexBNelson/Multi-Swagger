@@ -1,9 +1,4 @@
-import React from "react"
-
-// Nothing by default- component can be overridden by another plugin.
-
-export default class JumpToPath extends React.Component {
-  render() {
-    return null
-  }
-}
+function cov_1q9ri2ancr(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\components\\jump-to-path.jsx";var hash="d7c32dcb29f1bb6567c1fb8df43935a1f2ebcef1";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\components\\jump-to-path.jsx",statementMap:{"0":{start:{line:7,column:4},end:{line:7,column:15}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:6,column:2},end:{line:6,column:3}},loc:{start:{line:6,column:11},end:{line:8,column:3}},line:6}},branchMap:{},s:{"0":0},f:{"0":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"d7c32dcb29f1bb6567c1fb8df43935a1f2ebcef1"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_1q9ri2ancr=function(){return actualCoverage;};}return actualCoverage;}cov_1q9ri2ancr();import React from"react";// Nothing by default- component can be overridden by another plugin.
+export default class JumpToPath extends(React.Component){render(){cov_1q9ri2ancr().f[0]++;cov_1q9ri2ancr().s[0]++;return null;}}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMXE5cmkyYW5jciIsImFjdHVhbENvdmVyYWdlIiwiUmVhY3QiLCJKdW1wVG9QYXRoIiwiQ29tcG9uZW50IiwicmVuZGVyIiwiZiIsInMiXSwic291cmNlcyI6WyJqdW1wLXRvLXBhdGguanN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIlxyXG5cclxuLy8gTm90aGluZyBieSBkZWZhdWx0LSBjb21wb25lbnQgY2FuIGJlIG92ZXJyaWRkZW4gYnkgYW5vdGhlciBwbHVnaW4uXHJcblxyXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBKdW1wVG9QYXRoIGV4dGVuZHMgUmVhY3QuQ29tcG9uZW50IHtcclxuICByZW5kZXIoKSB7XHJcbiAgICByZXR1cm4gbnVsbFxyXG4gIH1cclxufVxyXG4iXSwibWFwcGluZ3MiOiJtNEJBZVk7QUFBQUEsY0FBQSxTQUFBQSxDQUFBLFNBQUFDLGNBQUEsV0FBQUEsY0FBQSxFQUFBRCxjQUFBLEdBZlosTUFBTyxDQUFBRSxLQUFLLEtBQU0sT0FBTyxDQUV6QjtBQUVBLGNBQWUsTUFBTSxDQUFBQyxVQUFVLFNBQVNELEtBQUssQ0FBQ0UsU0FBUyxDQUFDLENBQ3REQyxNQUFNQSxDQUFBLENBQUcsQ0FBQUwsY0FBQSxHQUFBTSxDQUFBLE1BQUFOLGNBQUEsR0FBQU8sQ0FBQSxNQUNQLE1BQU8sS0FBSSxDQUNiLENBQ0YifQ==

@@ -50,6 +50,8 @@ export default class Operations extends React.Component {
             .then( response => response.json()
               .then(json => {
 
+                
+
 
                 Object.values(json["paths"]).forEach((path)=>{
                   Object.values(path).forEach((method)=>{
@@ -76,7 +78,6 @@ export default class Operations extends React.Component {
     let {
       specSelectors,
     } = this.props
-
 
     const taggedOps = specSelectors.taggedOperations()
 
@@ -107,57 +108,17 @@ export default class Operations extends React.Component {
       getConfigs,
     } = this.props
 
-    // let services = JSON.parse(this.props.specSelectors.manifest())["Services"]
-
-    // let service = services.find(item => item.Name == tag)
-
-
-
-    // let serviceUrl
-
-    // if (service != undefined)
-      // serviceUrl = specSelectors.baseUrl() + "/" + tag + ".json"
-
-    // let serviceLink
-
     const OperationContainer = getComponent("OperationContainer", true)
     const OperationTag = getComponent("OperationTag")
     const operations = tagObj.get("operations")
-
-
-    
-      // serviceLink = <a onClick={(e) => {
-      //   e.stopPropagation()
-      //   this.props.specActions.download(serviceUrl)
-
-      //   let clients
-
-      //   let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
-
-      //   if (clientList != undefined) {
-      //     if ("Clients" in clientList) {
-      //       clients = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
-      //     }
-
-      //   }
-
-      //   if (clients != undefined) {
-      //     this.props.specActions.setCurrentDoc(tag)
-      //   } else {
-      //     this.props.specActions.setCurrentDoc()
-      //   }
-
-
-      // }}><img src={SwaggerLogo} style={{
-      //   width: 15,
-      //   height: 15
-      // }} />&nbsp;&nbsp;{tag}</a>
-    
+    const AuthorizeBtnContainer = getComponent("AuthorizeBtnContainer", true)
 
       let endpointLinks = []
       let alreadyAddedLinks = []
 
     return (
+      <div>
+      <AuthorizeBtnContainer/>
       <OperationTag
         tagObj={tagObj}
         tag={tag}
@@ -167,6 +128,7 @@ export default class Operations extends React.Component {
         getConfigs={getConfigs}
         getComponent={getComponent}
         specUrl={specSelectors.url()}>
+          
         <div className="operation-tag-content">
           {
             operations.map(op => {
@@ -228,8 +190,9 @@ export default class Operations extends React.Component {
                 return null
               }
 
-
               return (
+                <div>
+                
                 <OperationContainer
                   key={`${path}-${method}`}
                   specPath={specPath}
@@ -238,13 +201,14 @@ export default class Operations extends React.Component {
                   method={method}
                   tag={tag}>
                   </OperationContainer>
-                  
+                  </div>
               )
             }).toArray()
           }
         </div>
         {endpointLinks}
       </OperationTag>
+      </div>
     )
   }
 

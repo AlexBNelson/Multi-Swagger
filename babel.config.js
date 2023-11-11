@@ -126,7 +126,10 @@ module.exports = {
         ],
         "@babel/preset-react"
       ],
+      
       "plugins": [
+        "istanbul",
+        "transform-class-properties",
         [
           "@babel/plugin-transform-runtime",
           {

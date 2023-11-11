@@ -1,41 +1,5 @@
-import { normalizeArray } from "core/utils"
-
-export const UPDATE_LAYOUT = "layout_update_layout"
-export const UPDATE_FILTER = "layout_update_filter"
-export const UPDATE_MODE = "layout_update_mode"
-export const SHOW = "layout_show"
-
-// export const ONLY_SHOW = "layout_only_show"
-
-export function updateLayout(layout) {
-  return {
-    type: UPDATE_LAYOUT,
-    payload: layout
-  }
-}
-
-export function updateFilter(filter) {
-  return {
-    type: UPDATE_FILTER,
-    payload: filter
-  }
-}
-
-export function show(thing, shown=true) {
-  thing = normalizeArray(thing)
-  
-
-  return {
-    type: SHOW,
-    payload: {thing, shown}
-  }
-}
-
-// Simple string key-store, used for
-export function changeMode(thing, mode="") {
-  thing = normalizeArray(thing)
-  return {
-    type: UPDATE_MODE,
-    payload: {thing, mode}
-  }
-}
+function cov_v65ce239w(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\layout\\actions.js";var hash="2d1aba77ea939899953bb84efadc42e4019c12ba";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\layout\\actions.js",statementMap:{"0":{start:{line:3,column:29},end:{line:3,column:51}},"1":{start:{line:4,column:29},end:{line:4,column:51}},"2":{start:{line:5,column:27},end:{line:5,column:47}},"3":{start:{line:6,column:20},end:{line:6,column:33}},"4":{start:{line:11,column:2},end:{line:14,column:3}},"5":{start:{line:18,column:2},end:{line:21,column:3}},"6":{start:{line:25,column:2},end:{line:25,column:31}},"7":{start:{line:28,column:2},end:{line:31,column:3}},"8":{start:{line:36,column:2},end:{line:36,column:31}},"9":{start:{line:37,column:2},end:{line:40,column:3}}},fnMap:{"0":{name:"updateLayout",decl:{start:{line:10,column:16},end:{line:10,column:28}},loc:{start:{line:10,column:37},end:{line:15,column:1}},line:10},"1":{name:"updateFilter",decl:{start:{line:17,column:16},end:{line:17,column:28}},loc:{start:{line:17,column:37},end:{line:22,column:1}},line:17},"2":{name:"show",decl:{start:{line:24,column:16},end:{line:24,column:20}},loc:{start:{line:24,column:40},end:{line:32,column:1}},line:24},"3":{name:"changeMode",decl:{start:{line:35,column:16},end:{line:35,column:26}},loc:{start:{line:35,column:43},end:{line:41,column:1}},line:35}},branchMap:{"0":{loc:{start:{line:24,column:28},end:{line:24,column:38}},type:"default-arg",locations:[{start:{line:24,column:34},end:{line:24,column:38}}],line:24},"1":{loc:{start:{line:35,column:34},end:{line:35,column:41}},type:"default-arg",locations:[{start:{line:35,column:39},end:{line:35,column:41}}],line:35}},s:{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0},f:{"0":0,"1":0,"2":0,"3":0},b:{"0":[0],"1":[0]},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"2d1aba77ea939899953bb84efadc42e4019c12ba"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_v65ce239w=function(){return actualCoverage;};}return actualCoverage;}cov_v65ce239w();import{normalizeArray}from"core/utils";export const UPDATE_LAYOUT=(cov_v65ce239w().s[0]++,"layout_update_layout");export const UPDATE_FILTER=(cov_v65ce239w().s[1]++,"layout_update_filter");export const UPDATE_MODE=(cov_v65ce239w().s[2]++,"layout_update_mode");export const SHOW=(cov_v65ce239w().s[3]++,"layout_show");// export const ONLY_SHOW = "layout_only_show"
+export function updateLayout(layout){cov_v65ce239w().f[0]++;cov_v65ce239w().s[4]++;return{type:UPDATE_LAYOUT,payload:layout};}export function updateFilter(filter){cov_v65ce239w().f[1]++;cov_v65ce239w().s[5]++;return{type:UPDATE_FILTER,payload:filter};}export function show(thing,shown=(cov_v65ce239w().b[0][0]++,true)){cov_v65ce239w().f[2]++;cov_v65ce239w().s[6]++;thing=normalizeArray(thing);cov_v65ce239w().s[7]++;return{type:SHOW,payload:{thing,shown}};}// Simple string key-store, used for
+export function changeMode(thing,mode=(cov_v65ce239w().b[1][0]++,"")){cov_v65ce239w().f[3]++;cov_v65ce239w().s[8]++;thing=normalizeArray(thing);cov_v65ce239w().s[9]++;return{type:UPDATE_MODE,payload:{thing,mode}};}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfdjY1Y2UyMzl3IiwiYWN0dWFsQ292ZXJhZ2UiLCJub3JtYWxpemVBcnJheSIsIlVQREFURV9MQVlPVVQiLCJzIiwiVVBEQVRFX0ZJTFRFUiIsIlVQREFURV9NT0RFIiwiU0hPVyIsInVwZGF0ZUxheW91dCIsImxheW91dCIsImYiLCJ0eXBlIiwicGF5bG9hZCIsInVwZGF0ZUZpbHRlciIsImZpbHRlciIsInNob3ciLCJ0aGluZyIsInNob3duIiwiYiIsImNoYW5nZU1vZGUiLCJtb2RlIl0sInNvdXJjZXMiOlsiYWN0aW9ucy5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBub3JtYWxpemVBcnJheSB9IGZyb20gXCJjb3JlL3V0aWxzXCJcclxuXHJcbmV4cG9ydCBjb25zdCBVUERBVEVfTEFZT1VUID0gXCJsYXlvdXRfdXBkYXRlX2xheW91dFwiXHJcbmV4cG9ydCBjb25zdCBVUERBVEVfRklMVEVSID0gXCJsYXlvdXRfdXBkYXRlX2ZpbHRlclwiXHJcbmV4cG9ydCBjb25zdCBVUERBVEVfTU9ERSA9IFwibGF5b3V0X3VwZGF0ZV9tb2RlXCJcclxuZXhwb3J0IGNvbnN0IFNIT1cgPSBcImxheW91dF9zaG93XCJcclxuXHJcbi8vIGV4cG9ydCBjb25zdCBPTkxZX1NIT1cgPSBcImxheW91dF9vbmx5X3Nob3dcIlxyXG5cclxuZXhwb3J0IGZ1bmN0aW9uIHVwZGF0ZUxheW91dChsYXlvdXQpIHtcclxuICByZXR1cm4ge1xyXG4gICAgdHlwZTogVVBEQVRFX0xBWU9VVCxcclxuICAgIHBheWxvYWQ6IGxheW91dFxyXG4gIH1cclxufVxyXG5cclxuZXhwb3J0IGZ1bmN0aW9uIHVwZGF0ZUZpbHRlcihmaWx0ZXIpIHtcclxuICByZXR1cm4ge1xyXG4gICAgdHlwZTogVVBEQVRFX0ZJTFRFUixcclxuICAgIHBheWxvYWQ6IGZpbHRlclxyXG4gIH1cclxufVxyXG5cclxuZXhwb3J0IGZ1bmN0aW9uIHNob3codGhpbmcsIHNob3duPXRydWUpIHtcclxuICB0aGluZyA9IG5vcm1hbGl6ZUFycmF5KHRoaW5nKVxyXG4gIFxyXG5cclxuICByZXR1cm4ge1xyXG4gICAgdHlwZTogU0hPVyxcclxuICAgIHBheWxvYWQ6IHt0aGluZywgc2hvd259XHJcbiAgfVxyXG59XHJcblxyXG4vLyBTaW1wbGUgc3RyaW5nIGtleS1zdG9yZSwgdXNlZCBmb3JcclxuZXhwb3J0IGZ1bmN0aW9uIGNoYW5nZU1vZGUodGhpbmcsIG1vZGU9XCJcIikge1xyXG4gIHRoaW5nID0gbm9ybWFsaXplQXJyYXkodGhpbmcpXHJcbiAgcmV0dXJuIHtcclxuICAgIHR5cGU6IFVQREFURV9NT0RFLFxyXG4gICAgcGF5bG9hZDoge3RoaW5nLCBtb2RlfVxyXG4gIH1cclxufVxyXG4iXSwibWFwcGluZ3MiOiJtcUVBZVk7QUFBQUEsYUFBQSxTQUFBQSxDQUFBLFNBQUFDLGNBQUEsV0FBQUEsY0FBQSxFQUFBRCxhQUFBLEdBZlosT0FBU0UsY0FBYyxLQUFRLFlBQVksQ0FFM0MsTUFBTyxNQUFNLENBQUFDLGFBQWEsRUFBQUgsYUFBQSxHQUFBSSxDQUFBLE1BQUcsc0JBQXNCLEVBQ25ELE1BQU8sTUFBTSxDQUFBQyxhQUFhLEVBQUFMLGFBQUEsR0FBQUksQ0FBQSxNQUFHLHNCQUFzQixFQUNuRCxNQUFPLE1BQU0sQ0FBQUUsV0FBVyxFQUFBTixhQUFBLEdBQUFJLENBQUEsTUFBRyxvQkFBb0IsRUFDL0MsTUFBTyxNQUFNLENBQUFHLElBQUksRUFBQVAsYUFBQSxHQUFBSSxDQUFBLE1BQUcsYUFBYSxFQUVqQztBQUVBLE1BQU8sU0FBUyxDQUFBSSxZQUFZQSxDQUFDQyxNQUFNLENBQUUsQ0FBQVQsYUFBQSxHQUFBVSxDQUFBLE1BQUFWLGFBQUEsR0FBQUksQ0FBQSxNQUNuQyxNQUFPLENBQ0xPLElBQUksQ0FBRVIsYUFBYSxDQUNuQlMsT0FBTyxDQUFFSCxNQUNYLENBQUMsQ0FDSCxDQUVBLE1BQU8sU0FBUyxDQUFBSSxZQUFZQSxDQUFDQyxNQUFNLENBQUUsQ0FBQWQsYUFBQSxHQUFBVSxDQUFBLE1BQUFWLGFBQUEsR0FBQUksQ0FBQSxNQUNuQyxNQUFPLENBQ0xPLElBQUksQ0FBRU4sYUFBYSxDQUNuQk8sT0FBTyxDQUFFRSxNQUNYLENBQUMsQ0FDSCxDQUVBLE1BQU8sU0FBUyxDQUFBQyxJQUFJQSxDQUFDQyxLQUFLLENBQUVDLEtBQUssRUFBQWpCLGFBQUEsR0FBQWtCLENBQUEsU0FBQyxJQUFJLEVBQUUsQ0FBQWxCLGFBQUEsR0FBQVUsQ0FBQSxNQUFBVixhQUFBLEdBQUFJLENBQUEsTUFDdENZLEtBQUssQ0FBR2QsY0FBYyxDQUFDYyxLQUFLLENBQUMsQ0FBQWhCLGFBQUEsR0FBQUksQ0FBQSxNQUc3QixNQUFPLENBQ0xPLElBQUksQ0FBRUosSUFBSSxDQUNWSyxPQUFPLENBQUUsQ0FBQ0ksS0FBSyxDQUFFQyxLQUFLLENBQ3hCLENBQUMsQ0FDSCxDQUVBO0FBQ0EsTUFBTyxTQUFTLENBQUFFLFVBQVVBLENBQUNILEtBQUssQ0FBRUksSUFBSSxFQUFBcEIsYUFBQSxHQUFBa0IsQ0FBQSxTQUFDLEVBQUUsRUFBRSxDQUFBbEIsYUFBQSxHQUFBVSxDQUFBLE1BQUFWLGFBQUEsR0FBQUksQ0FBQSxNQUN6Q1ksS0FBSyxDQUFHZCxjQUFjLENBQUNjLEtBQUssQ0FBQyxDQUFBaEIsYUFBQSxHQUFBSSxDQUFBLE1BQzdCLE1BQU8sQ0FDTE8sSUFBSSxDQUFFTCxXQUFXLENBQ2pCTSxPQUFPLENBQUUsQ0FBQ0ksS0FBSyxDQUFFSSxJQUFJLENBQ3ZCLENBQUMsQ0FDSCJ9

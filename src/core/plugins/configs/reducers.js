@@ -1,20 +1,3 @@
-import { fromJS } from "immutable"
-
-import {
-	UPDATE_CONFIGS,
-	TOGGLE_CONFIGS,
-} from "./actions"
-
-export default {
-
-  [UPDATE_CONFIGS]: (state, action) => {
-    return state.merge(fromJS(action.payload))
-  },
-
-  [TOGGLE_CONFIGS]: (state, action) => {
-    const configName = action.payload
-    const oriVal = state.get(configName)
-    return state.set(configName, !oriVal)
-  },
-
-}
+function cov_voakrw7j2(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\configs\\reducers.js";var hash="e4bafc9c82deaf9324cd727163bb145983bd8313";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\configs\\reducers.js",statementMap:{"0":{start:{line:11,column:4},end:{line:11,column:46}},"1":{start:{line:15,column:23},end:{line:15,column:37}},"2":{start:{line:16,column:19},end:{line:16,column:40}},"3":{start:{line:17,column:4},end:{line:17,column:41}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:10,column:20},end:{line:10,column:21}},loc:{start:{line:10,column:39},end:{line:12,column:3}},line:10},"1":{name:"(anonymous_1)",decl:{start:{line:14,column:20},end:{line:14,column:21}},loc:{start:{line:14,column:39},end:{line:18,column:3}},line:14}},branchMap:{},s:{"0":0,"1":0,"2":0,"3":0},f:{"0":0,"1":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"e4bafc9c82deaf9324cd727163bb145983bd8313"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_voakrw7j2=function(){return actualCoverage;};}return actualCoverage;}cov_voakrw7j2();import{fromJS}from"immutable";import{UPDATE_CONFIGS,TOGGLE_CONFIGS}from"./actions";export default{[UPDATE_CONFIGS]:(state,action)=>{cov_voakrw7j2().f[0]++;cov_voakrw7j2().s[0]++;return state.merge(fromJS(action.payload));},[TOGGLE_CONFIGS]:(state,action)=>{cov_voakrw7j2().f[1]++;const configName=(cov_voakrw7j2().s[1]++,action.payload);const oriVal=(cov_voakrw7j2().s[2]++,state.get(configName));cov_voakrw7j2().s[3]++;return state.set(configName,!oriVal);}};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3Zfdm9ha3J3N2oyIiwiYWN0dWFsQ292ZXJhZ2UiLCJmcm9tSlMiLCJVUERBVEVfQ09ORklHUyIsIlRPR0dMRV9DT05GSUdTIiwic3RhdGUiLCJhY3Rpb24iLCJmIiwicyIsIm1lcmdlIiwicGF5bG9hZCIsImNvbmZpZ05hbWUiLCJvcmlWYWwiLCJnZXQiLCJzZXQiXSwic291cmNlcyI6WyJyZWR1Y2Vycy5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBmcm9tSlMgfSBmcm9tIFwiaW1tdXRhYmxlXCJcclxuXHJcbmltcG9ydCB7XHJcblx0VVBEQVRFX0NPTkZJR1MsXHJcblx0VE9HR0xFX0NPTkZJR1MsXHJcbn0gZnJvbSBcIi4vYWN0aW9uc1wiXHJcblxyXG5leHBvcnQgZGVmYXVsdCB7XHJcblxyXG4gIFtVUERBVEVfQ09ORklHU106IChzdGF0ZSwgYWN0aW9uKSA9PiB7XHJcbiAgICByZXR1cm4gc3RhdGUubWVyZ2UoZnJvbUpTKGFjdGlvbi5wYXlsb2FkKSlcclxuICB9LFxyXG5cclxuICBbVE9HR0xFX0NPTkZJR1NdOiAoc3RhdGUsIGFjdGlvbikgPT4ge1xyXG4gICAgY29uc3QgY29uZmlnTmFtZSA9IGFjdGlvbi5wYXlsb2FkXHJcbiAgICBjb25zdCBvcmlWYWwgPSBzdGF0ZS5nZXQoY29uZmlnTmFtZSlcclxuICAgIHJldHVybiBzdGF0ZS5zZXQoY29uZmlnTmFtZSwgIW9yaVZhbClcclxuICB9LFxyXG5cclxufVxyXG4iXSwibWFwcGluZ3MiOiIrdENBZVk7QUFBQUEsYUFBQSxTQUFBQSxDQUFBLFNBQUFDLGNBQUEsV0FBQUEsY0FBQSxFQUFBRCxhQUFBLEdBZlosT0FBU0UsTUFBTSxLQUFRLFdBQVcsQ0FFbEMsT0FDQ0MsY0FBYyxDQUNkQyxjQUFjLEtBQ1IsV0FBVyxDQUVsQixjQUFlLENBRWIsQ0FBQ0QsY0FBYyxFQUFHLENBQUNFLEtBQUssQ0FBRUMsTUFBTSxHQUFLLENBQUFOLGFBQUEsR0FBQU8sQ0FBQSxNQUFBUCxhQUFBLEdBQUFRLENBQUEsTUFDbkMsTUFBTyxDQUFBSCxLQUFLLENBQUNJLEtBQUssQ0FBQ1AsTUFBTSxDQUFDSSxNQUFNLENBQUNJLE9BQU8sQ0FBQyxDQUFDLENBQzVDLENBQUMsQ0FFRCxDQUFDTixjQUFjLEVBQUcsQ0FBQ0MsS0FBSyxDQUFFQyxNQUFNLEdBQUssQ0FBQU4sYUFBQSxHQUFBTyxDQUFBLE1BQ25DLEtBQU0sQ0FBQUksVUFBVSxFQUFBWCxhQUFBLEdBQUFRLENBQUEsTUFBR0YsTUFBTSxDQUFDSSxPQUFPLEVBQ2pDLEtBQU0sQ0FBQUUsTUFBTSxFQUFBWixhQUFBLEdBQUFRLENBQUEsTUFBR0gsS0FBSyxDQUFDUSxHQUFHLENBQUNGLFVBQVUsQ0FBQyxFQUFBWCxhQUFBLEdBQUFRLENBQUEsTUFDcEMsTUFBTyxDQUFBSCxLQUFLLENBQUNTLEdBQUcsQ0FBQ0gsVUFBVSxDQUFFLENBQUNDLE1BQU0sQ0FBQyxDQUN2QyxDQUVGLENBQUMifQ==

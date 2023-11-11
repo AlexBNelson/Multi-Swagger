@@ -1,16 +1,3 @@
-import * as fn from "./fn"
-import * as selectors from "./selectors"
-import RequestSnippets from "./request-snippets"
-export default () => {
-  return {
-    components: {
-      RequestSnippets
-    },
-    fn,
-    statePlugins: {
-      requestSnippets: {
-        selectors
-      }
-    }
-  }
-}
+function cov_2feqtbxuug(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\request-snippets\\index.js";var hash="00417b590df0f0ff4dcfa59947d79f28edfefd4c";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\request-snippets\\index.js",statementMap:{"0":{start:{line:5,column:2},end:{line:15,column:3}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:4,column:15},end:{line:4,column:16}},loc:{start:{line:4,column:21},end:{line:16,column:1}},line:4}},branchMap:{},s:{"0":0},f:{"0":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"00417b590df0f0ff4dcfa59947d79f28edfefd4c"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_2feqtbxuug=function(){return actualCoverage;};}return actualCoverage;}cov_2feqtbxuug();import*as fn from"./fn";import*as selectors from"./selectors";import RequestSnippets from"./request-snippets";export default(()=>{cov_2feqtbxuug().f[0]++;cov_2feqtbxuug().s[0]++;return{components:{RequestSnippets},fn,statePlugins:{requestSnippets:{selectors}}};});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMmZlcXRieHV1ZyIsImFjdHVhbENvdmVyYWdlIiwiZm4iLCJzZWxlY3RvcnMiLCJSZXF1ZXN0U25pcHBldHMiLCJmIiwicyIsImNvbXBvbmVudHMiLCJzdGF0ZVBsdWdpbnMiLCJyZXF1ZXN0U25pcHBldHMiXSwic291cmNlcyI6WyJpbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBmbiBmcm9tIFwiLi9mblwiXHJcbmltcG9ydCAqIGFzIHNlbGVjdG9ycyBmcm9tIFwiLi9zZWxlY3RvcnNcIlxyXG5pbXBvcnQgUmVxdWVzdFNuaXBwZXRzIGZyb20gXCIuL3JlcXVlc3Qtc25pcHBldHNcIlxyXG5leHBvcnQgZGVmYXVsdCAoKSA9PiB7XHJcbiAgcmV0dXJuIHtcclxuICAgIGNvbXBvbmVudHM6IHtcclxuICAgICAgUmVxdWVzdFNuaXBwZXRzXHJcbiAgICB9LFxyXG4gICAgZm4sXHJcbiAgICBzdGF0ZVBsdWdpbnM6IHtcclxuICAgICAgcmVxdWVzdFNuaXBwZXRzOiB7XHJcbiAgICAgICAgc2VsZWN0b3JzXHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcbn1cclxuIl0sIm1hcHBpbmdzIjoibzVCQWVZO0FBQUFBLGNBQUEsU0FBQUEsQ0FBQSxTQUFBQyxjQUFBLFdBQUFBLGNBQUEsRUFBQUQsY0FBQSxHQWZaLE1BQU8sR0FBSyxDQUFBRSxFQUFFLEtBQU0sTUFBTSxDQUMxQixNQUFPLEdBQUssQ0FBQUMsU0FBUyxLQUFNLGFBQWEsQ0FDeEMsTUFBTyxDQUFBQyxlQUFlLEtBQU0sb0JBQW9CLENBQ2hELGVBQWUsSUFBTSxDQUFBSixjQUFBLEdBQUFLLENBQUEsTUFBQUwsY0FBQSxHQUFBTSxDQUFBLE1BQ25CLE1BQU8sQ0FDTEMsVUFBVSxDQUFFLENBQ1ZILGVBQ0YsQ0FBQyxDQUNERixFQUFFLENBQ0ZNLFlBQVksQ0FBRSxDQUNaQyxlQUFlLENBQUUsQ0FDZk4sU0FDRixDQUNGLENBQ0YsQ0FBQyxDQUNILENBQUMifQ==

@@ -103,13 +103,13 @@ export default class Clients extends React.Component {
         e.stopPropagation()
         this.props.specActions.download(serviceUrl)
 
-        let clients
+        let clientNames
 
         let clientList = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)
 
         if (clientList != undefined) {
           if ("Clients" in clientList) {
-            clients = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
+            clientNames = JSON.parse(specSelectors.manifest())["Services"].find(service => service.Name === tag)["Clients"]
           }
 
         }
@@ -117,7 +117,7 @@ export default class Clients extends React.Component {
 
 
 
-        if (clients != undefined) {
+        if (clientNames != undefined) {
           this.props.specActions.setCurrentDoc(tag)
         } else {
           this.props.specActions.setCurrentDoc()
@@ -135,6 +135,8 @@ export default class Clients extends React.Component {
     const ClientContainer = getComponent("ClientContainer", true)
     const ClientTag = getComponent("ClientTag")
     const clients = tagObj.get("operations")
+
+    
 
     return (
       <ClientTag

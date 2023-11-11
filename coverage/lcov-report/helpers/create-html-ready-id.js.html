@@ -1,0 +1,109 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for helpers/create-html-ready-id.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">helpers</a> create-html-ready-id.js</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>1/1</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input oninput="onInput()" type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42x</span></td><td class="text"><pre class="prettyprint lang-js">function cov_2j5q5kas9q(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\helpers\\create-html-ready-id.js";var hash="771c324905281029938c9b1b5fe4be51898bf94b";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\helpers\\create-html-ready-id.js",statementMap:{"0":{start:{line:9,column:2},end:{line:9,column:43}}},fnMap:{"0":{name:"createHtmlReadyId",decl:{start:{line:8,column:24},end:{line:8,column:41}},loc:{start:{line:8,column:65},end:{line:10,column:1}},line:8}},branchMap:{"0":{loc:{start:{line:8,column:46},end:{line:8,column:63}},type:"default-arg",locations:[{start:{line:8,column:60},end:{line:8,column:63}}],line:8}},s:{"0":0},f:{"0":0},b:{"0":[0]},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"771c324905281029938c9b1b5fe4be51898bf94b"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_2j5q5kas9q=function(){return actualCoverage;};}return actualCoverage;}cov_2j5q5kas9q();/**
+ * Replace invalid characters from a string to create an html-ready ID
+ *
+ * @param {string} id A string that may contain invalid characters for the HTML ID attribute
+ * @param {string} [replacement=_] The string to replace invalid characters with; "_" by default
+ * @return {string} Information about the parameter schema
+ */export default function createHtmlReadyId(id,replacement=(cov_2j5q5kas9q().b[0][0]++,"_")){cov_2j5q5kas9q().f[0]++;cov_2j5q5kas9q().s[0]++;return id.replace(/[^\w-]/g,replacement);}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMmo1cTVrYXM5cSIsImFjdHVhbENvdmVyYWdlIiwiY3JlYXRlSHRtbFJlYWR5SWQiLCJpZCIsInJlcGxhY2VtZW50IiwiYiIsImYiLCJzIiwicmVwbGFjZSJdLCJzb3VyY2VzIjpbImNyZWF0ZS1odG1sLXJlYWR5LWlkLmpzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBSZXBsYWNlIGludmFsaWQgY2hhcmFjdGVycyBmcm9tIGEgc3RyaW5nIHRvIGNyZWF0ZSBhbiBodG1sLXJlYWR5IElEXHJcbiAqXHJcbiAqIEBwYXJhbSB7c3RyaW5nfSBpZCBBIHN0cmluZyB0aGF0IG1heSBjb250YWluIGludmFsaWQgY2hhcmFjdGVycyBmb3IgdGhlIEhUTUwgSUQgYXR0cmlidXRlXHJcbiAqIEBwYXJhbSB7c3RyaW5nfSBbcmVwbGFjZW1lbnQ9X10gVGhlIHN0cmluZyB0byByZXBsYWNlIGludmFsaWQgY2hhcmFjdGVycyB3aXRoOyBcIl9cIiBieSBkZWZhdWx0XHJcbiAqIEByZXR1cm4ge3N0cmluZ30gSW5mb3JtYXRpb24gYWJvdXQgdGhlIHBhcmFtZXRlciBzY2hlbWFcclxuICovXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIGNyZWF0ZUh0bWxSZWFkeUlkKGlkLCByZXBsYWNlbWVudCA9IFwiX1wiKSB7XHJcbiAgcmV0dXJuIGlkLnJlcGxhY2UoL1teXFx3LV0vZywgcmVwbGFjZW1lbnQpXHJcbn1cclxuIl0sIm1hcHBpbmdzIjoiZ2lDQWVZO0FBQUFBLGNBQUEsU0FBQUEsQ0FBQSxTQUFBQyxjQUFBLFdBQUFBLGNBQUEsRUFBQUQsY0FBQSxHQWZaO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLEdBQ0EsY0FBZSxTQUFTLENBQUFFLGlCQUFpQkEsQ0FBQ0MsRUFBRSxDQUFFQyxXQUFXLEVBQUFKLGNBQUEsR0FBQUssQ0FBQSxTQUFHLEdBQUcsRUFBRSxDQUFBTCxjQUFBLEdBQUFNLENBQUEsTUFBQU4sY0FBQSxHQUFBTyxDQUFBLE1BQy9ELE1BQU8sQ0FBQUosRUFBRSxDQUFDSyxPQUFPLENBQUMsU0FBUyxDQUFFSixXQUFXLENBQUMsQ0FDM0MifQ==</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2023-11-05T20:25:05.853Z
+            </div>
+        <script src="../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
+    </body>
+</html>
+    

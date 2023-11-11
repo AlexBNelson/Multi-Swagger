@@ -1,28 +1,4 @@
-import layout from "./layout"
-import OperationWrapper from "./operation-wrapper"
-import OperationTagWrapper from "./operation-tag-wrapper"
-import ClientWrapper from "./client-wrapper"
-import ClientTagWrapper from "./client-tag-wrapper"
-
-export default function() {
-  return [layout, {
-    statePlugins: {
-      configs: {
-        wrapActions: {
-          loaded: (ori, system) => (...args) => {
-            ori(...args)
-            // location.hash was an UTF-16 String, here is required UTF-8
-            const hash = decodeURIComponent(window.location.hash)
-            system.layoutActions.parseDeepLinkHash(hash)
-          }
-        }
-      }
-    },
-    wrapComponents: {
-      operation: OperationWrapper,
-      OperationTag: OperationTagWrapper,
-      client: ClientWrapper,
-      ClientTag: ClientTagWrapper
-    },
-  }]
-}
+function cov_nu7f4zp77(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\deep-linking\\index.js";var hash="5f79bdd25548ff8f46ebba519a3d9cffbcfadeb4";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\deep-linking\\index.js",statementMap:{"0":{start:{line:8,column:2},end:{line:27,column:4}},"1":{start:{line:12,column:35},end:{line:17,column:11}},"2":{start:{line:13,column:12},end:{line:13,column:24}},"3":{start:{line:15,column:25},end:{line:15,column:65}},"4":{start:{line:16,column:12},end:{line:16,column:56}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:7,column:15},end:{line:7,column:16}},loc:{start:{line:7,column:26},end:{line:28,column:1}},line:7},"1":{name:"(anonymous_1)",decl:{start:{line:12,column:18},end:{line:12,column:19}},loc:{start:{line:12,column:35},end:{line:17,column:11}},line:12},"2":{name:"(anonymous_2)",decl:{start:{line:12,column:35},end:{line:12,column:36}},loc:{start:{line:12,column:48},end:{line:17,column:11}},line:12}},branchMap:{},s:{"0":0,"1":0,"2":0,"3":0,"4":0},f:{"0":0,"1":0,"2":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"5f79bdd25548ff8f46ebba519a3d9cffbcfadeb4"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_nu7f4zp77=function(){return actualCoverage;};}return actualCoverage;}cov_nu7f4zp77();import layout from"./layout";import OperationWrapper from"./operation-wrapper";import OperationTagWrapper from"./operation-tag-wrapper";import ClientWrapper from"./client-wrapper";import ClientTagWrapper from"./client-tag-wrapper";export default function(){cov_nu7f4zp77().f[0]++;cov_nu7f4zp77().s[0]++;return[layout,{statePlugins:{configs:{wrapActions:{loaded:(ori,system)=>{cov_nu7f4zp77().f[1]++;cov_nu7f4zp77().s[1]++;return(...args)=>{cov_nu7f4zp77().f[2]++;cov_nu7f4zp77().s[2]++;ori(...args);// location.hash was an UTF-16 String, here is required UTF-8
+const hash=(cov_nu7f4zp77().s[3]++,decodeURIComponent(window.location.hash));cov_nu7f4zp77().s[4]++;system.layoutActions.parseDeepLinkHash(hash);};}}}},wrapComponents:{operation:OperationWrapper,OperationTag:OperationTagWrapper,client:ClientWrapper,ClientTag:ClientTagWrapper}}];}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfbnU3ZjR6cDc3IiwiYWN0dWFsQ292ZXJhZ2UiLCJsYXlvdXQiLCJPcGVyYXRpb25XcmFwcGVyIiwiT3BlcmF0aW9uVGFnV3JhcHBlciIsIkNsaWVudFdyYXBwZXIiLCJDbGllbnRUYWdXcmFwcGVyIiwiZiIsInMiLCJzdGF0ZVBsdWdpbnMiLCJjb25maWdzIiwid3JhcEFjdGlvbnMiLCJsb2FkZWQiLCJvcmkiLCJzeXN0ZW0iLCJhcmdzIiwiaGFzaCIsImRlY29kZVVSSUNvbXBvbmVudCIsIndpbmRvdyIsImxvY2F0aW9uIiwibGF5b3V0QWN0aW9ucyIsInBhcnNlRGVlcExpbmtIYXNoIiwid3JhcENvbXBvbmVudHMiLCJvcGVyYXRpb24iLCJPcGVyYXRpb25UYWciLCJjbGllbnQiLCJDbGllbnRUYWciXSwic291cmNlcyI6WyJpbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgbGF5b3V0IGZyb20gXCIuL2xheW91dFwiXHJcbmltcG9ydCBPcGVyYXRpb25XcmFwcGVyIGZyb20gXCIuL29wZXJhdGlvbi13cmFwcGVyXCJcclxuaW1wb3J0IE9wZXJhdGlvblRhZ1dyYXBwZXIgZnJvbSBcIi4vb3BlcmF0aW9uLXRhZy13cmFwcGVyXCJcclxuaW1wb3J0IENsaWVudFdyYXBwZXIgZnJvbSBcIi4vY2xpZW50LXdyYXBwZXJcIlxyXG5pbXBvcnQgQ2xpZW50VGFnV3JhcHBlciBmcm9tIFwiLi9jbGllbnQtdGFnLXdyYXBwZXJcIlxyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oKSB7XHJcbiAgcmV0dXJuIFtsYXlvdXQsIHtcclxuICAgIHN0YXRlUGx1Z2luczoge1xyXG4gICAgICBjb25maWdzOiB7XHJcbiAgICAgICAgd3JhcEFjdGlvbnM6IHtcclxuICAgICAgICAgIGxvYWRlZDogKG9yaSwgc3lzdGVtKSA9PiAoLi4uYXJncykgPT4ge1xyXG4gICAgICAgICAgICBvcmkoLi4uYXJncylcclxuICAgICAgICAgICAgLy8gbG9jYXRpb24uaGFzaCB3YXMgYW4gVVRGLTE2IFN0cmluZywgaGVyZSBpcyByZXF1aXJlZCBVVEYtOFxyXG4gICAgICAgICAgICBjb25zdCBoYXNoID0gZGVjb2RlVVJJQ29tcG9uZW50KHdpbmRvdy5sb2NhdGlvbi5oYXNoKVxyXG4gICAgICAgICAgICBzeXN0ZW0ubGF5b3V0QWN0aW9ucy5wYXJzZURlZXBMaW5rSGFzaChoYXNoKVxyXG4gICAgICAgICAgfVxyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG4gICAgfSxcclxuICAgIHdyYXBDb21wb25lbnRzOiB7XHJcbiAgICAgIG9wZXJhdGlvbjogT3BlcmF0aW9uV3JhcHBlcixcclxuICAgICAgT3BlcmF0aW9uVGFnOiBPcGVyYXRpb25UYWdXcmFwcGVyLFxyXG4gICAgICBjbGllbnQ6IENsaWVudFdyYXBwZXIsXHJcbiAgICAgIENsaWVudFRhZzogQ2xpZW50VGFnV3JhcHBlclxyXG4gICAgfSxcclxuICB9XVxyXG59XHJcbiJdLCJtYXBwaW5ncyI6InU3Q0FlWTtBQUFBQSxhQUFBLFNBQUFBLENBQUEsU0FBQUMsY0FBQSxXQUFBQSxjQUFBLEVBQUFELGFBQUEsR0FmWixNQUFPLENBQUFFLE1BQU0sS0FBTSxVQUFVLENBQzdCLE1BQU8sQ0FBQUMsZ0JBQWdCLEtBQU0scUJBQXFCLENBQ2xELE1BQU8sQ0FBQUMsbUJBQW1CLEtBQU0seUJBQXlCLENBQ3pELE1BQU8sQ0FBQUMsYUFBYSxLQUFNLGtCQUFrQixDQUM1QyxNQUFPLENBQUFDLGdCQUFnQixLQUFNLHNCQUFzQixDQUVuRCxjQUFlLFdBQVcsQ0FBQU4sYUFBQSxHQUFBTyxDQUFBLE1BQUFQLGFBQUEsR0FBQVEsQ0FBQSxNQUN4QixNQUFPLENBQUNOLE1BQU0sQ0FBRSxDQUNkTyxZQUFZLENBQUUsQ0FDWkMsT0FBTyxDQUFFLENBQ1BDLFdBQVcsQ0FBRSxDQUNYQyxNQUFNLENBQUVBLENBQUNDLEdBQUcsQ0FBRUMsTUFBTSxHQUFLLENBQUFkLGFBQUEsR0FBQU8sQ0FBQSxNQUFBUCxhQUFBLEdBQUFRLENBQUEsYUFBQyxHQUFHTyxJQUFJLEdBQUssQ0FBQWYsYUFBQSxHQUFBTyxDQUFBLE1BQUFQLGFBQUEsR0FBQVEsQ0FBQSxNQUNwQ0ssR0FBRyxDQUFDLEdBQUdFLElBQUksQ0FBQyxDQUNaO0FBQ0EsS0FBTSxDQUFBQyxJQUFJLEVBQUFoQixhQUFBLEdBQUFRLENBQUEsTUFBR1Msa0JBQWtCLENBQUNDLE1BQU0sQ0FBQ0MsUUFBUSxDQUFDSCxJQUFJLENBQUMsRUFBQWhCLGFBQUEsR0FBQVEsQ0FBQSxNQUNyRE0sTUFBTSxDQUFDTSxhQUFhLENBQUNDLGlCQUFpQixDQUFDTCxJQUFJLENBQUMsQ0FDOUMsQ0FBQyxDQUFELENBQ0YsQ0FDRixDQUNGLENBQUMsQ0FDRE0sY0FBYyxDQUFFLENBQ2RDLFNBQVMsQ0FBRXBCLGdCQUFnQixDQUMzQnFCLFlBQVksQ0FBRXBCLG1CQUFtQixDQUNqQ3FCLE1BQU0sQ0FBRXBCLGFBQWEsQ0FDckJxQixTQUFTLENBQUVwQixnQkFDYixDQUNGLENBQUMsQ0FBQyxDQUNKIn0=

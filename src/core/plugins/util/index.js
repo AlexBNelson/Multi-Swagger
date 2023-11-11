@@ -1,7 +1,3 @@
-import { shallowEqualKeys } from "core/utils"
-
-export default function() {
-  return {
-    fn: { shallowEqualKeys }
-  }
-}
+function cov_suo2qvolm(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\util\\index.js";var hash="037f5e843d3c3af11dcc1ec806cf1bad6cb14424";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\util\\index.js",statementMap:{"0":{start:{line:4,column:2},end:{line:6,column:3}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:3,column:15},end:{line:3,column:16}},loc:{start:{line:3,column:26},end:{line:7,column:1}},line:3}},branchMap:{},s:{"0":0},f:{"0":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"037f5e843d3c3af11dcc1ec806cf1bad6cb14424"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_suo2qvolm=function(){return actualCoverage;};}return actualCoverage;}cov_suo2qvolm();import{shallowEqualKeys}from"core/utils";export default function(){cov_suo2qvolm().f[0]++;cov_suo2qvolm().s[0]++;return{fn:{shallowEqualKeys}};}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3Zfc3VvMnF2b2xtIiwiYWN0dWFsQ292ZXJhZ2UiLCJzaGFsbG93RXF1YWxLZXlzIiwiZiIsInMiLCJmbiJdLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHNoYWxsb3dFcXVhbEtleXMgfSBmcm9tIFwiY29yZS91dGlsc1wiXHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbigpIHtcclxuICByZXR1cm4ge1xyXG4gICAgZm46IHsgc2hhbGxvd0VxdWFsS2V5cyB9XHJcbiAgfVxyXG59XHJcbiJdLCJtYXBwaW5ncyI6InkzQkFlWTtBQUFBQSxhQUFBLFNBQUFBLENBQUEsU0FBQUMsY0FBQSxXQUFBQSxjQUFBLEVBQUFELGFBQUEsR0FmWixPQUFTRSxnQkFBZ0IsS0FBUSxZQUFZLENBRTdDLGNBQWUsV0FBVyxDQUFBRixhQUFBLEdBQUFHLENBQUEsTUFBQUgsYUFBQSxHQUFBSSxDQUFBLE1BQ3hCLE1BQU8sQ0FDTEMsRUFBRSxDQUFFLENBQUVILGdCQUFpQixDQUN6QixDQUFDLENBQ0gifQ==

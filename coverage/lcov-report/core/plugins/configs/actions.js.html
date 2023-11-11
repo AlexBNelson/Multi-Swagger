@@ -1,0 +1,103 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for core/plugins/configs/actions.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">core/plugins/configs</a> actions.js</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">66.66% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>4/6</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">50% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>2/4</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">60% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>3/5</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input oninput="onInput()" type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line medium'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">95x</span>
+<span class="cline-any cline-yes">95x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">function cov_onng4tkjn(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\configs\\actions.js";var hash="2def52f5d402984a9edba0a51b9470a4c93300c9";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\configs\\actions.js",statementMap:{"0":{start:{line:1,column:30},end:{line:1,column:46}},"1":{start:{line:2,column:30},end:{line:2,column:46}},"2":{start:{line:6,column:2},end:{line:11,column:3}},"3":{start:{line:16,column:2},end:{line:19,column:3}},"4":{start:{line:24,column:22},end:{line:26,column:1}},"5":{start:{line:24,column:28},end:{line:26,column:1}}},fnMap:{"0":{name:"update",decl:{start:{line:5,column:16},end:{line:5,column:22}},loc:{start:{line:5,column:48},end:{line:12,column:1}},line:5},"1":{name:"toggle",decl:{start:{line:15,column:16},end:{line:15,column:22}},loc:{start:{line:15,column:35},end:{line:20,column:1}},line:15},"2":{name:"(anonymous_2)",decl:{start:{line:24,column:22},end:{line:24,column:23}},loc:{start:{line:24,column:28},end:{line:26,column:1}},line:24},"3":{name:"(anonymous_3)",decl:{start:{line:24,column:28},end:{line:24,column:29}},loc:{start:{line:24,column:34},end:{line:26,column:1}},line:24}},branchMap:{},s:{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0},f:{"0":0,"1":0,"2":0,"3":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"2def52f5d402984a9edba0a51b9470a4c93300c9"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_onng4tkjn=function(){return actualCoverage;};}return actualCoverage;}cov_onng4tkjn();export const UPDATE_CONFIGS=(cov_onng4tkjn().s[0]++,"configs_update");export const TOGGLE_CONFIGS=(cov_onng4tkjn().s[1]++,"configs_toggle");// Update the configs, with a merge ( not deep )
+export function update(configName,configValue){cov_onng4tkjn().f[0]++;cov_onng4tkjn().s[2]++;return{type:UPDATE_CONFIGS,payload:{[configName]:configValue}};}// Toggle's the config, by name
+export function toggle(configName){cov_onng4tkjn().f[1]++;cov_onng4tkjn().s[3]++;return{type:TOGGLE_CONFIGS,payload:configName};}// Hook
+cov_onng4tkjn().<span class="fstat-no" title="function not covered" >s[4]++;</span>export const loaded=()=&gt;{cov_onng4tkjn().f[2]++;cov_onng4tkjn().s[5]++;return()=&gt;{cov_onng4tkjn().f[3]++;}// noop
+;}<span class="cstat-no" title="statement not covered" >;</span>
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3Zfb25uZzR0a2puIiwiYWN0dWFsQ292ZXJhZ2UiLCJVUERBVEVfQ09ORklHUyIsInMiLCJUT0dHTEVfQ09ORklHUyIsInVwZGF0ZSIsImNvbmZpZ05hbWUiLCJjb25maWdWYWx1ZSIsImYiLCJ0eXBlIiwicGF5bG9hZCIsInRvZ2dsZSIsImxvYWRlZCJdLCJzb3VyY2VzIjpbImFjdGlvbnMuanMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IFVQREFURV9DT05GSUdTID0gXCJjb25maWdzX3VwZGF0ZVwiXHJcbmV4cG9ydCBjb25zdCBUT0dHTEVfQ09ORklHUyA9IFwiY29uZmlnc190b2dnbGVcIlxyXG5cclxuLy8gVXBkYXRlIHRoZSBjb25maWdzLCB3aXRoIGEgbWVyZ2UgKCBub3QgZGVlcCApXHJcbmV4cG9ydCBmdW5jdGlvbiB1cGRhdGUoY29uZmlnTmFtZSwgY29uZmlnVmFsdWUpIHtcclxuICByZXR1cm4ge1xyXG4gICAgdHlwZTogVVBEQVRFX0NPTkZJR1MsXHJcbiAgICBwYXlsb2FkOiB7XHJcbiAgICAgIFtjb25maWdOYW1lXTogY29uZmlnVmFsdWVcclxuICAgIH0sXHJcbiAgfVxyXG59XHJcblxyXG4vLyBUb2dnbGUncyB0aGUgY29uZmlnLCBieSBuYW1lXHJcbmV4cG9ydCBmdW5jdGlvbiB0b2dnbGUoY29uZmlnTmFtZSkge1xyXG4gIHJldHVybiB7XHJcbiAgICB0eXBlOiBUT0dHTEVfQ09ORklHUyxcclxuICAgIHBheWxvYWQ6IGNvbmZpZ05hbWUsXHJcbiAgfVxyXG59XHJcblxyXG5cclxuLy8gSG9va1xyXG5leHBvcnQgY29uc3QgbG9hZGVkID0gKCkgPT4gKCkgPT4ge1xyXG4gIC8vIG5vb3BcclxufVxyXG4iXSwibWFwcGluZ3MiOiJnbkRBZVk7QUFBQUEsYUFBQSxTQUFBQSxDQUFBLFNBQUFDLGNBQUEsV0FBQUEsY0FBQSxFQUFBRCxhQUFBLEdBZlosTUFBTyxNQUFNLENBQUFFLGNBQWMsRUFBQUYsYUFBQSxHQUFBRyxDQUFBLE1BQUcsZ0JBQWdCLEVBQzlDLE1BQU8sTUFBTSxDQUFBQyxjQUFjLEVBQUFKLGFBQUEsR0FBQUcsQ0FBQSxNQUFHLGdCQUFnQixFQUU5QztBQUNBLE1BQU8sU0FBUyxDQUFBRSxNQUFNQSxDQUFDQyxVQUFVLENBQUVDLFdBQVcsQ0FBRSxDQUFBUCxhQUFBLEdBQUFRLENBQUEsTUFBQVIsYUFBQSxHQUFBRyxDQUFBLE1BQzlDLE1BQU8sQ0FDTE0sSUFBSSxDQUFFUCxjQUFjLENBQ3BCUSxPQUFPLENBQUUsQ0FDUCxDQUFDSixVQUFVLEVBQUdDLFdBQ2hCLENBQ0YsQ0FBQyxDQUNILENBRUE7QUFDQSxNQUFPLFNBQVMsQ0FBQUksTUFBTUEsQ0FBQ0wsVUFBVSxDQUFFLENBQUFOLGFBQUEsR0FBQVEsQ0FBQSxNQUFBUixhQUFBLEdBQUFHLENBQUEsTUFDakMsTUFBTyxDQUNMTSxJQUFJLENBQUVMLGNBQWMsQ0FDcEJNLE9BQU8sQ0FBRUosVUFDWCxDQUFDLENBQ0gsQ0FHQTtBQUFBTixhQUFBLEdBQUFHLENBQUEsTUFDQSxNQUFPLE1BQU0sQ0FBQVMsTUFBTSxDQUFHQSxDQUFBLEdBQU0sQ0FBQVosYUFBQSxHQUFBUSxDQUFBLE1BQUFSLGFBQUEsR0FBQUcsQ0FBQSxnQkFBTSxDQUFBSCxhQUFBLEdBQUFRLENBQUEsTUFFbEMsQ0FERTtBQUNELENBQUQsQ0FBQyJ9</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2023-11-05T20:25:05.853Z
+            </div>
+        <script src="../../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
+    </body>
+</html>
+    

@@ -1,7 +1,3 @@
-import Configs from "./configs"
-import Topbar from "./topbar"
-
-export default {
-  Configs,
-  Topbar
-}
+function cov_2gxahdztzn(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\plugins\\index.js";var hash="be1fe2c0cd4f6954522f16619e7fba9eebec31a7";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\plugins\\index.js",statementMap:{},fnMap:{},branchMap:{},s:{},f:{},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"be1fe2c0cd4f6954522f16619e7fba9eebec31a7"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_2gxahdztzn=function(){return actualCoverage;};}return actualCoverage;}cov_2gxahdztzn();import Configs from"./configs";import Topbar from"./topbar";export default{Configs,Topbar};
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMmd4YWhkenR6biIsImFjdHVhbENvdmVyYWdlIiwiQ29uZmlncyIsIlRvcGJhciJdLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBDb25maWdzIGZyb20gXCIuL2NvbmZpZ3NcIlxyXG5pbXBvcnQgVG9wYmFyIGZyb20gXCIuL3RvcGJhclwiXHJcblxyXG5leHBvcnQgZGVmYXVsdCB7XHJcbiAgQ29uZmlncyxcclxuICBUb3BiYXJcclxufVxyXG4iXSwibWFwcGluZ3MiOiJ3cEJBZVk7QUFBQUEsY0FBQSxTQUFBQSxDQUFBLFNBQUFDLGNBQUEsV0FBQUEsY0FBQSxFQUFBRCxjQUFBLEdBZlosTUFBTyxDQUFBRSxPQUFPLEtBQU0sV0FBVyxDQUMvQixNQUFPLENBQUFDLE1BQU0sS0FBTSxVQUFVLENBRTdCLGNBQWUsQ0FDYkQsT0FBTyxDQUNQQyxNQUNGLENBQUMifQ==

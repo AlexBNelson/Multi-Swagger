@@ -28,6 +28,7 @@ export default class Auths extends React.Component {
     e.preventDefault()
 
     let { authActions } = this.props
+    console.log(this.state)
     authActions.authorizeWithPersistOption(this.state)
   }
 

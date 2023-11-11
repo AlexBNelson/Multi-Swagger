@@ -1,15 +1,3 @@
-import makeReducers from "./reducers"
-import * as actions from "./actions"
-import * as selectors from "./selectors"
-
-export default function(system) {
-  return {
-    statePlugins: {
-      err: {
-        reducers: makeReducers(system),
-        actions,
-        selectors
-      }
-    }
-  }
-}
+function cov_kqauudd2u(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\err\\index.js";var hash="1aa0ab7e0f782ef5f81dc357160efcf1a8d9d598";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\err\\index.js",statementMap:{"0":{start:{line:6,column:2},end:{line:14,column:3}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:5,column:15},end:{line:5,column:16}},loc:{start:{line:5,column:32},end:{line:15,column:1}},line:5}},branchMap:{},s:{"0":0},f:{"0":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"1aa0ab7e0f782ef5f81dc357160efcf1a8d9d598"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_kqauudd2u=function(){return actualCoverage;};}return actualCoverage;}cov_kqauudd2u();import makeReducers from"./reducers";import*as actions from"./actions";import*as selectors from"./selectors";export default function(system){cov_kqauudd2u().f[0]++;cov_kqauudd2u().s[0]++;return{statePlugins:{err:{reducers:makeReducers(system),actions,selectors}}};}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3Zfa3FhdXVkZDJ1IiwiYWN0dWFsQ292ZXJhZ2UiLCJtYWtlUmVkdWNlcnMiLCJhY3Rpb25zIiwic2VsZWN0b3JzIiwic3lzdGVtIiwiZiIsInMiLCJzdGF0ZVBsdWdpbnMiLCJlcnIiLCJyZWR1Y2VycyJdLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBtYWtlUmVkdWNlcnMgZnJvbSBcIi4vcmVkdWNlcnNcIlxyXG5pbXBvcnQgKiBhcyBhY3Rpb25zIGZyb20gXCIuL2FjdGlvbnNcIlxyXG5pbXBvcnQgKiBhcyBzZWxlY3RvcnMgZnJvbSBcIi4vc2VsZWN0b3JzXCJcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uKHN5c3RlbSkge1xyXG4gIHJldHVybiB7XHJcbiAgICBzdGF0ZVBsdWdpbnM6IHtcclxuICAgICAgZXJyOiB7XHJcbiAgICAgICAgcmVkdWNlcnM6IG1ha2VSZWR1Y2VycyhzeXN0ZW0pLFxyXG4gICAgICAgIGFjdGlvbnMsXHJcbiAgICAgICAgc2VsZWN0b3JzXHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcbn1cclxuIl0sIm1hcHBpbmdzIjoieTNCQWVZO0FBQUFBLGFBQUEsU0FBQUEsQ0FBQSxTQUFBQyxjQUFBLFdBQUFBLGNBQUEsRUFBQUQsYUFBQSxHQWZaLE1BQU8sQ0FBQUUsWUFBWSxLQUFNLFlBQVksQ0FDckMsTUFBTyxHQUFLLENBQUFDLE9BQU8sS0FBTSxXQUFXLENBQ3BDLE1BQU8sR0FBSyxDQUFBQyxTQUFTLEtBQU0sYUFBYSxDQUV4QyxjQUFlLFVBQVNDLE1BQU0sQ0FBRSxDQUFBTCxhQUFBLEdBQUFNLENBQUEsTUFBQU4sYUFBQSxHQUFBTyxDQUFBLE1BQzlCLE1BQU8sQ0FDTEMsWUFBWSxDQUFFLENBQ1pDLEdBQUcsQ0FBRSxDQUNIQyxRQUFRLENBQUVSLFlBQVksQ0FBQ0csTUFBTSxDQUFDLENBQzlCRixPQUFPLENBQ1BDLFNBQ0YsQ0FDRixDQUNGLENBQUMsQ0FDSCJ9

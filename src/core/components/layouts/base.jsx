@@ -32,6 +32,8 @@ export default class BaseLayout extends React.Component {
             let localClients = []
             localClients.push(fromJSOrdered(json))
 
+            // need to set using 'setClientJson' action
+
             let multiClients = this.taggedClients(localClients)
 
 
@@ -476,9 +478,9 @@ export default class BaseLayout extends React.Component {
     let Col = getComponent("Col")
     let Errors = getComponent("errors", true)
 
-    const ServersContainer = getComponent("ServersContainer", true)
-    const SchemesContainer = getComponent("SchemesContainer", true)
-    const AuthorizeBtnContainer = getComponent("AuthorizeBtnContainer", true)
+    // const ServersContainer = getComponent("ServersContainer", true)
+    // const SchemesContainer = getComponent("SchemesContainer", true)
+    // const AuthorizeBtnContainer = getComponent("AuthorizeBtnContainer", true)
     const FilterContainer = getComponent("FilterContainer", true)
     let isSwagger2 = specSelectors.isSwagger2()
     let isOAS3 = specSelectors.isOAS3()
@@ -588,7 +590,7 @@ export default class BaseLayout extends React.Component {
             </Col>
           </Row>
 
-          {hasServers || hasSchemes || hasSecurityDefinitions ? (
+          {/* {hasServers || hasSchemes || hasSecurityDefinitions ? (
             <div className="scheme-container">
               <Col className="schemes wrapper" mobile={12}>
                 {hasServers ? (<ServersContainer />) : null}
@@ -596,7 +598,7 @@ export default class BaseLayout extends React.Component {
                 {hasSecurityDefinitions ? (<AuthorizeBtnContainer />) : null}
               </Col>
             </div>
-          ) : null}
+          ) : null} */}
 
           <FilterContainer />
           {/* <Row>

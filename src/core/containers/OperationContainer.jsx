@@ -213,6 +213,7 @@ export default class OperationContainer extends PureComponent {
     const Operation = getComponent( "operation" )
 
     const resolvedSubtree = this.getResolvedSubtree() || Map()
+
     
     const operationProps = fromJS({
       op: resolvedSubtree,

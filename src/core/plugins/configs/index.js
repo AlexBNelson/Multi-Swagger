@@ -1,30 +1,3 @@
-import yamlConfig from "root/swagger-config.yaml"
-import { parseYamlConfig } from "./helpers"
-import * as actions from "./actions"
-import * as specActions from "./spec-actions"
-import * as selectors from "./selectors"
-import reducers from "./reducers"
-
-const specSelectors = {
-  getLocalConfig: () => {
-    return parseYamlConfig(yamlConfig)
-  }
-}
-
-
-export default function configsPlugin() {
-
-  return {
-    statePlugins: {
-      spec: {
-        actions: specActions,
-        selectors: specSelectors,
-      },
-      configs: {
-        reducers,
-        actions,
-        selectors,
-      }
-    }
-  }
-}
+function cov_1ojbzt0c3t(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\configs\\index.js";var hash="a42436694f056465036223d237759c21d71952b3";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\core\\plugins\\configs\\index.js",statementMap:{"0":{start:{line:8,column:22},end:{line:12,column:1}},"1":{start:{line:10,column:4},end:{line:10,column:38}},"2":{start:{line:17,column:2},end:{line:29,column:3}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:9,column:18},end:{line:9,column:19}},loc:{start:{line:9,column:24},end:{line:11,column:3}},line:9},"1":{name:"configsPlugin",decl:{start:{line:15,column:24},end:{line:15,column:37}},loc:{start:{line:15,column:40},end:{line:30,column:1}},line:15}},branchMap:{},s:{"0":0,"1":0,"2":0},f:{"0":0,"1":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"a42436694f056465036223d237759c21d71952b3"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
+cov_1ojbzt0c3t=function(){return actualCoverage;};}return actualCoverage;}cov_1ojbzt0c3t();import yamlConfig from"root/swagger-config.yaml";import{parseYamlConfig}from"./helpers";import*as actions from"./actions";import*as specActions from"./spec-actions";import*as selectors from"./selectors";import reducers from"./reducers";const specSelectors=(cov_1ojbzt0c3t().s[0]++,{getLocalConfig:()=>{cov_1ojbzt0c3t().f[0]++;cov_1ojbzt0c3t().s[1]++;return parseYamlConfig(yamlConfig);}});export default function configsPlugin(){cov_1ojbzt0c3t().f[1]++;cov_1ojbzt0c3t().s[2]++;return{statePlugins:{spec:{actions:specActions,selectors:specSelectors},configs:{reducers,actions,selectors}}};}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMW9qYnp0MGMzdCIsImFjdHVhbENvdmVyYWdlIiwieWFtbENvbmZpZyIsInBhcnNlWWFtbENvbmZpZyIsImFjdGlvbnMiLCJzcGVjQWN0aW9ucyIsInNlbGVjdG9ycyIsInJlZHVjZXJzIiwic3BlY1NlbGVjdG9ycyIsInMiLCJnZXRMb2NhbENvbmZpZyIsImYiLCJjb25maWdzUGx1Z2luIiwic3RhdGVQbHVnaW5zIiwic3BlYyIsImNvbmZpZ3MiXSwic291cmNlcyI6WyJpbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeWFtbENvbmZpZyBmcm9tIFwicm9vdC9zd2FnZ2VyLWNvbmZpZy55YW1sXCJcclxuaW1wb3J0IHsgcGFyc2VZYW1sQ29uZmlnIH0gZnJvbSBcIi4vaGVscGVyc1wiXHJcbmltcG9ydCAqIGFzIGFjdGlvbnMgZnJvbSBcIi4vYWN0aW9uc1wiXHJcbmltcG9ydCAqIGFzIHNwZWNBY3Rpb25zIGZyb20gXCIuL3NwZWMtYWN0aW9uc1wiXHJcbmltcG9ydCAqIGFzIHNlbGVjdG9ycyBmcm9tIFwiLi9zZWxlY3RvcnNcIlxyXG5pbXBvcnQgcmVkdWNlcnMgZnJvbSBcIi4vcmVkdWNlcnNcIlxyXG5cclxuY29uc3Qgc3BlY1NlbGVjdG9ycyA9IHtcclxuICBnZXRMb2NhbENvbmZpZzogKCkgPT4ge1xyXG4gICAgcmV0dXJuIHBhcnNlWWFtbENvbmZpZyh5YW1sQ29uZmlnKVxyXG4gIH1cclxufVxyXG5cclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIGNvbmZpZ3NQbHVnaW4oKSB7XHJcblxyXG4gIHJldHVybiB7XHJcbiAgICBzdGF0ZVBsdWdpbnM6IHtcclxuICAgICAgc3BlYzoge1xyXG4gICAgICAgIGFjdGlvbnM6IHNwZWNBY3Rpb25zLFxyXG4gICAgICAgIHNlbGVjdG9yczogc3BlY1NlbGVjdG9ycyxcclxuICAgICAgfSxcclxuICAgICAgY29uZmlnczoge1xyXG4gICAgICAgIHJlZHVjZXJzLFxyXG4gICAgICAgIGFjdGlvbnMsXHJcbiAgICAgICAgc2VsZWN0b3JzLFxyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcbiJdLCJtYXBwaW5ncyI6InFwQ0FlWTtBQUFBQSxjQUFBLFNBQUFBLENBQUEsU0FBQUMsY0FBQSxXQUFBQSxjQUFBLEVBQUFELGNBQUEsR0FmWixNQUFPLENBQUFFLFVBQVUsS0FBTSwwQkFBMEIsQ0FDakQsT0FBU0MsZUFBZSxLQUFRLFdBQVcsQ0FDM0MsTUFBTyxHQUFLLENBQUFDLE9BQU8sS0FBTSxXQUFXLENBQ3BDLE1BQU8sR0FBSyxDQUFBQyxXQUFXLEtBQU0sZ0JBQWdCLENBQzdDLE1BQU8sR0FBSyxDQUFBQyxTQUFTLEtBQU0sYUFBYSxDQUN4QyxNQUFPLENBQUFDLFFBQVEsS0FBTSxZQUFZLENBRWpDLEtBQU0sQ0FBQUMsYUFBYSxFQUFBUixjQUFBLEdBQUFTLENBQUEsTUFBRyxDQUNwQkMsY0FBYyxDQUFFQSxDQUFBLEdBQU0sQ0FBQVYsY0FBQSxHQUFBVyxDQUFBLE1BQUFYLGNBQUEsR0FBQVMsQ0FBQSxNQUNwQixNQUFPLENBQUFOLGVBQWUsQ0FBQ0QsVUFBVSxDQUFDLENBQ3BDLENBQ0YsQ0FBQyxFQUdELGNBQWUsU0FBUyxDQUFBVSxhQUFhQSxDQUFBLENBQUcsQ0FBQVosY0FBQSxHQUFBVyxDQUFBLE1BQUFYLGNBQUEsR0FBQVMsQ0FBQSxNQUV0QyxNQUFPLENBQ0xJLFlBQVksQ0FBRSxDQUNaQyxJQUFJLENBQUUsQ0FDSlYsT0FBTyxDQUFFQyxXQUFXLENBQ3BCQyxTQUFTLENBQUVFLGFBQ2IsQ0FBQyxDQUNETyxPQUFPLENBQUUsQ0FDUFIsUUFBUSxDQUNSSCxPQUFPLENBQ1BFLFNBQ0YsQ0FDRixDQUNGLENBQUMsQ0FDSCJ9
