@@ -1,4 +1,24 @@
-function cov_14zmquwzuf(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\standalone\\index.js";var hash="d213b9cd84312b284d262e7df4b44fe232ea8d9a";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\standalone\\index.js",statementMap:{"0":{start:{line:12,column:4},end:{line:14,column:5}}},fnMap:{"0":{name:"(anonymous_0)",decl:{start:{line:11,column:2},end:{line:11,column:3}},loc:{start:{line:11,column:8},end:{line:15,column:3}},line:11}},branchMap:{},s:{"0":0},f:{"0":0},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"d213b9cd84312b284d262e7df4b44fe232ea8d9a"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
-cov_14zmquwzuf=function(){return actualCoverage;};}return actualCoverage;}cov_14zmquwzuf();import StandaloneLayout from"./layout";import TopbarPlugin from"plugins/topbar";import ConfigsPlugin from"corePlugins/configs";import SafeRenderPlugin from"core/plugins/safe-render";// the Standalone preset
-export default[TopbarPlugin,ConfigsPlugin,()=>{cov_14zmquwzuf().f[0]++;cov_14zmquwzuf().s[0]++;return{components:{StandaloneLayout}};},SafeRenderPlugin({fullOverride:true,componentList:["Topbar","StandaloneLayout","onlineValidatorBadge"]})];
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfMTR6bXF1d3p1ZiIsImFjdHVhbENvdmVyYWdlIiwiU3RhbmRhbG9uZUxheW91dCIsIlRvcGJhclBsdWdpbiIsIkNvbmZpZ3NQbHVnaW4iLCJTYWZlUmVuZGVyUGx1Z2luIiwiZiIsInMiLCJjb21wb25lbnRzIiwiZnVsbE92ZXJyaWRlIiwiY29tcG9uZW50TGlzdCJdLCJzb3VyY2VzIjpbImluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBTdGFuZGFsb25lTGF5b3V0IGZyb20gXCIuL2xheW91dFwiXHJcbmltcG9ydCBUb3BiYXJQbHVnaW4gZnJvbSBcInBsdWdpbnMvdG9wYmFyXCJcclxuaW1wb3J0IENvbmZpZ3NQbHVnaW4gZnJvbSBcImNvcmVQbHVnaW5zL2NvbmZpZ3NcIlxyXG5pbXBvcnQgU2FmZVJlbmRlclBsdWdpbiBmcm9tIFwiY29yZS9wbHVnaW5zL3NhZmUtcmVuZGVyXCJcclxuXHJcbi8vIHRoZSBTdGFuZGFsb25lIHByZXNldFxyXG5cclxuZXhwb3J0IGRlZmF1bHQgW1xyXG4gIFRvcGJhclBsdWdpbixcclxuICBDb25maWdzUGx1Z2luLFxyXG4gICgpID0+IHtcclxuICAgIHJldHVybiB7XHJcbiAgICAgIGNvbXBvbmVudHM6IHsgU3RhbmRhbG9uZUxheW91dCB9XHJcbiAgICB9XHJcbiAgfSxcclxuICBTYWZlUmVuZGVyUGx1Z2luKHtcclxuICAgIGZ1bGxPdmVycmlkZTogdHJ1ZSxcclxuICAgIGNvbXBvbmVudExpc3Q6IFtcclxuICAgICAgXCJUb3BiYXJcIixcclxuICAgICAgXCJTdGFuZGFsb25lTGF5b3V0XCIsXHJcbiAgICAgIFwib25saW5lVmFsaWRhdG9yQmFkZ2VcIlxyXG4gICAgXVxyXG4gIH0pXHJcbl1cclxuIl0sIm1hcHBpbmdzIjoiNDJCQWVZO0FBQUFBLGNBQUEsU0FBQUEsQ0FBQSxTQUFBQyxjQUFBLFdBQUFBLGNBQUEsRUFBQUQsY0FBQSxHQWZaLE1BQU8sQ0FBQUUsZ0JBQWdCLEtBQU0sVUFBVSxDQUN2QyxNQUFPLENBQUFDLFlBQVksS0FBTSxnQkFBZ0IsQ0FDekMsTUFBTyxDQUFBQyxhQUFhLEtBQU0scUJBQXFCLENBQy9DLE1BQU8sQ0FBQUMsZ0JBQWdCLEtBQU0sMEJBQTBCLENBRXZEO0FBRUEsY0FBZSxDQUNiRixZQUFZLENBQ1pDLGFBQWEsQ0FDYixJQUFNLENBQUFKLGNBQUEsR0FBQU0sQ0FBQSxNQUFBTixjQUFBLEdBQUFPLENBQUEsTUFDSixNQUFPLENBQ0xDLFVBQVUsQ0FBRSxDQUFFTixnQkFBaUIsQ0FDakMsQ0FBQyxDQUNILENBQUMsQ0FDREcsZ0JBQWdCLENBQUMsQ0FDZkksWUFBWSxDQUFFLElBQUksQ0FDbEJDLGFBQWEsQ0FBRSxDQUNiLFFBQVEsQ0FDUixrQkFBa0IsQ0FDbEIsc0JBQXNCLENBRTFCLENBQUMsQ0FBQyxDQUNIIn0=
+import StandaloneLayout from "./layout"
+import TopbarPlugin from "plugins/topbar"
+import ConfigsPlugin from "corePlugins/configs"
+import SafeRenderPlugin from "core/plugins/safe-render"
+
+// the Standalone preset
+
+export default [
+  TopbarPlugin,
+  ConfigsPlugin,
+  () => {
+    return {
+      components: { StandaloneLayout }
+    }
+  },
+  SafeRenderPlugin({
+    fullOverride: true,
+    componentList: [
+      "Topbar",
+      "StandaloneLayout",
+      "onlineValidatorBadge"
+    ]
+  })
+]

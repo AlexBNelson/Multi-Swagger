@@ -124,15 +124,11 @@ export default class Operations extends React.Component {
 
     return (
       <div>
-         {hasServers || hasSchemes || hasSecurityDefinitions ? (
-            <div className="scheme-container">
-              <Col className="schemes wrapper" mobile={12}>
-                {hasServers ? (<ServersContainer />) : null}
+              <Col style={{alignItems:"flex-end", display:"flex"}} className="schemes wrapper" mobile={12}>
+                {/* {hasServers ? (<ServersContainer />) : null} */}
                 {hasSchemes ? (<SchemesContainer />) : null}
                 {hasSecurityDefinitions ? (<AuthorizeBtnContainer />) : null}
               </Col>
-            </div>
-          ) : null}
       <OperationTag
         tagObj={tagObj}
         tag={tag}

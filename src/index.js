@@ -1,3 +1,3 @@
-function cov_xgsc0byi7(){var path="C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\index.js";var hash="9918e14a70553133437b33f9f916d55f296a4d54";var global=new Function("return this")();var gcv="__coverage__";var coverageData={path:"C:\\Users\\User\\source\\repos\\multi-swagger\\Multi-Swagger\\src\\index.js",statementMap:{},fnMap:{},branchMap:{},s:{},f:{},b:{},_coverageSchema:"1a1c01bbd47fc00a2c39e90264f33305004495a9",hash:"9918e14a70553133437b33f9f916d55f296a4d54"};var coverage=global[gcv]||(global[gcv]={});if(!coverage[path]||coverage[path].hash!==hash){coverage[path]=coverageData;}var actualCoverage=coverage[path];{// @ts-ignore
-cov_xgsc0byi7=function(){return actualCoverage;};}return actualCoverage;}cov_xgsc0byi7();import SwaggerUI from"./core";export default SwaggerUI;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJjb3ZfeGdzYzBieWk3IiwiYWN0dWFsQ292ZXJhZ2UiLCJTd2FnZ2VyVUkiXSwic291cmNlcyI6WyJpbmRleC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgU3dhZ2dlclVJIGZyb20gXCIuL2NvcmVcIlxyXG5cclxuZXhwb3J0IGRlZmF1bHQgU3dhZ2dlclVJXHJcbiJdLCJtYXBwaW5ncyI6InFvQkFlWTtBQUFBQSxhQUFBLFNBQUFBLENBQUEsU0FBQUMsY0FBQSxXQUFBQSxjQUFBLEVBQUFELGFBQUEsR0FmWixNQUFPLENBQUFFLFNBQVMsS0FBTSxRQUFRLENBRTlCLGNBQWUsQ0FBQUEsU0FBUyJ9
+import SwaggerUI from "./core"
+
+export default SwaggerUI

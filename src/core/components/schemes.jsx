@@ -40,14 +40,18 @@ export default class Schemes extends React.Component {
     let { schemes, currentScheme } = this.props
 
     return (
-      <label htmlFor="schemes">
-        <span className="schemes-title">Schemes</span>
-        <select onChange={ this.onChange } value={currentScheme}>
+      <div style={{display: "flex"}}>
+      <label style={{flexDirection:"column", display: "flex"}} htmlFor="schemes">
+        
+        <span style={{flexDirection:"column", display: "flex"}} className="schemes-title">Schemes</span>
+        <select style={{flexDirection:"column", display: "flex"}} onChange={ this.onChange } value={currentScheme}>
           { schemes.valueSeq().map(
             ( scheme ) => <option value={ scheme } key={ scheme }>{ scheme }</option>
           ).toArray()}
         </select>
+       
       </label>
+      </div>
     )
   }
 }

@@ -156,15 +156,12 @@ export default class Clients extends React.Component {
 
     return (
       <div>
-         {hasServers || hasSchemes || hasSecurityDefinitions ? (
-            <div className="scheme-container">
-              <Col className="schemes wrapper" mobile={12}>
+         
+         <Col style={{alignItems:"flex-end", display:"flex"}} className="schemes wrapper" mobile={12}>
                 {/* {hasServers ? (<ServersContainer />) : null} */}
                 {hasSchemes ? (<SchemesContainer />) : null}
                 {hasSecurityDefinitions ? (<AuthorizeBtnClientContainer doc={tag}/>) : null}
               </Col>
-            </div>
-          ) : null}
       <ClientTag
         key={"operation-" + tag}
         tagObj={tagObj}
