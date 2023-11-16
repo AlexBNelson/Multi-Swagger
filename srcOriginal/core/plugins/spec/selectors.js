@@ -61,7 +61,11 @@ export const specSource = createSelector(
 
 export const specJson = createSelector(
   state,
-  spec => spec.get("json", Map())
+  spec => {
+    console.log(spec)
+    console.log(spec.get("json", Map()))
+    return spec.get("json", Map())
+  }
 )
 
 export const specResolved = createSelector(
@@ -107,6 +111,7 @@ export const specJsonWithResolvedSubtrees = createSelector(
 
 // Default Spec ( as an object )
 export const spec = state => {
+ 
   let res = specJson(state)
   return res
 }
@@ -578,7 +583,7 @@ function returnSelfOrNewMap(obj) {
 
 export const clientJson = createSelector(
   state,
-  spec => spec.get("clientJson", Map())
+  state => state.get("clientJson", Map() )
 )
 
 

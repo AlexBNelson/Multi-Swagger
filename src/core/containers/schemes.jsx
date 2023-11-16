@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Map } from "immutable"
 
 export default class SchemesContainer extends React.Component {
 
@@ -13,7 +14,7 @@ export default class SchemesContainer extends React.Component {
     const {specActions, specSelectors, getComponent} = this.props
 
     const currentScheme = specSelectors.operationScheme()
-    const schemes = specSelectors.schemes()
+    const schemes = specSelectors.spec().get("schemes", Map())
 
     const Schemes = getComponent("schemes")
 

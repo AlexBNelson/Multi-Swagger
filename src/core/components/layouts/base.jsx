@@ -21,8 +21,6 @@ export default class BaseLayout extends React.Component {
 
     let clientMap = []
 
-
-
     clients.forEach((client) => {
       let clientUrl = this.props.specSelectors.baseUrl() + "/" + client + ".json"
 
@@ -31,11 +29,12 @@ export default class BaseLayout extends React.Component {
           .then(json => {
             let localClients = []
             localClients.push(fromJSOrdered(json))
+            let clientJson = this.props.specSelectors.clientJson();
+            clientJson = clientJson.set(client, json)
 
+            this.props.specActions.setClientJson(clientJson)
             // need to set using 'setClientJson' action
-
             let multiClients = this.taggedClients(localClients)
-
 
             this.TransformClientDetails(multiClients, json)
 
@@ -45,8 +44,7 @@ export default class BaseLayout extends React.Component {
 
     })
     serviceClientMap = serviceClientMap.set(serviceName, clientMap)
-
-
+    
     this.props.specActions.setClients(serviceClientMap)
 
     return null
@@ -573,8 +571,8 @@ export default class BaseLayout extends React.Component {
 
     }
 
-    const hasServers = servers && servers.size
-    const hasSchemes = schemes && schemes.size
+    const hasServers = specSelectors.servers() && specSelectors.servers().size
+    const hasSchemes = specSelectors.schemes() && specSelectors.schemes().size
     const hasSecurityDefinitions = !!specSelectors.securityDefinitions()
 
 

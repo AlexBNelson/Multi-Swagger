@@ -139,6 +139,8 @@ export default class Clients extends React.Component {
     
 
     return (
+      <div>
+      <AuthorizeBtnContainer/>
       <ClientTag
         key={"operation-" + tag}
         tagObj={tagObj}
@@ -193,6 +195,7 @@ export default class Clients extends React.Component {
         </div>
         {serviceLink}
       </ClientTag>
+      </div>
     )
   }
 

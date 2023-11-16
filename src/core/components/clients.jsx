@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Im from "immutable"
 import SwaggerLogo from "./swagger.svg"
+import { getExtensions, getSampleSchema, fromJSOrdered, stringify } from "core/utils"
 
 const SWAGGER2_OPERATION_METHODS = [
   "get", "put", "post", "delete", "options", "head", "patch"
@@ -135,10 +136,35 @@ export default class Clients extends React.Component {
     const ClientContainer = getComponent("ClientContainer", true)
     const ClientTag = getComponent("ClientTag")
     const clients = tagObj.get("operations")
+    const AuthorizeBtnClientContainer = getComponent("AuthorizeBtnClientContainer", true)
+    const Col = getComponent("Col")
 
-    
+    // const hasServers = specSelectors.servers() && specSelectors.servers().size
+    let hasSchemes = specSelectors.schemes() && specSelectors.schemes().size
+
+    let hasSecurityDefinitions = null
+
+   
+
+    if(fromJSOrdered(specSelectors.clientJson().get(tag)) != null){
+         hasSchemes = !!fromJSOrdered(specSelectors.clientJson().get(tag)).get("schemes")
+
+          hasSecurityDefinitions = !!fromJSOrdered(specSelectors.clientJson().get(tag)
+        ).get("securityDefinitions")
+    }
+
 
     return (
+      <div>
+         {hasServers || hasSchemes || hasSecurityDefinitions ? (
+            <div className="scheme-container">
+              <Col className="schemes wrapper" mobile={12}>
+                {/* {hasServers ? (<ServersContainer />) : null} */}
+                {hasSchemes ? (<SchemesContainer />) : null}
+                {hasSecurityDefinitions ? (<AuthorizeBtnClientContainer doc={tag}/>) : null}
+              </Col>
+            </div>
+          ) : null}
       <ClientTag
         key={"operation-" + tag}
         tagObj={tagObj}
@@ -193,6 +219,7 @@ export default class Clients extends React.Component {
         </div>
         {serviceLink}
       </ClientTag>
+      </div>
     )
   }
 

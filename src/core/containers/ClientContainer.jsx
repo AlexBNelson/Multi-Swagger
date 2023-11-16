@@ -203,8 +203,6 @@ export default class ClientContainer extends PureComponent {
 
     const resolvedSubtree = this.getResolvedSubtree() || Map()
 
-    console.log(security)
-
     const operationProps = fromJS({
       op: resolvedSubtree,
       tag,

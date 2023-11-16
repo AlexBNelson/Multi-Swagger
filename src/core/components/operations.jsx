@@ -112,13 +112,27 @@ export default class Operations extends React.Component {
     const OperationTag = getComponent("OperationTag")
     const operations = tagObj.get("operations")
     const AuthorizeBtnContainer = getComponent("AuthorizeBtnContainer", true)
+    let Col = getComponent("Col")
+    const SchemesContainer = getComponent("SchemesContainer", true)
+
+    const hasServers = specSelectors.servers() && specSelectors.servers().size
+    const hasSchemes = specSelectors.spec().get("schemes", Map()) && specSelectors.spec().get("schemes", Map()).size
+    const hasSecurityDefinitions = !!specSelectors.spec().get("securityDefinitions")
 
       let endpointLinks = []
       let alreadyAddedLinks = []
 
     return (
       <div>
-      <AuthorizeBtnContainer/>
+         {hasServers || hasSchemes || hasSecurityDefinitions ? (
+            <div className="scheme-container">
+              <Col className="schemes wrapper" mobile={12}>
+                {hasServers ? (<ServersContainer />) : null}
+                {hasSchemes ? (<SchemesContainer />) : null}
+                {hasSecurityDefinitions ? (<AuthorizeBtnContainer />) : null}
+              </Col>
+            </div>
+          ) : null}
       <OperationTag
         tagObj={tagObj}
         tag={tag}

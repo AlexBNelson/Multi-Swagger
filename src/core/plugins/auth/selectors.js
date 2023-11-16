@@ -6,7 +6,6 @@ const state = state => state
 export const shownDefinitions = createSelector(
     state,
     auth => {
-      console.log(auth)
       return auth.get( "showDefinitions" )
     }
 )
@@ -14,7 +13,6 @@ export const shownDefinitions = createSelector(
 export const definitionsToAuthorize = createSelector(
     state,
     () => ( { specSelectors } ) => {
-        console.log(specSelectors) 
       let definitions = specSelectors.securityDefinitions() || Map({})
    
       let list = List()
@@ -76,8 +74,6 @@ export const definitionsForRequirements = (state, securities = List()) => ({ spe
       list = list.push(map)
     })
 let allDefinitions = list
-
-console.log(specSelectors.spec().get("securityDefinitions"))
 
     let result = List()
   allDefinitions.forEach( (definition) => {

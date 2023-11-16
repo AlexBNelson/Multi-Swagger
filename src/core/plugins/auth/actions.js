@@ -21,7 +21,6 @@ export function showDefinitions(payload) {
 }
 
 export function authorize(payload) {
-    console.log(payload)
   return {
     type: AUTHORIZE,
     payload: payload
@@ -29,7 +28,6 @@ export function authorize(payload) {
 }
 
 export const authorizeWithPersistOption = (payload) => ( { authActions } ) => {
-  console.log(payload)
   authActions.authorize(payload)
   authActions.persistAuthorizationIfNeeded()
 }

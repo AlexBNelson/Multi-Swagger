@@ -97,7 +97,6 @@ export default class OperationSummary extends PureComponent {
               isAuthorized={isAuthorized}
               onClick={() => {
                 const applicableDefinitions = authSelectors.definitionsForRequirements(security)
-                console.log(security)
                 authActions.showDefinitions(applicableDefinitions)
               }}
             />

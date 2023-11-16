@@ -11,7 +11,6 @@ export default class AuthorizationPopup extends React.Component {
   render() {
     let { authSelectors, authActions, getComponent, errSelectors, specSelectors, fn: { AST = {} } } = this.props
     let definitions = authSelectors.shownDefinitions()
-    console.log(definitions)
     const Auths = getComponent("auths")
 
     return (
@@ -32,7 +31,6 @@ export default class AuthorizationPopup extends React.Component {
 
                 {
                   definitions.valueSeq().map(( definition, key ) => {
-                    console.log(definitions)
                     return <Auths key={ key }
                                   AST={AST}
                                   definitions={ definition }

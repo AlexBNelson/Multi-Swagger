@@ -12,7 +12,6 @@ import {
 
 export default {
   [SHOW_AUTH_POPUP]: (state, { payload } ) =>{
-    console.log(payload)
     return state.set( "showDefinitions", payload )
   },
 
