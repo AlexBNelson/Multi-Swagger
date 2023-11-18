@@ -100,7 +100,7 @@ export default class Clients extends React.Component {
     let serviceLink
 
     if (tag != specSelectors.currentDoc()) {
-      serviceLink = <a onClick={(e) => {
+      serviceLink = <a style={{marginBottom: "150px"}} onClick={(e) => {
         e.stopPropagation()
         this.props.specActions.download(serviceUrl)
 
@@ -138,6 +138,7 @@ export default class Clients extends React.Component {
     const clients = tagObj.get("operations")
     const AuthorizeBtnClientContainer = getComponent("AuthorizeBtnClientContainer", true)
     const Col = getComponent("Col")
+    const SchemesClientContainer = getComponent("SchemesClientContainer", true)
 
     // const hasServers = specSelectors.servers() && specSelectors.servers().size
     let hasSchemes = specSelectors.schemes() && specSelectors.schemes().size
@@ -159,7 +160,7 @@ export default class Clients extends React.Component {
          
          <Col style={{alignItems:"flex-end", display:"flex"}} className="schemes wrapper" mobile={12}>
                 {/* {hasServers ? (<ServersContainer />) : null} */}
-                {hasSchemes ? (<SchemesContainer />) : null}
+                {hasSchemes ? (<SchemesClientContainer doc={tag}/>) : null}
                 {hasSecurityDefinitions ? (<AuthorizeBtnClientContainer doc={tag}/>) : null}
               </Col>
       <ClientTag

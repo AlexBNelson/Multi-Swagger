@@ -41,7 +41,7 @@ export default class Schemes extends React.Component {
 
     return (
       <div style={{display: "flex"}}>
-      <label style={{flexDirection:"column", display: "flex"}} htmlFor="schemes">
+      <label style={{flexDirection:"column", display: "flex", width: "125px"}} htmlFor="schemes">
         
         <span style={{flexDirection:"column", display: "flex"}} className="schemes-title">Schemes</span>
         <select style={{flexDirection:"column", display: "flex"}} onChange={ this.onChange } value={currentScheme}>
