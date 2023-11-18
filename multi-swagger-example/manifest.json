@@ -1,0 +1,46 @@
+{
+  "Services": [
+    {
+      "Name": "RoomBookingApi",
+      "Endpoints": "./roomBookingApi.json"
+
+    },
+    {
+      "Name": "CleaningScheduleService",
+      "Endpoints": "./cleaningScheduleService.json"
+
+    },
+    {
+      "Name": "StaffAvailabilityApi",
+      "Endpoints": "./staffAvailabilityApi.json"
+
+    },
+    {
+      "Name": "DeliveryApi",
+      "Endpoints": "./deliveryApi.json"
+    },
+    {
+      "Name": "StockKeepingApi",
+      "Endpoints": "./stockKeepingApi.json",
+      "Clients": [
+        "DeliveryApi",
+        "CleaningScheduleService"
+      ]
+    },
+    {
+      "Name": "RoomServiceApi",
+      "Endpoints": "./roomServiceApi.json",
+      "Clients": [
+        "RoomBookingApi",
+        "StockKeepingApi"
+      ]
+    },
+    {
+      "Name": "KeyReader",
+      "Clients": [
+        "RoomBookingApi",
+        "CleaningScheduleService"
+      ]
+    }
+  ]
+}

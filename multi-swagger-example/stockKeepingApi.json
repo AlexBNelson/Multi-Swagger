@@ -1,0 +1,77 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "StockKeepingApi",
+    "version": "1.0"
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/stockInventory": {
+      "get": {
+        "tags": [
+          "StockKeepingApi"
+        ],
+        "operationId": "GetStockInventory",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stockInventoryEnhanced": {
+      "get": {
+        "tags": [
+          "StockKeepingApi"
+        ],
+        "operationId": "GetStockInventoryEnhanced",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StockItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StockItem": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantityInStock": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
