@@ -138,7 +138,6 @@ export default class Client extends PureComponent {
 
     const validationErrors = specSelectors.validationErrors([path, method])
 
-    // Getting empty map for StockKeepingApi
     return (
         <div className={deprecated ? "opblock opblock-deprecated" : isShown ? `opblock opblock-${method} is-open` : `opblock opblock-${method}`} id={escapeDeepLinkPath(isShownKey.join("-"))} >
           <ClientSummary operationProps={operationProps} isShown={isShown} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} />

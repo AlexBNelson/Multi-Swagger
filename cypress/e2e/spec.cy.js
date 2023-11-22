@@ -89,6 +89,38 @@ describe('Can click on authorize button', () => {
   })
 })
 
+describe('Authorize endpoint', () => {
+  it('Shows service link', () => {
+    cy.visit('http://localhost:3200/')
+
+    cy.visit('http://localhost:3200/')
+
+    cy.contains('RoomServiceApi').click()
+
+    cy.contains('Authorize').click()
+
+    cy.get('input').eq(5).type('blah')
+
+    cy.contains('Authorize').click()
+
+    cy.get('.close-modal').click()
+
+    cy.get('.authorization__btn').click()
+    
+    cy.contains('Available authorizations')
+  })
+})
+
+describe('Get service description', () => {
+  it('Shows service link', () => {
+    cy.visit('http://localhost:3200/')
+
+    cy.contains('RoomServiceApi').click()
+
+    cy.contains('This is a sample server Petstore server')
+  })
+})
+
 
 
 
